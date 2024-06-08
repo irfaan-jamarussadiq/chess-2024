@@ -1,5 +1,7 @@
 package org.chess.chess.board;
 
+import org.chess.chess.board.piece.Piece;
+
 public class Tile {
     private Piece piece;
 

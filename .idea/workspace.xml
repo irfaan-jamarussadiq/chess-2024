@@ -75,7 +75,7 @@
       <module name="chess" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.chess.chess.board.*" />
+          <option name="PATTERN" value="org.chess.chess.board.piece.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -90,7 +90,7 @@
       <module name="chess" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.chess.chess.board.*" />
+          <option name="PATTERN" value="org.chess.chess.board.piece.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>

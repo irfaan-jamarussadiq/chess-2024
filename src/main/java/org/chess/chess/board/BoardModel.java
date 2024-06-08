@@ -1,5 +1,7 @@
 package org.chess.chess.board;
 
+import org.chess.chess.board.piece.*;
+
 public class BoardModel {
     public static final int SIZE = 8;
     private final Tile[] tiles;

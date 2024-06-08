@@ -1,4 +1,4 @@
-package org.chess.chess.board;
+package org.chess.chess.board.piece;
 
 public abstract class Piece {
     private final PieceColor pieceColor;

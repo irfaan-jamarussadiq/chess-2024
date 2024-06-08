@@ -7,4 +7,5 @@ module org.chess.chess {
     opens org.chess.chess to javafx.fxml;
     exports org.chess.chess;
     exports org.chess.chess.board;
+    exports org.chess.chess.board.piece;
 }

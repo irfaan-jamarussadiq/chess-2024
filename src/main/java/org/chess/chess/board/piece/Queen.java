@@ -1,4 +1,4 @@
-package org.chess.chess.board;
+package org.chess.chess.board.piece;
 
 public class Queen extends Piece {
     public Queen(PieceColor pieceColor) {

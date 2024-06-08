@@ -1,5 +1,7 @@
 package org.chess.chess.board;
 
+import org.chess.chess.board.piece.Pawn;
+import org.chess.chess.board.piece.PieceColor;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
