@@ -52,6 +52,10 @@ public class BoardModel {
     }
 
     public Piece pieceAt(Location location) {
+        if (!location.isWithinBounds()) {
+            throw new IllegalArgumentException("Location is out of bounds");
+        }
+
         int tileCoordinate = SIZE * (location.rank() - 1) + (location.file() - 1);
         return tiles[tileCoordinate].getPiece();
     }
