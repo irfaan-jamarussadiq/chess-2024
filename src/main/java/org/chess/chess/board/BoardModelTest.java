@@ -1,7 +1,6 @@
 package org.chess.chess.board;
 
 import org.chess.chess.board.piece.Pawn;
-import org.chess.chess.board.piece.PieceColor;
 import org.chess.chess.board.piece.Rook;
 import org.junit.Test;
 
@@ -15,14 +14,14 @@ public class BoardModelTest {
         Location start = new Location(2, 4);
         Location end = new Location(4, 4);
         board.movePiece(start, end);
-        assertEquals(board.pieceAt(end), new Pawn(PieceColor.WHITE));
+        assertEquals(board.pieceAt(end), new Pawn(Alliance.WHITE));
     }
 
     @Test
     public void testPieceAtWithinBounds() {
         BoardModel board = new BoardModel();
         Location location = new Location(1, 1);
-        assertEquals(board.pieceAt(location), new Rook(PieceColor.WHITE));
+        assertEquals(board.pieceAt(location), new Rook(Alliance.WHITE));
     }
 
     @Test

@@ -1,14 +1,16 @@
 package org.chess.chess.board.piece;
 
-public abstract class Piece {
-    private final PieceColor pieceColor;
+import org.chess.chess.board.Alliance;
 
-    public Piece(PieceColor pieceColor) {
-        this.pieceColor = pieceColor;
+public abstract class Piece {
+    private final Alliance alliance;
+
+    public Piece(Alliance alliance) {
+        this.alliance = alliance;
     }
 
-    public PieceColor getPieceColor() {
-        return pieceColor;
+    public Alliance getPieceColor() {
+        return alliance;
     }
 
     public boolean equals(Object other) {
@@ -17,6 +19,6 @@ public abstract class Piece {
         }
 
         Piece otherPiece = (Piece) other;
-        return otherPiece.pieceColor == this.pieceColor;
+        return otherPiece.alliance == this.alliance;
     }
 }

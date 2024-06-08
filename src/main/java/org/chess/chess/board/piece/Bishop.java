@@ -1,10 +1,9 @@
 package org.chess.chess.board.piece;
 
-import org.chess.chess.board.piece.Piece;
-import org.chess.chess.board.piece.PieceColor;
+import org.chess.chess.board.Alliance;
 
 public class Bishop extends Piece {
-    public Bishop(PieceColor pieceColor) {
-        super(pieceColor);
+    public Bishop(Alliance alliance) {
+        super(alliance);
     }
 }

@@ -1,7 +1,9 @@
 package org.chess.chess.board.piece;
 
+import org.chess.chess.board.Alliance;
+
 public class Pawn extends Piece {
-    public Pawn(PieceColor pieceColor) {
-        super(pieceColor);
+    public Pawn(Alliance alliance) {
+        super(alliance);
     }
 }
