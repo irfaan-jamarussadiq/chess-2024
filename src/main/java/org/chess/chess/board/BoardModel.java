@@ -36,6 +36,15 @@ public class BoardModel {
         addPiece(new Rook(Alliance.BLACK), new Location(SIZE, 8));
     }
 
+    public BoardModel(BoardModel board) {
+        tiles = new Tile[SIZE * SIZE];
+        for (int i = 0; i < SIZE * SIZE; i++) {
+            Piece piece = board.tiles[i].getPiece();
+            tiles[i] = new Tile();
+            tiles[i].setPiece(piece);
+        }
+    }
+
     public void movePiece(Location start, Location end) {
         if (!start.isWithinBounds() || !end.isWithinBounds()) {
             return;

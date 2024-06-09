@@ -14,7 +14,9 @@ public class Player {
     }
 
     public boolean isInCheck(BoardModel board) {
-        throw new UnsupportedOperationException("Not implemented yet!");
+        // TODO: Implement this method!
+        return false;
+//        throw new UnsupportedOperationException("Not implemented yet!");
     }
 
     public boolean isInCheckmate(BoardModel board) {

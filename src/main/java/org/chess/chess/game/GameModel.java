@@ -11,8 +11,8 @@ import org.chess.chess.board.piece.Rook;
 import java.util.List;
 
 public class GameModel {
-    private static final Player WHITE = new Player(Alliance.WHITE, new Location(1, 5));
-    private static final Player BLACK = new Player(Alliance.BLACK, new Location(8, 5));
+    public static final Player WHITE = new Player(Alliance.WHITE, new Location(1, 5));
+    public static final Player BLACK = new Player(Alliance.BLACK, new Location(8, 5));
     private Player currentPlayer;
     private BoardModel board;
 
@@ -24,8 +24,9 @@ public class GameModel {
     public void move(Location start, Location end) {
         Move move = new Move(start, end);
         if (isValidMove(move, board)) {
+            Piece piece = board.pieceAt(start);
             executeMove(move, board);
-            if (board.pieceAt(start) instanceof King) {
+            if (piece instanceof King) {
                 currentPlayer.setKingLocation(end);
             }
             currentPlayer = getNextPlayer();
