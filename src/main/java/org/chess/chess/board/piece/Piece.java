@@ -27,4 +27,8 @@ public abstract class Piece {
     }
 
     public abstract List<Move> getCandidateMoves(Location location);
+
+    public boolean isEnemyOf(Piece enemyPawn) {
+        return enemyPawn != null && alliance != enemyPawn.alliance;
+    }
 }

@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb32eb40-b065-4f3d-bc40-daac67398af0" name="Changes" comment="Generate list of moves by piece" />
+    <list default="true" id="cb32eb40-b065-4f3d-bc40-daac67398af0" name="Changes" comment="Add methods for executing en passant, castling, and other moves">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/Alliance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/Alliance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/BoardModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/BoardModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Piece.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -172,7 +178,23 @@
       <option name="project" value="LOCAL" />
       <updated>1717896896101</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Add getter for alliance in Player class">
+      <option name="closed" value="true" />
+      <created>1717898382355</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1717898382355</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Add methods for executing en passant, castling, and other moves">
+      <option name="closed" value="true" />
+      <created>1717898411819</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1717898411819</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -183,6 +205,8 @@
     <MESSAGE value="Rename PieceColor to Alliance" />
     <MESSAGE value="Create skeletal structure for Game class" />
     <MESSAGE value="Generate list of moves by piece" />
-    <option name="LAST_COMMIT_MESSAGE" value="Generate list of moves by piece" />
+    <MESSAGE value="Add getter for alliance in Player class" />
+    <MESSAGE value="Add methods for executing en passant, castling, and other moves" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add methods for executing en passant, castling, and other moves" />
   </component>
 </project>

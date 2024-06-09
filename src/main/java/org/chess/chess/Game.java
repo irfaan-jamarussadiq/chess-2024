@@ -3,7 +3,10 @@ package org.chess.chess;
 import org.chess.chess.board.Alliance;
 import org.chess.chess.board.BoardModel;
 import org.chess.chess.board.Location;
+import org.chess.chess.board.piece.King;
+import org.chess.chess.board.piece.Pawn;
 import org.chess.chess.board.piece.Piece;
+import org.chess.chess.board.piece.Rook;
 
 public class Game {
     private static final Player WHITE = new Player(Alliance.WHITE);
@@ -60,7 +63,37 @@ public class Game {
     }
 
     private boolean isCastlingMove(Move move, BoardModel board) {
-        throw new UnsupportedOperationException("Not implemented yet!");
+        Piece king = board.pieceAt(move.start());
+        if (!(king instanceof King) || board.pieceAt(move.end()) == null) {
+            return false;
+        }
+
+        if (move.start().file() != 5 || move.start().rank() != move.end().rank()) {
+            return false;
+        }
+
+        if (king.getAlliance() == Alliance.WHITE && move.start().rank() != 1) {
+            return false;
+        }
+
+        if (king.getAlliance() == Alliance.BLACK && move.start().rank() != 8) {
+            return false;
+        }
+
+        if (move.end().file() == 3) {
+            Piece rook = board.pieceAt(new Location(move.start().rank(), 1));
+            return rook instanceof Rook
+                    && board.isEmpty(new Location(move.start().rank(), 2))
+                    && board.isEmpty(new Location(move.start().rank(), 3))
+                    && board.isEmpty(new Location(move.start().rank(), 4));
+        } else if (move.end().file() == 7) {
+            Piece rook = board.pieceAt(new Location(move.start().rank(), 8));
+            return rook instanceof Rook
+                    && board.isEmpty(new Location(move.start().rank(), 6))
+                    && board.isEmpty(new Location(move.start().rank(), 7));
+        }
+
+        return false;
     }
 
     private void enPassant(Location pawnStart, Location pawnEnd) {
@@ -70,7 +103,19 @@ public class Game {
     }
 
     private boolean isEnPassantMove(Move move, BoardModel board) {
-        throw new UnsupportedOperationException("Not implemented yet!");
+        Piece pawn = board.pieceAt(move.start());
+        if (!(pawn instanceof Pawn) || board.pieceAt(move.end()) == null) {
+            return false;
+        }
+
+        Piece enemyPawn = board.pieceAt(move.start());
+        if (!pawn.isEnemyOf(enemyPawn) || !(enemyPawn instanceof Pawn)) {
+            return false;
+        }
+
+        return Math.abs(move.start().file() - move.end().file()) == 1
+                && move.start().rank() == pawn.getAlliance().getEnPassantStartingRank()
+                && move.end().rank() == pawn.getAlliance().getEnPassantEndingRank();
     }
 
     public Player getNextPlayer() {

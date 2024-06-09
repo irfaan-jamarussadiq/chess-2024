@@ -60,6 +60,10 @@ public class BoardModel {
         return tiles[tileCoordinate].getPiece();
     }
 
+    public boolean isEmpty(Location location) {
+        return pieceAt(location) == null;
+    }
+
     private void addPiece(Piece piece, Location location) {
         int tileCoordinate = SIZE * (location.rank() - 1) + (location.file() - 1);
         tiles[tileCoordinate].setPiece(piece);
