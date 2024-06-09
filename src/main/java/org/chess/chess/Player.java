@@ -21,4 +21,8 @@ public class Player {
     public boolean isInStalemate(BoardModel board) {
         throw new UnsupportedOperationException("Not implemented yet!");
     }
+
+    public Alliance getAlliance() {
+        return alliance;
+    }
 }
