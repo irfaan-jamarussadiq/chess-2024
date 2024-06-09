@@ -30,4 +30,12 @@ public class BoardModelTest {
         Location location = new Location(1, -1);
         assertThrows(IllegalArgumentException.class, () -> board.pieceAt(location));
     }
+
+    @Test
+    public void testMovePieceAtEmptySquareFails() {
+        BoardModel board = new BoardModel();
+        Location start = new Location(4, 4);
+        Location end = new Location(5, 4);
+        assertThrows(IllegalArgumentException.class, () -> board.movePiece(start, end));
+    }
 }

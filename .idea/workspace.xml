@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb32eb40-b065-4f3d-bc40-daac67398af0" name="Changes" comment="Rename to GameModel">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModelTest.java" afterDir="false" />
+    <list default="true" id="cb32eb40-b065-4f3d-bc40-daac67398af0" name="Changes" comment="Create copy of entire board for BoardSnapshot. Can improve later.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/BoardModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/BoardModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/BoardSnapshot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/BoardSnapshot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/BoardModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/BoardModelTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,12 +47,13 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.ChessApplication.executor": "Run",
-    "JUnit.BoardModelTest.executor": "Run",
+    "JUnit.BoardModelTest.executor": "Coverage",
     "JUnit.BoardModelTest.testMovePiece.executor": "Run",
+    "JUnit.BoardModelTest.testMovePieceAtEmptySquareFails.executor": "Run",
     "JUnit.BoardModelTest.testPieceAtOutOfBounds.executor": "Run",
     "JUnit.GameModelTest.executor": "Coverage",
     "JUnit.GameModelTest.testGameStartsOnWhiteTurn.executor": "Run",
-    "JUnit.GameModelTest.testMoveChangesTurn.executor": "Debug",
+    "JUnit.GameModelTest.testMoveChangesTurn.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
@@ -69,8 +66,8 @@
       <recent name="org.chess.chess.board" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.GameModelTest.testMoveChangesTurn">
-    <configuration name="BoardModelTest.testMovePiece" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.BoardModelTest">
+    <configuration name="BoardModelTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="chess" />
       <extension name="coverage">
         <pattern>
@@ -80,39 +77,23 @@
       </extension>
       <option name="PACKAGE_NAME" value="org.chess.chess.board" />
       <option name="MAIN_CLASS_NAME" value="org.chess.chess.board.BoardModelTest" />
-      <option name="METHOD_NAME" value="testMovePiece" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="BoardModelTest.testPieceAtOutOfBounds" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="chess" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.chess.chess.board.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.chess.chess.board" />
-      <option name="MAIN_CLASS_NAME" value="org.chess.chess.board.BoardModelTest" />
-      <option name="METHOD_NAME" value="testPieceAtOutOfBounds" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="GameModelTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="chess" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.chess.chess.game.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.chess.chess.game" />
-      <option name="MAIN_CLASS_NAME" value="org.chess.chess.game.GameModelTest" />
       <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BoardModelTest.testMovePieceAtEmptySquareFails" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="chess" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.chess.chess.board.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.chess.chess.board" />
+      <option name="MAIN_CLASS_NAME" value="org.chess.chess.board.BoardModelTest" />
+      <option name="METHOD_NAME" value="testMovePieceAtEmptySquareFails" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -149,13 +130,27 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="org.chess.chess.board in chess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="chess" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.chess.chess.board.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.chess.chess.board" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.BoardModelTest" />
+        <item itemvalue="JUnit.org.chess.chess.board in chess" />
+        <item itemvalue="JUnit.BoardModelTest.testMovePieceAtEmptySquareFails" />
         <item itemvalue="JUnit.GameModelTest.testMoveChangesTurn" />
         <item itemvalue="JUnit.GameModelTest.testGameStartsOnWhiteTurn" />
-        <item itemvalue="JUnit.GameModelTest" />
-        <item itemvalue="JUnit.BoardModelTest.testPieceAtOutOfBounds" />
-        <item itemvalue="JUnit.BoardModelTest.testMovePiece" />
       </list>
     </recent_temporary>
   </component>
@@ -280,7 +275,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717944045363</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Create copy of entire board for BoardSnapshot. Can improve later.">
+      <option name="closed" value="true" />
+      <created>1717945405285</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1717945405285</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -299,29 +302,13 @@
     <MESSAGE value="Create board snapshot class to undo moves" />
     <MESSAGE value="Update import message after game package refactor" />
     <MESSAGE value="Rename to GameModel" />
-    <option name="LAST_COMMIT_MESSAGE" value="Rename to GameModel" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModelTest.java</url>
-          <line>17</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModel.java</url>
-          <line>35</line>
-          <properties class="org.chess.chess.game.GameModel" method="isValidMove">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Create copy of entire board for BoardSnapshot. Can improve later." />
+    <option name="LAST_COMMIT_MESSAGE" value="Create copy of entire board for BoardSnapshot. Can improve later." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/chess$BoardModelTest.ic" NAME="BoardModelTest Coverage Results" MODIFIED="1717945477826" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>org.chess.chess.board.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/chess$GameModelTest.ic" NAME="GameModelTest Coverage Results" MODIFIED="1717944080531" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>org.chess.chess.game.*</FILTER>
     </SUITE>
