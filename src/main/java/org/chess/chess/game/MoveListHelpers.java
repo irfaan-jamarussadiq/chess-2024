@@ -1,4 +1,4 @@
-package org.chess.chess;
+package org.chess.chess.game;
 
 import org.chess.chess.board.Location;
 

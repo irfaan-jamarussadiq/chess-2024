@@ -1,4 +1,4 @@
-package org.chess.chess;
+package org.chess.chess.game;
 
 import org.chess.chess.board.Alliance;
 import org.chess.chess.board.BoardModel;
@@ -8,11 +8,13 @@ import org.chess.chess.board.piece.Pawn;
 import org.chess.chess.board.piece.Piece;
 import org.chess.chess.board.piece.Rook;
 
+import java.util.List;
+
 public class Game {
-    private static final Player WHITE = new Player(Alliance.WHITE);
-    private static final Player BLACK = new Player(Alliance.BLACK);
+    private static final Player WHITE = new Player(Alliance.WHITE, new Location(1, 5));
+    private static final Player BLACK = new Player(Alliance.BLACK, new Location(8, 5));
     private Player currentPlayer;
-    private final BoardModel board;
+    private BoardModel board;
 
     public Game() {
         this.currentPlayer = WHITE;
@@ -23,6 +25,9 @@ public class Game {
         Move move = new Move(start, end);
         if (isValidMove(move, board)) {
             executeMove(move, board);
+            if (board.pieceAt(start) instanceof King) {
+                currentPlayer.setKingLocation(end);
+            }
             currentPlayer = getNextPlayer();
         }
     }
@@ -32,7 +37,26 @@ public class Game {
             return false;
         }
 
-        throw new UnsupportedOperationException("Not implemented yet!");
+        Piece piece = board.pieceAt(move.start());
+        List<Move> candidateMoves = piece.getCandidateMoves(move.start());
+        for (Move candidateMove : candidateMoves) {
+            if (candidateMove.isWithinBounds() && candidateMove.equals(move)) {
+                BoardSnapshot boardSnapshot = new BoardSnapshot(board, currentPlayer.getKingLocation());
+                executeMove(candidateMove, board);
+                boolean movePutPlayerInCheck = currentPlayer.isInCheck(board);
+                restoreFromMemento(boardSnapshot);
+                if (!movePutPlayerInCheck) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private void restoreFromMemento(BoardSnapshot boardSnapshot) {
+        this.board = boardSnapshot.board();
+        this.currentPlayer.setKingLocation(boardSnapshot.kingLocation());
     }
 
     private void executeMove(Move move, BoardModel board) {
