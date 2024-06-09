@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb32eb40-b065-4f3d-bc40-daac67398af0" name="Changes" comment="Add check for location out of bounds in pieceAt()">
+    <list default="true" id="cb32eb40-b065-4f3d-bc40-daac67398af0" name="Changes" comment="Rename PieceColor to Alliance">
       <change afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/Game.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/PlayerTurn.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/Move.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,9 +18,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Record" />
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
+        <option value="Record" />
       </list>
     </option>
   </component>
@@ -55,6 +57,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="org.chess.chess" />
       <recent name="org.chess.chess.board" />
     </key>
   </component>
@@ -63,7 +66,7 @@
       <module name="chess" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.chess.chess.board.piece.*" />
+          <option name="PATTERN" value="org.chess.chess.board.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -78,7 +81,7 @@
       <module name="chess" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.chess.chess.board.piece.*" />
+          <option name="PATTERN" value="org.chess.chess.board.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -147,7 +150,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717886272754</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Rename PieceColor to Alliance">
+      <option name="closed" value="true" />
+      <created>1717886537390</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1717886537390</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -155,6 +166,7 @@
     <MESSAGE value="Create board and piece classes and test move piece method" />
     <MESSAGE value="Move piece classes to new package within board" />
     <MESSAGE value="Add check for location out of bounds in pieceAt()" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add check for location out of bounds in pieceAt()" />
+    <MESSAGE value="Rename PieceColor to Alliance" />
+    <option name="LAST_COMMIT_MESSAGE" value="Rename PieceColor to Alliance" />
   </component>
 </project>
