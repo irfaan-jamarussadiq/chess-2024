@@ -4,11 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb32eb40-b065-4f3d-bc40-daac67398af0" name="Changes" comment="Rename PieceColor to Alliance">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/Game.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/Move.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/Player.java" afterDir="false" />
+    <list default="true" id="cb32eb40-b065-4f3d-bc40-daac67398af0" name="Changes" comment="Create skeletal structure for Game class">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/Direction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/MoveListHelpers.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/Location.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Bishop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Bishop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/King.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/King.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Knight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Knight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Piece.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Queen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Queen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Rook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Rook.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +33,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -43,18 +52,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.ChessApplication.executor": "Run",
-    "JUnit.BoardModelTest.executor": "Run",
-    "JUnit.BoardModelTest.testMovePiece.executor": "Run",
-    "JUnit.BoardModelTest.testPieceAtOutOfBounds.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.ChessApplication.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BoardModelTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BoardModelTest.testMovePiece.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BoardModelTest.testPieceAtOutOfBounds.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="org.chess.chess" />
@@ -158,7 +167,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717886537390</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Create skeletal structure for Game class">
+      <option name="closed" value="true" />
+      <created>1717894002498</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1717894002498</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -167,6 +184,7 @@
     <MESSAGE value="Move piece classes to new package within board" />
     <MESSAGE value="Add check for location out of bounds in pieceAt()" />
     <MESSAGE value="Rename PieceColor to Alliance" />
-    <option name="LAST_COMMIT_MESSAGE" value="Rename PieceColor to Alliance" />
+    <MESSAGE value="Create skeletal structure for Game class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Create skeletal structure for Game class" />
   </component>
 </project>

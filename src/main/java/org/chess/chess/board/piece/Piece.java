@@ -1,6 +1,10 @@
 package org.chess.chess.board.piece;
 
+import org.chess.chess.Move;
 import org.chess.chess.board.Alliance;
+import org.chess.chess.board.Location;
+
+import java.util.List;
 
 public abstract class Piece {
     private final Alliance alliance;
@@ -9,7 +13,7 @@ public abstract class Piece {
         this.alliance = alliance;
     }
 
-    public Alliance getPieceColor() {
+    public Alliance getAlliance() {
         return alliance;
     }
 
@@ -21,4 +25,6 @@ public abstract class Piece {
         Piece otherPiece = (Piece) other;
         return otherPiece.alliance == this.alliance;
     }
+
+    public abstract List<Move> getCandidateMoves(Location location);
 }
