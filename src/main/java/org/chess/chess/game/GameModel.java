@@ -10,13 +10,13 @@ import org.chess.chess.board.piece.Rook;
 
 import java.util.List;
 
-public class Game {
+public class GameModel {
     private static final Player WHITE = new Player(Alliance.WHITE, new Location(1, 5));
     private static final Player BLACK = new Player(Alliance.BLACK, new Location(8, 5));
     private Player currentPlayer;
     private BoardModel board;
 
-    public Game() {
+    public GameModel() {
         this.currentPlayer = WHITE;
         this.board = new BoardModel();
     }
