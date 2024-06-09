@@ -1,6 +1,6 @@
 package org.chess.chess.board;
 
-import org.chess.chess.Direction;
+import org.chess.chess.game.Direction;
 
 public record Location(int rank, int file) {
     public boolean isWithinBounds() {
