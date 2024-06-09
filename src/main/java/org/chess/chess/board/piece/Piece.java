@@ -1,6 +1,6 @@
 package org.chess.chess.board.piece;
 
-import org.chess.chess.Move;
+import org.chess.chess.game.Move;
 import org.chess.chess.board.Alliance;
 import org.chess.chess.board.Location;
 

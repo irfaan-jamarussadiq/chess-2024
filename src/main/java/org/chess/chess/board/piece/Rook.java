@@ -1,7 +1,7 @@
 package org.chess.chess.board.piece;
 
-import org.chess.chess.Move;
-import org.chess.chess.MoveListHelpers;
+import org.chess.chess.game.Move;
+import org.chess.chess.game.MoveListHelpers;
 import org.chess.chess.board.Alliance;
 import org.chess.chess.board.BoardModel;
 import org.chess.chess.board.Location;
