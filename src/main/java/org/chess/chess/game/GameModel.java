@@ -13,7 +13,6 @@ import java.util.List;
 public class GameModel {
     public static final Player WHITE = new Player(Alliance.WHITE, new Location(1, 5));
     public static final Player BLACK = new Player(Alliance.BLACK, new Location(8, 5));
-
     private Player currentPlayer;
     private BoardModel board;
 
@@ -30,7 +29,7 @@ public class GameModel {
         }
     }
 
-    private boolean isValidMove(Move move, BoardModel board) {
+    boolean isValidMove(Move move, BoardModel board) {
         if (!move.isWithinBounds()) {
             return false;
         }
@@ -41,7 +40,7 @@ public class GameModel {
             if (candidateMove.isWithinBounds() && candidateMove.equals(move)) {
                 BoardSnapshot boardSnapshot = new BoardSnapshot(board, currentPlayer);
                 executeMove(candidateMove, board);
-                boolean movePutPlayerInCheck = currentPlayer.isInCheck(board);
+                boolean movePutPlayerInCheck = currentPlayer.isInCheck(this);
                 restoreFromMemento(boardSnapshot);
                 if (!movePutPlayerInCheck) {
                     return true;
@@ -148,5 +147,9 @@ public class GameModel {
 
     public Player getNextPlayer() {
         return (currentPlayer == WHITE) ? BLACK : WHITE;
+    }
+
+    public BoardModel getBoard() {
+        return board;
     }
 }
