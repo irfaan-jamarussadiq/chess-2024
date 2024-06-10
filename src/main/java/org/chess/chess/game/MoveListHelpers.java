@@ -28,6 +28,28 @@ public final class MoveListHelpers {
         return moves;
     }
 
+    public static List<Move> getAllPossibleMoves(Location location, int maxSquares) {
+        List<Move> moves = new ArrayList<>();
+
+        List<Move> knightMoves = List.of(
+                new Move(location, location.shift(new Direction(-2, -1))),
+                new Move(location, location.shift(new Direction(-2, 1))),
+                new Move(location, location.shift(new Direction(-1, -2))),
+                new Move(location, location.shift(new Direction(-1, 2))),
+                new Move(location, location.shift(new Direction(1, -2))),
+                new Move(location, location.shift(new Direction(1, 2))),
+                new Move(location, location.shift(new Direction(2, -1))),
+                new Move(location, location.shift(new Direction(2, 1)))
+        );
+        List<Move> bishopMoves = getAllDiagonalMoves(location, maxSquares);
+        List<Move> rookMoves = getAllStraightMoves(location, maxSquares);
+
+        moves.addAll(knightMoves);
+        moves.addAll(bishopMoves);
+        moves.addAll(rookMoves);
+        return moves;
+    }
+
     private static List<Move> getLineOfMoves(Location location, Direction direction, int maxSquares) {
         List<Move> moves = new ArrayList<>();
         for (int numSquares = 1; numSquares <= maxSquares; numSquares++) {
