@@ -13,6 +13,7 @@ import java.util.List;
 public class GameModel {
     public static final Player WHITE = new Player(Alliance.WHITE, new Location(1, 5));
     public static final Player BLACK = new Player(Alliance.BLACK, new Location(8, 5));
+
     private Player currentPlayer;
     private BoardModel board;
 
@@ -24,11 +25,7 @@ public class GameModel {
     public void move(Location start, Location end) {
         Move move = new Move(start, end);
         if (isValidMove(move, board)) {
-            Piece piece = board.pieceAt(start);
             executeMove(move, board);
-            if (piece instanceof King) {
-                currentPlayer.setKingLocation(end);
-            }
             currentPlayer = getNextPlayer();
         }
     }
@@ -42,7 +39,7 @@ public class GameModel {
         List<Move> candidateMoves = piece.getCandidateMoves(move.start());
         for (Move candidateMove : candidateMoves) {
             if (candidateMove.isWithinBounds() && candidateMove.equals(move)) {
-                BoardSnapshot boardSnapshot = new BoardSnapshot(board, currentPlayer.getKingLocation());
+                BoardSnapshot boardSnapshot = new BoardSnapshot(board, currentPlayer);
                 executeMove(candidateMove, board);
                 boolean movePutPlayerInCheck = currentPlayer.isInCheck(board);
                 restoreFromMemento(boardSnapshot);
@@ -57,16 +54,22 @@ public class GameModel {
 
     private void restoreFromMemento(BoardSnapshot boardSnapshot) {
         this.board = boardSnapshot.board();
-        this.currentPlayer.setKingLocation(boardSnapshot.kingLocation());
+        this.currentPlayer.setKingLocation(boardSnapshot.getPlayer().getKingLocation());
     }
 
     private void executeMove(Move move, BoardModel board) {
+        Piece piece = board.pieceAt(move.start());
+
         if (isCastlingMove(move, board)) {
             castle(move.start(), move.end());
         } else if (isEnPassantMove(move, board)) {
             enPassant(move.start(), move.end());
         } else {
             board.movePiece(move.start(), move.end());
+        }
+
+        if (piece instanceof King) {
+            currentPlayer.setKingLocation(move.end());
         }
     }
 
