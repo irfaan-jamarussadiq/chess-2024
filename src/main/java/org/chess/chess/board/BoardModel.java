@@ -73,6 +73,26 @@ public class BoardModel {
         return pieceAt(location) == null;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (int rank = 1; rank <= SIZE; rank++) {
+            for (int file = 1; file <= SIZE; file++) {
+                Piece piece = pieceAt(new Location(9 - rank, file));
+                if (piece == null) {
+                    sb.append(". ");
+                } else {
+                    String p = piece.getClass().getSimpleName().charAt(0) + "";
+                    String p2 = (piece.getAlliance() == Alliance.WHITE) ? p.toUpperCase() : p.toLowerCase();
+                    sb.append(p2).append(" ");
+                }
+            }
+            sb.append("\n");
+        }
+
+        return sb.toString();
+    }
+
     private void addPiece(Piece piece, Location location) {
         int tileCoordinate = SIZE * (location.rank() - 1) + (location.file() - 1);
         tiles[tileCoordinate].setPiece(piece);
