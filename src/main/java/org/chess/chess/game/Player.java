@@ -3,6 +3,9 @@ package org.chess.chess.game;
 import org.chess.chess.board.Alliance;
 import org.chess.chess.board.BoardModel;
 import org.chess.chess.board.Location;
+import org.chess.chess.board.piece.Piece;
+
+import java.util.List;
 
 public class Player {
     private final Alliance alliance;
@@ -14,9 +17,19 @@ public class Player {
     }
 
     public boolean isInCheck(BoardModel board) {
-        // TODO: Implement this method!
+        Piece king = board.pieceAt(kingLocation);
+        List<Move> movesAtKingLocation = MoveListHelpers.getAllPossibleMoves(kingLocation, BoardModel.SIZE);
+        for (Move move : movesAtKingLocation) {
+            if (move.isWithinBounds()) {
+                Piece potentialEnemy = board.pieceAt(move.end());
+                if (king.isEnemyOf(potentialEnemy)
+                        && potentialEnemy.canMoveFrom(move.end(), move.start(), board)) {
+                    return true;
+                }
+            }
+        }
+
         return false;
-//        throw new UnsupportedOperationException("Not implemented yet!");
     }
 
     public boolean isInCheckmate(BoardModel board) {

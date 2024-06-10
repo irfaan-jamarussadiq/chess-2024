@@ -26,4 +26,15 @@ public class Queen extends Piece {
         moves.addAll(MoveListHelpers.getAllDiagonalMoves(location, maxSquares));
         return moves;
     }
+
+    @Override
+    public boolean canMoveFrom(Location start, Location end, BoardModel board) {
+        int diffRank = Math.abs(end.rank() - start.rank());
+        int diffFile = Math.abs(end.file() - start.file());
+        if (diffRank != diffFile && diffRank != 0 && diffFile != 0) {
+            return false;
+        }
+
+        return !this.isFriend(board.pieceAt(end));
+    }
 }

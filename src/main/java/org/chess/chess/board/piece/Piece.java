@@ -1,5 +1,6 @@
 package org.chess.chess.board.piece;
 
+import org.chess.chess.board.BoardModel;
 import org.chess.chess.game.Move;
 import org.chess.chess.board.Alliance;
 import org.chess.chess.board.Location;
@@ -27,8 +28,13 @@ public abstract class Piece {
     }
 
     public abstract List<Move> getCandidateMoves(Location location);
+    public abstract boolean canMoveFrom(Location start, Location end, BoardModel board);
 
-    public boolean isEnemyOf(Piece enemyPawn) {
-        return enemyPawn != null && alliance != enemyPawn.alliance;
+    public boolean isEnemyOf(Piece enemy) {
+        return enemy != null && alliance != enemy.alliance;
+    }
+
+    protected boolean isFriend(Piece friend) {
+        return friend != null && alliance == friend.alliance;
     }
 }
