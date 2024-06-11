@@ -8,7 +8,9 @@ import org.chess.chess.board.piece.Pawn;
 import org.chess.chess.board.piece.Piece;
 import org.chess.chess.board.piece.Rook;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GameModel {
     public static final Player WHITE = new Player(Alliance.WHITE, new Location(1, 5));
@@ -23,13 +25,13 @@ public class GameModel {
 
     public void move(Location start, Location end) {
         Move move = new Move(start, end);
-        if (isValidMove(move, board)) {
+        if (isValidMove(move)) {
             executeMove(move, board);
             currentPlayer = getNextPlayer();
         }
     }
 
-    boolean isValidMove(Move move, BoardModel board) {
+    boolean isValidMove(Move move) {
         if (!move.isWithinBounds()) {
             return false;
         }
@@ -40,7 +42,7 @@ public class GameModel {
             if (candidateMove.isWithinBounds() && candidateMove.equals(move)) {
                 BoardSnapshot boardSnapshot = new BoardSnapshot(board, currentPlayer);
                 executeMove(candidateMove, board);
-                boolean movePutPlayerInCheck = currentPlayer.isInCheck(this);
+                boolean movePutPlayerInCheck = isInCheck(currentPlayer);
                 restoreFromMemento(boardSnapshot);
                 if (!movePutPlayerInCheck) {
                     return true;
@@ -49,6 +51,56 @@ public class GameModel {
         }
 
         return false;
+    }
+
+    public boolean isInCheck(Player player) {
+        Piece king = board.pieceAt(player.getKingLocation());
+        List<Move> movesAtKingLocation = MoveListHelpers.getAllPossibleMoves(player.getKingLocation(), BoardModel.SIZE);
+        for (Move move : movesAtKingLocation) {
+            if (move.isWithinBounds()) {
+                Piece potentialEnemy = board.pieceAt(move.end());
+                if (king.isEnemyOf(potentialEnemy)
+                        && potentialEnemy.canMoveFrom(move.end(), move.start(), board)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public boolean isInCheckmate(Player player) {
+        return isInCheck(player) && hasNoPossibleMoves(player);
+    }
+
+    public boolean isInStalemate(Player player) {
+        return !isInCheck(player) && hasNoPossibleMoves(player);
+    }
+
+    private boolean hasNoPossibleMoves(Player player) {
+        Map<Location, Piece> playerPieces = new HashMap<>();
+        for (int rank = 1; rank <= BoardModel.SIZE; rank++) {
+            for (int file = 1; file <= BoardModel.SIZE; file++) {
+                Location location = new Location(rank, file);
+                Piece piece = board.pieceAt(location);
+                if (piece != null && piece.getAlliance() == player.getAlliance()) {
+                    playerPieces.put(location, piece);
+                }
+            }
+        }
+
+        for (Map.Entry<Location, Piece> entry : playerPieces.entrySet()) {
+            Location location = entry.getKey();
+            Piece piece = entry.getValue();
+            List<Move> candidateMoves = piece.getCandidateMoves(location);
+            for (Move move : candidateMoves) {
+                if (isValidMove(move) && piece.canMoveFrom(move.end(), location, board)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 
     private void restoreFromMemento(BoardSnapshot boardSnapshot) {
