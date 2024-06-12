@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb32eb40-b065-4f3d-bc40-daac67398af0" name="Changes" comment="Move check, checkmate, and stalemate methods from Player to Game class">
+    <list default="true" id="cb32eb40-b065-4f3d-bc40-daac67398af0" name="Changes" comment="Fix bug in checkmate detection">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Bishop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Bishop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Queen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Queen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Rook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Rook.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModelTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -55,12 +51,15 @@
     "JUnit.BoardModelTest.testMovePiece.executor": "Run",
     "JUnit.BoardModelTest.testMovePieceAtEmptySquareFails.executor": "Run",
     "JUnit.BoardModelTest.testPieceAtOutOfBounds.executor": "Run",
-    "JUnit.GameModelTest.executor": "Run",
+    "JUnit.GameModelTest.executor": "Coverage",
+    "JUnit.GameModelTest.testCastlingInvalidAtStart.executor": "Run",
     "JUnit.GameModelTest.testFoolsMateIsCheckmate.executor": "Run",
     "JUnit.GameModelTest.testGameStartsOnWhiteTurn.executor": "Run",
     "JUnit.GameModelTest.testMoveChangesTurn.executor": "Run",
+    "JUnit.GameModelTest.testMoveOutOfBoundsIsInvalid.executor": "Run",
     "JUnit.GameModelTest.testPlayerKingLocationUpdatesOnKingMove.executor": "Run",
-    "JUnit.GameModelTest.testScholarsMateIsCheckmate.executor": "Debug",
+    "JUnit.GameModelTest.testScholarsMateIsCheckmate.executor": "Run",
+    "JUnit.GameModelTest.testWhiteIsInCheck.executor": "Run",
     "JUnit.org.chess.chess.board in chess.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -74,7 +73,7 @@
       <recent name="org.chess.chess.board" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.GameModelTest">
+  <component name="RunManager" selected="JUnit.GameModelTest.testCastlingInvalidAtStart">
     <configuration name="GameModelTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="chess" />
       <extension name="coverage">
@@ -90,7 +89,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GameModelTest.testFoolsMateIsCheckmate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="GameModelTest.testCastlingInvalidAtStart" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="chess" />
       <extension name="coverage">
         <pattern>
@@ -100,13 +99,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="org.chess.chess.game" />
       <option name="MAIN_CLASS_NAME" value="org.chess.chess.game.GameModelTest" />
-      <option name="METHOD_NAME" value="testFoolsMateIsCheckmate" />
+      <option name="METHOD_NAME" value="testCastlingInvalidAtStart" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GameModelTest.testGameStartsOnWhiteTurn" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="GameModelTest.testMoveOutOfBoundsIsInvalid" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="chess" />
       <extension name="coverage">
         <pattern>
@@ -116,23 +115,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="org.chess.chess.game" />
       <option name="MAIN_CLASS_NAME" value="org.chess.chess.game.GameModelTest" />
-      <option name="METHOD_NAME" value="testGameStartsOnWhiteTurn" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="GameModelTest.testPlayerKingLocationUpdatesOnKingMove" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="chess" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.chess.chess.game.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.chess.chess.game" />
-      <option name="MAIN_CLASS_NAME" value="org.chess.chess.game.GameModelTest" />
-      <option name="METHOD_NAME" value="testPlayerKingLocationUpdatesOnKingMove" />
+      <option name="METHOD_NAME" value="testMoveOutOfBoundsIsInvalid" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -154,13 +137,29 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="GameModelTest.testWhiteIsInCheck" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="chess" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.chess.chess.game.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.chess.chess.game" />
+      <option name="MAIN_CLASS_NAME" value="org.chess.chess.game.GameModelTest" />
+      <option name="METHOD_NAME" value="testWhiteIsInCheck" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.GameModelTest.testCastlingInvalidAtStart" />
         <item itemvalue="JUnit.GameModelTest" />
+        <item itemvalue="JUnit.GameModelTest.testMoveOutOfBoundsIsInvalid" />
+        <item itemvalue="JUnit.GameModelTest.testWhiteIsInCheck" />
         <item itemvalue="JUnit.GameModelTest.testScholarsMateIsCheckmate" />
-        <item itemvalue="JUnit.GameModelTest.testFoolsMateIsCheckmate" />
-        <item itemvalue="JUnit.GameModelTest.testPlayerKingLocationUpdatesOnKingMove" />
-        <item itemvalue="JUnit.GameModelTest.testGameStartsOnWhiteTurn" />
       </list>
     </recent_temporary>
   </component>
@@ -357,7 +356,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718145570775</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Fix bug in checkmate detection">
+      <option name="closed" value="true" />
+      <created>1718152354241</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1718152354241</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -385,30 +392,16 @@
     <MESSAGE value="Implement check, checkmate, and stalemate methods" />
     <MESSAGE value="Update workspace file" />
     <MESSAGE value="Move check, checkmate, and stalemate methods from Player to Game class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Move check, checkmate, and stalemate methods from Player to Game class" />
+    <MESSAGE value="Fix bug in checkmate detection" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix bug in checkmate detection" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModelTest.java</url>
-          <line>50</line>
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModel.java</url>
-          <line>63</line>
-          <option name="timeStamp" value="21" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Rook.java</url>
           <line>41</line>
           <option name="timeStamp" value="22" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Queen.java</url>
-          <line>33</line>
-          <option name="timeStamp" value="23" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -417,7 +410,7 @@
     <SUITE FILE_PATH="coverage/chess$BoardModelTest.ic" NAME="BoardModelTest Coverage Results" MODIFIED="1717945694849" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>org.chess.chess.board.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/chess$GameModelTest.ic" NAME="GameModelTest Coverage Results" MODIFIED="1717950753059" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/chess$GameModelTest.ic" NAME="GameModelTest Coverage Results" MODIFIED="1718194900350" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>org.chess.chess.game.*</FILTER>
     </SUITE>
   </component>
