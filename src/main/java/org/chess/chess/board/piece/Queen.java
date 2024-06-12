@@ -29,12 +29,8 @@ public class Queen extends Piece {
 
     @Override
     public boolean canMoveFrom(Location start, Location end, BoardModel board) {
-        int diffRank = Math.abs(end.rank() - start.rank());
-        int diffFile = Math.abs(end.file() - start.file());
-        if (diffRank != diffFile && diffRank != 0 && diffFile != 0) {
-            return false;
-        }
-
-        return !this.isFriend(board.pieceAt(end));
+        Piece bishop = new Bishop(getAlliance());
+        Piece rook = new Rook(getAlliance());
+        return bishop.canMoveFrom(start, end, board) || rook.canMoveFrom(start, end, board);
     }
 }

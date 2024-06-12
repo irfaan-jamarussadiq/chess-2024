@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb32eb40-b065-4f3d-bc40-daac67398af0" name="Changes" comment="Update workspace file">
+    <list default="true" id="cb32eb40-b065-4f3d-bc40-daac67398af0" name="Changes" comment="Move check, checkmate, and stalemate methods from Player to Game class">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Bishop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Bishop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Queen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Queen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Rook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Rook.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModelTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/Player.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +60,7 @@
     "JUnit.GameModelTest.testGameStartsOnWhiteTurn.executor": "Run",
     "JUnit.GameModelTest.testMoveChangesTurn.executor": "Run",
     "JUnit.GameModelTest.testPlayerKingLocationUpdatesOnKingMove.executor": "Run",
-    "JUnit.GameModelTest.testScholarsMateIsCheckmate.executor": "Run",
+    "JUnit.GameModelTest.testScholarsMateIsCheckmate.executor": "Debug",
     "JUnit.org.chess.chess.board in chess.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -347,7 +349,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718063951932</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Move check, checkmate, and stalemate methods from Player to Game class">
+      <option name="closed" value="true" />
+      <created>1718145570775</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1718145570775</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -374,7 +384,34 @@
     <MESSAGE value="Fix bug in test for GameModel" />
     <MESSAGE value="Implement check, checkmate, and stalemate methods" />
     <MESSAGE value="Update workspace file" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update workspace file" />
+    <MESSAGE value="Move check, checkmate, and stalemate methods from Player to Game class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Move check, checkmate, and stalemate methods from Player to Game class" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModelTest.java</url>
+          <line>50</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModel.java</url>
+          <line>63</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Rook.java</url>
+          <line>41</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Queen.java</url>
+          <line>33</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/chess$BoardModelTest.ic" NAME="BoardModelTest Coverage Results" MODIFIED="1717945694849" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

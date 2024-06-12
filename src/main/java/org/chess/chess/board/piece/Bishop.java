@@ -38,7 +38,7 @@ public class Bishop extends Piece {
                 break;
             }
 
-            current = start.shift(direction);
+            current = current.shift(direction);
         }
 
         return current.equals(end);

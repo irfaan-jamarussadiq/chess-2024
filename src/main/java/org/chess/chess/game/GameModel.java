@@ -13,13 +13,13 @@ import java.util.List;
 import java.util.Map;
 
 public class GameModel {
-    public static final Player WHITE = new Player(Alliance.WHITE, new Location(1, 5));
-    public static final Player BLACK = new Player(Alliance.BLACK, new Location(8, 5));
+    public final Player white = new Player(Alliance.WHITE, new Location(1, 5));
+    public final Player black = new Player(Alliance.BLACK, new Location(8, 5));
     private Player currentPlayer;
     private BoardModel board;
 
     public GameModel() {
-        this.currentPlayer = WHITE;
+        this.currentPlayer = white;
         this.board = new BoardModel();
     }
 
@@ -198,7 +198,7 @@ public class GameModel {
     }
 
     public Player getNextPlayer() {
-        return (currentPlayer == WHITE) ? BLACK : WHITE;
+        return (currentPlayer == white) ? black : white;
     }
 
     public BoardModel getBoard() {

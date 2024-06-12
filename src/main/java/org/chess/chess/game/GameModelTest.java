@@ -9,14 +9,14 @@ public class GameModelTest {
     @Test
     public void testGameStartsOnWhiteTurn() {
         GameModel game = new GameModel();
-        assertEquals(game.getNextPlayer(), GameModel.BLACK);
+        assertEquals(game.getNextPlayer(), game.black);
     }
 
     @Test
     public void testMoveChangesTurn() {
         GameModel game = new GameModel();
         moveHelper(game, 2, 4, 4, 4);
-        assertEquals(game.getNextPlayer(), GameModel.WHITE);
+        assertEquals(game.getNextPlayer(), game.white);
     }
 
     @Test
@@ -25,7 +25,7 @@ public class GameModelTest {
         moveHelper(game, 2, 5, 4, 5);
         moveHelper(game, 7, 5, 5, 5);
         moveHelper(game, 1, 5, 2, 5);
-        assertEquals(GameModel.WHITE.getKingLocation(), new Location(2, 5));
+        assertEquals(game.white.getKingLocation(), new Location(2, 5));
     }
 
     @Test
@@ -36,8 +36,8 @@ public class GameModelTest {
         moveHelper(game, 2, 4, 4, 4);
         moveHelper(game, 7, 6, 5, 6);
         moveHelper(game, 1, 4, 5, 8);
-        assertFalse(game.isInCheckmate(GameModel.WHITE));
-        assertTrue(game.isInCheckmate(GameModel.BLACK));
+        assertFalse(game.isInCheckmate(game.white));
+        assertTrue(game.isInCheckmate(game.black));
     }
 
     @Test
@@ -50,8 +50,8 @@ public class GameModelTest {
         moveHelper(game, 1, 4, 5, 8);
         moveHelper(game, 8, 7, 6, 6);
         moveHelper(game, 5, 8, 7, 6);
-        assertFalse(game.isInCheckmate(GameModel.WHITE));
-        assertTrue(game.isInCheckmate(GameModel.BLACK));
+        assertFalse(game.isInCheckmate(game.white));
+        assertTrue(game.isInCheckmate(game.black));
     }
 
     private void moveHelper(GameModel game, int startRank, int startFile, int endRank, int endFile) {
