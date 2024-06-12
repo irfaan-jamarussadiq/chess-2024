@@ -4,9 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb32eb40-b065-4f3d-bc40-daac67398af0" name="Changes" comment="Fix bug in checkmate detection">
+    <list default="true" id="cb32eb40-b065-4f3d-bc40-daac67398af0" name="Changes" comment="Add more tests to GameModel class">
+      <change afterPath="$PROJECT_DIR$/assets/bishop.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/bishop2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/chess-gui-castling.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/chess-gui-check.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/chess-gui-checkmate.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/chess-gui-normal.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/king.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/king2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/knight.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/knight2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/pawn.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/pawn2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/queen.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/queen2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/rook.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/rook2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/BoardView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/TileView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModelTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/ChessApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/ChessApplication.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +82,9 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true"
+    "jdk.selected.JAVA_MODULE": "17",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/irfaan/Documents/Programming/Java/chess/assets"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -72,8 +92,11 @@
       <recent name="org.chess.chess" />
       <recent name="org.chess.chess.board" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets" />
+    </key>
   </component>
-  <component name="RunManager" selected="JUnit.GameModelTest.testCastlingInvalidAtStart">
+  <component name="RunManager">
     <configuration name="GameModelTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="chess" />
       <extension name="coverage">
@@ -364,11 +387,18 @@
       <option name="project" value="LOCAL" />
       <updated>1718152354241</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Add more tests to GameModel class">
+      <option name="closed" value="true" />
+      <created>1718195066579</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1718195066579</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Initial commit" />
     <MESSAGE value="Create board and piece classes and test move piece method" />
     <MESSAGE value="Move piece classes to new package within board" />
     <MESSAGE value="Add check for location out of bounds in pieceAt()" />
@@ -393,7 +423,8 @@
     <MESSAGE value="Update workspace file" />
     <MESSAGE value="Move check, checkmate, and stalemate methods from Player to Game class" />
     <MESSAGE value="Fix bug in checkmate detection" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix bug in checkmate detection" />
+    <MESSAGE value="Add more tests to GameModel class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add more tests to GameModel class" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
