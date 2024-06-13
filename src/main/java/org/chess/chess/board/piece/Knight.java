@@ -31,10 +31,11 @@ public class Knight extends Piece {
     public boolean canMoveFrom(Location start, Location end, BoardModel board) {
         int diffRank = Math.abs(end.rank() - start.rank());
         int diffFile = Math.abs(end.file() - start.file());
+
         if ((diffRank == 2 && diffFile == 1) || (diffRank == 1 && diffFile == 2)) {
-            return false;
+            return !this.isFriend(board.pieceAt(end));
         }
 
-        return !this.isFriend(board.pieceAt(end));
+        return false;
     }
 }

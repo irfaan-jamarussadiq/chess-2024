@@ -8,6 +8,7 @@ import org.chess.chess.board.piece.Pawn;
 import org.chess.chess.board.piece.Piece;
 import org.chess.chess.board.piece.Rook;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,6 +52,26 @@ public class GameModel {
         }
 
         return false;
+    }
+
+    public List<Move> getLegalMoves(Location location) {
+        Piece piece = board.pieceAt(location);
+        List<Move> candidateMoves = piece.getCandidateMoves(location);
+        List<Move> legalMoves = new ArrayList<>();
+
+        for (Move candidateMove : candidateMoves) {
+            if (candidateMove.isWithinBounds() && piece.canMoveFrom(location, candidateMove.end(), board)) {
+                BoardSnapshot boardSnapshot = new BoardSnapshot(board, currentPlayer);
+                executeMove(candidateMove, board);
+                boolean movePutPlayerInCheck = isInCheck(currentPlayer);
+                restoreFromMemento(boardSnapshot);
+                if (!movePutPlayerInCheck) {
+                    legalMoves.add(candidateMove);
+                }
+            }
+        }
+
+        return legalMoves;
     }
 
     public boolean isInCheck(Player player) {
