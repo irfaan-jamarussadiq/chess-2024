@@ -4,14 +4,16 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.chess.chess.board.BoardController;
 import org.chess.chess.board.BoardView;
+import org.chess.chess.game.GameController;
 
 public class ChessApplication extends Application {
     @Override
     public void start(Stage stage) {
         VBox root = new VBox();
-        BoardView view = new BoardView();
-        root.getChildren().add(view);
+        GameController controller = new GameController();
+        root.getChildren().add(controller.getGameView());
         Scene scene = new Scene(root, 1000, 1000);
         stage.setTitle("Chess");
         stage.setScene(scene);
