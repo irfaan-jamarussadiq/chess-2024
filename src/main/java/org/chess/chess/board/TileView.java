@@ -8,15 +8,15 @@ import javafx.scene.shape.Rectangle;
 import org.chess.chess.board.piece.Piece;
 
 public class TileView extends StackPane {
-    public static final int TILE_SIDE_LENGTH = 80;
+    public static final int SIDE_LENGTH = 80;
     private final ImageView pieceView;
     private final Rectangle tile;
     private Piece piece;
 
     public TileView(Color color) {
         tile = new Rectangle();
-        tile.setHeight(TILE_SIDE_LENGTH);
-        tile.setWidth(TILE_SIDE_LENGTH);
+        tile.setHeight(SIDE_LENGTH);
+        tile.setWidth(SIDE_LENGTH);
         tile.setFill(color);
 
         pieceView = new ImageView();
@@ -40,5 +40,9 @@ public class TileView extends StackPane {
 
     public Piece getPiece() {
         return piece;
+    }
+
+    public void setFill(Color color) {
+        tile.setFill(color);
     }
 }

@@ -7,6 +7,7 @@ import org.chess.chess.board.piece.*;
 public class BoardView extends GridPane {
     private static final Color LIGHT_SQUARE = Color.rgb(157, 172, 255);
     private static final Color DARK_SQUARE = Color.rgb(111, 115, 210);
+    private static final Color HIGHLIGHT_COLOR = Color.rgb(134, 239, 172);
 
     public static final int SIZE = 8;
 
@@ -76,5 +77,10 @@ public class BoardView extends GridPane {
 
         removePiece(start);
         addPiece(piece, end);
+    }
+
+    public void highlightSquare(Location location) {
+        int tileCoordinate = SIZE * (location.rank() - 1) + location.file() - 1;
+        tiles[tileCoordinate].setFill(HIGHLIGHT_COLOR);
     }
 }

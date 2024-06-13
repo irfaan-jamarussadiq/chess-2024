@@ -4,27 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb32eb40-b065-4f3d-bc40-daac67398af0" name="Changes" comment="Add more tests to GameModel class">
-      <change afterPath="$PROJECT_DIR$/assets/bishop.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/bishop2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/chess-gui-castling.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/chess-gui-check.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/chess-gui-checkmate.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/chess-gui-normal.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/king.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/king2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/knight.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/knight2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/pawn.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/pawn2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/queen.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/queen2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/rook.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/rook2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/BoardView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/TileView.java" afterDir="false" />
+    <list default="true" id="cb32eb40-b065-4f3d-bc40-daac67398af0" name="Changes" comment="Create BoardView">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/BoardController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/ChessApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/ChessApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/BoardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/BoardView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/TileView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/TileView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Knight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Knight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +85,20 @@
       <recent name="$PROJECT_DIR$/assets" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.ChessApplication">
+    <configuration name="ChessApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.chess.chess.ChessApplication" />
+      <module name="chess" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.chess.chess.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="GameModelTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="chess" />
       <extension name="coverage">
@@ -144,22 +146,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GameModelTest.testScholarsMateIsCheckmate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="chess" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.chess.chess.game.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.chess.chess.game" />
-      <option name="MAIN_CLASS_NAME" value="org.chess.chess.game.GameModelTest" />
-      <option name="METHOD_NAME" value="testScholarsMateIsCheckmate" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="GameModelTest.testWhiteIsInCheck" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="chess" />
       <extension name="coverage">
@@ -178,11 +164,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.ChessApplication" />
         <item itemvalue="JUnit.GameModelTest.testCastlingInvalidAtStart" />
         <item itemvalue="JUnit.GameModelTest" />
         <item itemvalue="JUnit.GameModelTest.testMoveOutOfBoundsIsInvalid" />
         <item itemvalue="JUnit.GameModelTest.testWhiteIsInCheck" />
-        <item itemvalue="JUnit.GameModelTest.testScholarsMateIsCheckmate" />
       </list>
     </recent_temporary>
   </component>
@@ -395,12 +381,26 @@
       <option name="project" value="LOCAL" />
       <updated>1718195066579</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Add piece images">
+      <option name="closed" value="true" />
+      <created>1718235115397</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1718235115397</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Create BoardView">
+      <option name="closed" value="true" />
+      <created>1718235132307</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1718235132307</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Create board and piece classes and test move piece method" />
-    <MESSAGE value="Move piece classes to new package within board" />
     <MESSAGE value="Add check for location out of bounds in pieceAt()" />
     <MESSAGE value="Rename PieceColor to Alliance" />
     <MESSAGE value="Create skeletal structure for Game class" />
@@ -424,7 +424,9 @@
     <MESSAGE value="Move check, checkmate, and stalemate methods from Player to Game class" />
     <MESSAGE value="Fix bug in checkmate detection" />
     <MESSAGE value="Add more tests to GameModel class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add more tests to GameModel class" />
+    <MESSAGE value="Add piece images" />
+    <MESSAGE value="Create BoardView" />
+    <option name="LAST_COMMIT_MESSAGE" value="Create BoardView" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
