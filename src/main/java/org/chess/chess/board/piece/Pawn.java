@@ -33,11 +33,11 @@ public class Pawn extends Piece {
         Location rightPawnLocation = new Location(start.rank() + pawnDir, start.file() + 1);
 
         if (leftPawnLocation.isWithinBounds() && end.equals(leftPawnLocation)) {
-            return !this.isFriend(endPiece);
+            return this.isEnemyOf(endPiece);
         }
 
         if (rightPawnLocation.isWithinBounds() && end.equals(rightPawnLocation)) {
-            return !this.isFriend(endPiece);
+            return this.isEnemyOf(endPiece);
         }
 
         Location oneSquareForward = new Location(start.rank() + pawnDir, start.file());

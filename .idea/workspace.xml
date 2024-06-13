@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb32eb40-b065-4f3d-bc40-daac67398af0" name="Changes" comment="Remove debugging print statements" />
+    <list default="true" id="cb32eb40-b065-4f3d-bc40-daac67398af0" name="Changes" comment="Fix bugs in Bishop and Rook classes suggesting illegal moves">
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Pawn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Pawn.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -419,11 +421,18 @@
       <option name="project" value="LOCAL" />
       <updated>1718246209876</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Fix bugs in Bishop and Rook classes suggesting illegal moves">
+      <option name="closed" value="true" />
+      <created>1718313104932</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1718313104932</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add getter for alliance in Player class" />
     <MESSAGE value="Add methods for executing en passant, castling, and other moves" />
     <MESSAGE value="Add methods for validating castling and en passant" />
     <MESSAGE value="Create game package and move classes" />
@@ -448,18 +457,8 @@
     <MESSAGE value="Create GameController" />
     <MESSAGE value="Highlight all legal moves and fix bug in Knight class" />
     <MESSAGE value="Remove debugging print statements" />
-    <option name="LAST_COMMIT_MESSAGE" value="Remove debugging print statements" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Rook.java</url>
-          <line>41</line>
-          <option name="timeStamp" value="22" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Fix bugs in Bishop and Rook classes suggesting illegal moves" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix bugs in Bishop and Rook classes suggesting illegal moves" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/chess$BoardModelTest.ic" NAME="BoardModelTest Coverage Results" MODIFIED="1717945694849" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
