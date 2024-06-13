@@ -25,7 +25,6 @@ public class GameController implements EventHandler<MouseEvent> {
     public void handle(MouseEvent mouseEvent) {
         int rank = BoardView.SIZE - (int) mouseEvent.getY() / TileView.SIDE_LENGTH;
         int file = (int) mouseEvent.getX() / TileView.SIDE_LENGTH + 1;
-        System.out.println(rank + " " + file);
 
         Location location = new Location(rank, file);
         this.selectedPiece = gameModel.getBoard().pieceAt(location);
@@ -36,7 +35,6 @@ public class GameController implements EventHandler<MouseEvent> {
 
     private void highlightSquares(Location location) {
         List<Move> moves = gameModel.getLegalMoves(location);
-        System.out.println(moves);
         for (Move move : moves) {
             if (move.isWithinBounds()) {
                 gameView.getBoardView().highlightSquare(move.end());

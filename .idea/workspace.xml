@@ -4,16 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb32eb40-b065-4f3d-bc40-daac67398af0" name="Changes" comment="Create BoardView">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/BoardController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameView.java" afterDir="false" />
+    <list default="true" id="cb32eb40-b065-4f3d-bc40-daac67398af0" name="Changes" comment="Highlight all legal moves and fix bug in Knight class">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/ChessApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/ChessApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/BoardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/BoardView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/TileView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/TileView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Knight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Knight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -397,13 +390,34 @@
       <option name="project" value="LOCAL" />
       <updated>1718235132307</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Set highlighting of squares">
+      <option name="closed" value="true" />
+      <created>1718246067991</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1718246067991</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Create GameController">
+      <option name="closed" value="true" />
+      <created>1718246093009</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1718246093009</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Highlight all legal moves and fix bug in Knight class">
+      <option name="closed" value="true" />
+      <created>1718246122644</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1718246122644</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add check for location out of bounds in pieceAt()" />
-    <MESSAGE value="Rename PieceColor to Alliance" />
-    <MESSAGE value="Create skeletal structure for Game class" />
     <MESSAGE value="Generate list of moves by piece" />
     <MESSAGE value="Add getter for alliance in Player class" />
     <MESSAGE value="Add methods for executing en passant, castling, and other moves" />
@@ -426,7 +440,10 @@
     <MESSAGE value="Add more tests to GameModel class" />
     <MESSAGE value="Add piece images" />
     <MESSAGE value="Create BoardView" />
-    <option name="LAST_COMMIT_MESSAGE" value="Create BoardView" />
+    <MESSAGE value="Set highlighting of squares" />
+    <MESSAGE value="Create GameController" />
+    <MESSAGE value="Highlight all legal moves and fix bug in Knight class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Highlight all legal moves and fix bug in Knight class" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
