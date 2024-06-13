@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb32eb40-b065-4f3d-bc40-daac67398af0" name="Changes" comment="Highlight all legal moves and fix bug in Knight class">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameController.java" afterDir="false" />
-    </list>
+    <list default="true" id="cb32eb40-b065-4f3d-bc40-daac67398af0" name="Changes" comment="Remove debugging print statements" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -414,11 +411,18 @@
       <option name="project" value="LOCAL" />
       <updated>1718246122644</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Remove debugging print statements">
+      <option name="closed" value="true" />
+      <created>1718246209876</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1718246209876</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Generate list of moves by piece" />
     <MESSAGE value="Add getter for alliance in Player class" />
     <MESSAGE value="Add methods for executing en passant, castling, and other moves" />
     <MESSAGE value="Add methods for validating castling and en passant" />
@@ -443,7 +447,8 @@
     <MESSAGE value="Set highlighting of squares" />
     <MESSAGE value="Create GameController" />
     <MESSAGE value="Highlight all legal moves and fix bug in Knight class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Highlight all legal moves and fix bug in Knight class" />
+    <MESSAGE value="Remove debugging print statements" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove debugging print statements" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

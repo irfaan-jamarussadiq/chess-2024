@@ -41,6 +41,6 @@ public class Bishop extends Piece {
             current = current.shift(direction);
         }
 
-        return current.equals(end);
+        return current.isWithinBounds() && !this.isFriend(board.pieceAt(current));
     }
 }
