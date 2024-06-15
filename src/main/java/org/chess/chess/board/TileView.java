@@ -25,6 +25,7 @@ public class TileView extends StackPane {
 
     public void setPiece(Piece piece) {
         if (piece == null) {
+            this.piece = null;
             pieceView.setImage(null);
             return;
         }
