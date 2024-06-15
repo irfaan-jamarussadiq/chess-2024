@@ -5,6 +5,7 @@ import javafx.scene.input.MouseEvent;
 import org.chess.chess.board.BoardView;
 import org.chess.chess.board.Location;
 import org.chess.chess.board.TileView;
+import org.chess.chess.board.piece.Piece;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +42,8 @@ public class GameController implements EventHandler<MouseEvent> {
     }
 
     public void move(Location start, Location end) {
-        if (gameModel.getBoard().isEmpty(start)) {
+        Piece piece = gameModel.getBoard().pieceAt(start);
+        if (piece == null || !piece.canMoveFrom(start, end, gameModel.getBoard())) {
             return;
         }
 

@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb32eb40-b065-4f3d-bc40-daac67398af0" name="Changes" comment="Remove unused import">
+    <list default="true" id="cb32eb40-b065-4f3d-bc40-daac67398af0" name="Changes" comment="Add checks to piece canMove() methods to fix bugs in UI">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/King.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/King.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -470,12 +470,26 @@
       <option name="project" value="LOCAL" />
       <updated>1718413062332</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="Add some checks before moving piece in GameView">
+      <option name="closed" value="true" />
+      <created>1718463624040</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1718463624040</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Add checks to piece canMove() methods to fix bugs in UI">
+      <option name="closed" value="true" />
+      <created>1718463662850</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1718463662850</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Update import message after game package refactor" />
-    <MESSAGE value="Rename to GameModel" />
     <MESSAGE value="Create copy of entire board for BoardSnapshot. Can improve later." />
     <MESSAGE value="Add test for moving piece at empty tile for BoardModel" />
     <MESSAGE value="Determine if player is in check" />
@@ -499,7 +513,9 @@
     <MESSAGE value="Highlight moves that are for current player only" />
     <MESSAGE value="Fix bugs in king and knight canMoveFrom() methods throwing an exception when location is out of bounds" />
     <MESSAGE value="Remove unused import" />
-    <option name="LAST_COMMIT_MESSAGE" value="Remove unused import" />
+    <MESSAGE value="Add some checks before moving piece in GameView" />
+    <MESSAGE value="Add checks to piece canMove() methods to fix bugs in UI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add checks to piece canMove() methods to fix bugs in UI" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/chess$BoardModelTest.ic" NAME="BoardModelTest Coverage Results" MODIFIED="1717945694849" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
