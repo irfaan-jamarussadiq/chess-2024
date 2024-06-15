@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb32eb40-b065-4f3d-bc40-daac67398af0" name="Changes" comment="Fix bug that generates pawn captures even if squares are empty">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/BoardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/BoardView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/TileView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/TileView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameView.java" afterDir="false" />
+    <list default="true" id="cb32eb40-b065-4f3d-bc40-daac67398af0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/Player.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -441,11 +438,18 @@
       <option name="project" value="LOCAL" />
       <updated>1718313281184</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Allow moves to be selected and deselected and simplify GameController class a bit">
+      <option name="closed" value="true" />
+      <created>1718412178447</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1718412178447</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add methods for validating castling and en passant" />
     <MESSAGE value="Create game package and move classes" />
     <MESSAGE value="Add candidate move generation for piece classes" />
     <MESSAGE value="Create board snapshot class to undo moves" />
@@ -470,7 +474,8 @@
     <MESSAGE value="Remove debugging print statements" />
     <MESSAGE value="Fix bugs in Bishop and Rook classes suggesting illegal moves" />
     <MESSAGE value="Fix bug that generates pawn captures even if squares are empty" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix bug that generates pawn captures even if squares are empty" />
+    <MESSAGE value="Allow moves to be selected and deselected and simplify GameController class a bit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Allow moves to be selected and deselected and simplify GameController class a bit" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/chess$BoardModelTest.ic" NAME="BoardModelTest Coverage Results" MODIFIED="1717945694849" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

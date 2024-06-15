@@ -29,6 +29,10 @@ public class King extends Piece {
 
     @Override
     public boolean canMoveFrom(Location start, Location end, BoardModel board) {
+        if (!start.isWithinBounds() || !end.isWithinBounds()) {
+            return false;
+        }
+
         int diffRank = Math.abs(end.rank() - start.rank());
         int diffFile = Math.abs(end.file() - start.file());
         if (diffRank > 1 || diffFile > 1) {
