@@ -34,7 +34,7 @@ public abstract class Piece {
         return enemy != null && alliance != enemy.alliance;
     }
 
-    protected boolean isFriend(Piece friend) {
+    public boolean isFriendOf(Piece friend) {
         return friend != null && alliance == friend.alliance;
     }
 }

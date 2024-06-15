@@ -3,6 +3,7 @@ package org.chess.chess.game;
 import javafx.scene.layout.BorderPane;
 import org.chess.chess.board.BoardView;
 import org.chess.chess.board.Location;
+import org.chess.chess.board.piece.Piece;
 
 import java.util.List;
 
@@ -31,6 +32,13 @@ public class GameView extends BorderPane {
     }
 
     public void move(Location start, Location end) {
+        Piece pieceStart = boardView.pieceAt(start);
+        Piece pieceEnd = boardView.pieceAt(end);
+
+        if (pieceStart.isFriendOf(pieceEnd)) {
+            return;
+        }
+
         boardView.move(start, end);
     }
 }

@@ -59,7 +59,7 @@ public class BoardView extends GridPane {
         tiles[tileCoordinate].setPiece(null);
     }
 
-    private Piece pieceAt(Location location) {
+    public Piece pieceAt(Location location) {
         int tileCoordinate = SIZE * (location.rank() - 1) + location.file() - 1;
         return tiles[tileCoordinate].getPiece();
     }
