@@ -26,6 +26,10 @@ public class Pawn extends Piece {
 
     @Override
     public boolean canMoveFrom(Location start, Location end, BoardModel board) {
+        if (!start.isWithinBounds() || !end.isWithinBounds()) {
+            return false;
+        }
+
         Piece endPiece = board.pieceAt(end);
 
         int pawnDir = (getAlliance() == Alliance.WHITE) ? 1 : -1;

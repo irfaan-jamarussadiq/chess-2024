@@ -23,7 +23,9 @@ public class King extends Piece {
                 new Move(location, location.shift(new Direction(0, 1))),
                 new Move(location, location.shift(new Direction(1, -1))),
                 new Move(location, location.shift(new Direction(1, 0))),
-                new Move(location, location.shift(new Direction(1, 1)))
+                new Move(location, location.shift(new Direction(1, 1))),
+                new Move(location, location.shift(new Direction(0, -2))),
+                new Move(location, location.shift(new Direction(0, 2)))
         );
     }
 
@@ -35,10 +37,15 @@ public class King extends Piece {
 
         int diffRank = Math.abs(end.rank() - start.rank());
         int diffFile = Math.abs(end.file() - start.file());
-        if (diffRank > 1 || diffFile > 1) {
+
+        if (diffRank > 1) {
             return false;
         }
 
-        return !this.isFriend(board.pieceAt(end));
+        int firstRank = (getAlliance() == Alliance.WHITE) ? 1 : BoardModel.SIZE;
+        boolean isCastlingMove = start.rank() == firstRank && end.rank() == firstRank && start.file() == 5
+                && (end.file() == 3 || end.file() == 7);
+        boolean isFriend = !this.isFriendOf(board.pieceAt(end));
+        return (diffFile > 1 && isCastlingMove && isFriend) || (!isCastlingMove && isFriend);
     }
 }

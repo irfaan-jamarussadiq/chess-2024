@@ -48,6 +48,6 @@ public class Rook extends Piece {
             current = current.shift(direction);
         }
 
-        return current.isWithinBounds() && !this.isFriend(board.pieceAt(current));
+        return current.isWithinBounds() && !this.isFriendOf(board.pieceAt(current));
     }
 }

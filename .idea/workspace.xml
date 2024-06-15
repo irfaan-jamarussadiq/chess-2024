@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb32eb40-b065-4f3d-bc40-daac67398af0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/Player.java" afterDir="false" />
+    <list default="true" id="cb32eb40-b065-4f3d-bc40-daac67398af0" name="Changes" comment="Remove unused import">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/King.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/King.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -446,13 +446,34 @@
       <option name="project" value="LOCAL" />
       <updated>1718412178447</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="Highlight moves that are for current player only">
+      <option name="closed" value="true" />
+      <created>1718412942865</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1718412942865</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Fix bugs in king and knight canMoveFrom() methods throwing an exception when location is out of bounds">
+      <option name="closed" value="true" />
+      <created>1718413003856</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1718413003856</updated>
+    </task>
+    <task id="LOCAL-00037" summary="Remove unused import">
+      <option name="closed" value="true" />
+      <created>1718413062332</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1718413062332</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Create game package and move classes" />
-    <MESSAGE value="Add candidate move generation for piece classes" />
-    <MESSAGE value="Create board snapshot class to undo moves" />
     <MESSAGE value="Update import message after game package refactor" />
     <MESSAGE value="Rename to GameModel" />
     <MESSAGE value="Create copy of entire board for BoardSnapshot. Can improve later." />
@@ -475,7 +496,10 @@
     <MESSAGE value="Fix bugs in Bishop and Rook classes suggesting illegal moves" />
     <MESSAGE value="Fix bug that generates pawn captures even if squares are empty" />
     <MESSAGE value="Allow moves to be selected and deselected and simplify GameController class a bit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Allow moves to be selected and deselected and simplify GameController class a bit" />
+    <MESSAGE value="Highlight moves that are for current player only" />
+    <MESSAGE value="Fix bugs in king and knight canMoveFrom() methods throwing an exception when location is out of bounds" />
+    <MESSAGE value="Remove unused import" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove unused import" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/chess$BoardModelTest.ic" NAME="BoardModelTest Coverage Results" MODIFIED="1717945694849" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
