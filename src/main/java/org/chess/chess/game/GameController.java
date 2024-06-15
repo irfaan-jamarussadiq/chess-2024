@@ -5,7 +5,6 @@ import javafx.scene.input.MouseEvent;
 import org.chess.chess.board.BoardView;
 import org.chess.chess.board.Location;
 import org.chess.chess.board.TileView;
-import org.chess.chess.board.piece.Piece;
 
 import java.util.ArrayList;
 import java.util.List;
