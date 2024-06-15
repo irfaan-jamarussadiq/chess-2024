@@ -65,7 +65,7 @@ public class GameModel {
         List<Move> candidateMoves = piece.getCandidateMoves(location);
 
         for (Move candidateMove : candidateMoves) {
-            if (candidateMove.isWithinBounds() && piece.canMoveFrom(location, candidateMove.end(), board)) {
+            if (currentPlayer.isPieceAlly(piece) && piece.canMoveFrom(location, candidateMove.end(), board)) {
                 BoardSnapshot boardSnapshot = new BoardSnapshot(board, currentPlayer);
                 executeMove(candidateMove, board);
                 boolean movePutPlayerInCheck = isInCheck(currentPlayer);
