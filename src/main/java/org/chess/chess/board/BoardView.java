@@ -83,4 +83,10 @@ public class BoardView extends GridPane {
         int tileCoordinate = SIZE * (location.rank() - 1) + location.file() - 1;
         tiles[tileCoordinate].setFill(HIGHLIGHT_COLOR);
     }
+
+    public void resetSquare(Location location) {
+        int tileCoordinate = SIZE * (location.rank() - 1) + location.file() - 1;
+        Color defaultColor = (location.rank() + location.file()) % 2 == 0 ? LIGHT_SQUARE : DARK_SQUARE;
+        tiles[tileCoordinate].setFill(defaultColor);
+    }
 }

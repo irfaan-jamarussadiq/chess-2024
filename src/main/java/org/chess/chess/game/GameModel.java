@@ -55,9 +55,14 @@ public class GameModel {
     }
 
     public List<Move> getLegalMoves(Location location) {
+        List<Move> legalMoves = new ArrayList<>();
+
+        if (board.isEmpty(location)) {
+            return legalMoves;
+        }
+
         Piece piece = board.pieceAt(location);
         List<Move> candidateMoves = piece.getCandidateMoves(location);
-        List<Move> legalMoves = new ArrayList<>();
 
         for (Move candidateMove : candidateMoves) {
             if (candidateMove.isWithinBounds() && piece.canMoveFrom(location, candidateMove.end(), board)) {

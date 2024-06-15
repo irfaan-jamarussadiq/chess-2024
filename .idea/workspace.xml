@@ -4,8 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb32eb40-b065-4f3d-bc40-daac67398af0" name="Changes" comment="Fix bugs in Bishop and Rook classes suggesting illegal moves">
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Pawn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Pawn.java" afterDir="false" />
+    <list default="true" id="cb32eb40-b065-4f3d-bc40-daac67398af0" name="Changes" comment="Fix bug that generates pawn captures even if squares are empty">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/BoardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/BoardView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/TileView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/TileView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,31 +47,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.ChessApplication.executor": "Run",
-    "JUnit.BoardModelTest.executor": "Coverage",
-    "JUnit.BoardModelTest.testMovePiece.executor": "Run",
-    "JUnit.BoardModelTest.testMovePieceAtEmptySquareFails.executor": "Run",
-    "JUnit.BoardModelTest.testPieceAtOutOfBounds.executor": "Run",
-    "JUnit.GameModelTest.executor": "Coverage",
-    "JUnit.GameModelTest.testCastlingInvalidAtStart.executor": "Run",
-    "JUnit.GameModelTest.testFoolsMateIsCheckmate.executor": "Run",
-    "JUnit.GameModelTest.testGameStartsOnWhiteTurn.executor": "Run",
-    "JUnit.GameModelTest.testMoveChangesTurn.executor": "Run",
-    "JUnit.GameModelTest.testMoveOutOfBoundsIsInvalid.executor": "Run",
-    "JUnit.GameModelTest.testPlayerKingLocationUpdatesOnKingMove.executor": "Run",
-    "JUnit.GameModelTest.testScholarsMateIsCheckmate.executor": "Run",
-    "JUnit.GameModelTest.testWhiteIsInCheck.executor": "Run",
-    "JUnit.org.chess.chess.board in chess.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "jdk.selected.JAVA_MODULE": "17",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/irfaan/Documents/Programming/Java/chess/assets"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.ChessApplication.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BoardModelTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.BoardModelTest.testMovePiece.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BoardModelTest.testMovePieceAtEmptySquareFails.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BoardModelTest.testPieceAtOutOfBounds.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GameModelTest.executor&quot;: &quot;Coverage&quot;,
+    &quot;JUnit.GameModelTest.testCastlingInvalidAtStart.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GameModelTest.testFoolsMateIsCheckmate.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GameModelTest.testGameStartsOnWhiteTurn.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GameModelTest.testMoveChangesTurn.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GameModelTest.testMoveOutOfBoundsIsInvalid.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GameModelTest.testPlayerKingLocationUpdatesOnKingMove.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GameModelTest.testScholarsMateIsCheckmate.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GameModelTest.testWhiteIsInCheck.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.org.chess.chess.board in chess.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/irfaan/Documents/Programming/Java/chess/assets&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="org.chess.chess" />
@@ -429,11 +433,18 @@
       <option name="project" value="LOCAL" />
       <updated>1718313104932</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="Fix bug that generates pawn captures even if squares are empty">
+      <option name="closed" value="true" />
+      <created>1718313281184</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1718313281184</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add methods for executing en passant, castling, and other moves" />
     <MESSAGE value="Add methods for validating castling and en passant" />
     <MESSAGE value="Create game package and move classes" />
     <MESSAGE value="Add candidate move generation for piece classes" />
@@ -458,7 +469,8 @@
     <MESSAGE value="Highlight all legal moves and fix bug in Knight class" />
     <MESSAGE value="Remove debugging print statements" />
     <MESSAGE value="Fix bugs in Bishop and Rook classes suggesting illegal moves" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix bugs in Bishop and Rook classes suggesting illegal moves" />
+    <MESSAGE value="Fix bug that generates pawn captures even if squares are empty" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix bug that generates pawn captures even if squares are empty" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/chess$BoardModelTest.ic" NAME="BoardModelTest Coverage Results" MODIFIED="1717945694849" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
