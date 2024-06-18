@@ -18,7 +18,7 @@ public class GameView extends BorderPane {
     public void highlightSquares(List<Move> moves) {
         for (Move move : moves) {
             if (move.isWithinBounds()) {
-                boardView.highlightSquare(move.end());
+                boardView.highlightSquare(move.getEnd());
             }
         }
     }
@@ -26,7 +26,7 @@ public class GameView extends BorderPane {
     public void resetSquares(List<Move> moves) {
         for (Move move : moves) {
             if (move.isWithinBounds()) {
-                boardView.resetSquare(move.end());
+                boardView.resetSquare(move.getEnd());
             }
         }
     }

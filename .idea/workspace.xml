@@ -4,9 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb32eb40-b065-4f3d-bc40-daac67398af0" name="Changes" comment="Add better handling of cases for move() in GameController">
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/TileView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/TileView.java" afterDir="false" />
+    <list default="true" id="cb32eb40-b065-4f3d-bc40-daac67398af0" name="Changes" comment="Fix bug causing some moves not to be registered in BoardView">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/TODO" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/CastlingMove.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/EnPassantMove.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/BoardModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/BoardModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/Move.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/Move.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,8 +77,8 @@
 }</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
-      <recent name="org.chess.chess" />
       <recent name="org.chess.chess.board" />
+      <recent name="org.chess.chess" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/assets" />
@@ -494,11 +500,18 @@
       <option name="project" value="LOCAL" />
       <updated>1718468851520</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="Fix bug causing some moves not to be registered in BoardView">
+      <option name="closed" value="true" />
+      <created>1718469089709</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1718469089709</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add test for moving piece at empty tile for BoardModel" />
     <MESSAGE value="Determine if player is in check" />
     <MESSAGE value="Add helper for getting all possible moves at location" />
     <MESSAGE value="Add toString method for easier debugging" />
@@ -523,7 +536,8 @@
     <MESSAGE value="Add some checks before moving piece in GameView" />
     <MESSAGE value="Add checks to piece canMove() methods to fix bugs in UI" />
     <MESSAGE value="Add better handling of cases for move() in GameController" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add better handling of cases for move() in GameController" />
+    <MESSAGE value="Fix bug causing some moves not to be registered in BoardView" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix bug causing some moves not to be registered in BoardView" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/chess$BoardModelTest.ic" NAME="BoardModelTest Coverage Results" MODIFIED="1717945694849" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
