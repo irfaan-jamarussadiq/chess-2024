@@ -2,6 +2,11 @@ package org.chess.chess.board;
 
 import org.chess.chess.board.piece.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class BoardModel {
     public static final int SIZE = 8;
     private final Tile[] tiles;
