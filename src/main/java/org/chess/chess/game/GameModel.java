@@ -4,9 +4,7 @@ import org.chess.chess.board.Alliance;
 import org.chess.chess.board.BoardModel;
 import org.chess.chess.board.Location;
 import org.chess.chess.board.piece.King;
-import org.chess.chess.board.piece.Pawn;
 import org.chess.chess.board.piece.Piece;
-import org.chess.chess.board.piece.Rook;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,14 +31,14 @@ public class GameModel {
     }
 
     boolean isValidMove(Move move) {
-        if (!move.isWithinBounds()) {
+        if (!move.isWithinBounds() || move.getStart().equals(move.getEnd()) || !move.isValid(board)) {
             return false;
         }
 
-        Piece piece = board.pieceAt(move.start());
-        List<Move> candidateMoves = piece.getCandidateMoves(move.start());
+        Piece piece = board.pieceAt(move.getStart());
+        List<Move> candidateMoves = piece.getCandidateMoves(move.getStart());
         for (Move candidateMove : candidateMoves) {
-            if (candidateMove.isWithinBounds() && candidateMove.equals(move)) {
+            if (candidateMove.equals(move)) {
                 BoardSnapshot boardSnapshot = new BoardSnapshot(board, currentPlayer);
                 executeMove(candidateMove, board);
                 boolean movePutPlayerInCheck = isInCheck(currentPlayer);
@@ -65,7 +63,7 @@ public class GameModel {
         List<Move> candidateMoves = piece.getCandidateMoves(location);
 
         for (Move candidateMove : candidateMoves) {
-            if (currentPlayer.isPieceAlly(piece) && piece.canMoveFrom(location, candidateMove.end(), board)) {
+            if (currentPlayer.isPieceAlly(piece) && piece.canMoveFrom(location, candidateMove.getEnd(), board)) {
                 BoardSnapshot boardSnapshot = new BoardSnapshot(board, currentPlayer);
                 executeMove(candidateMove, board);
                 boolean movePutPlayerInCheck = isInCheck(currentPlayer);
@@ -84,9 +82,9 @@ public class GameModel {
         List<Move> movesAtKingLocation = MoveListHelpers.getAllPossibleMoves(player.getKingLocation(), BoardModel.SIZE);
         for (Move move : movesAtKingLocation) {
             if (move.isWithinBounds()) {
-                Piece potentialEnemy = board.pieceAt(move.end());
+                Piece potentialEnemy = board.pieceAt(move.getEnd());
                 if (king.isEnemyOf(potentialEnemy)
-                        && potentialEnemy.canMoveFrom(move.end(), move.start(), board)) {
+                        && potentialEnemy.canMoveFrom(move.getEnd(), move.getStart(), board)) {
                     return true;
                 }
             }
@@ -120,7 +118,7 @@ public class GameModel {
             Piece piece = entry.getValue();
             List<Move> candidateMoves = piece.getCandidateMoves(location);
             for (Move move : candidateMoves) {
-                if (isValidMove(move) && piece.canMoveFrom(move.end(), location, board)) {
+                if (isValidMove(move) && piece.canMoveFrom(move.getEnd(), location, board)) {
                     return false;
                 }
             }
@@ -135,92 +133,11 @@ public class GameModel {
     }
 
     private void executeMove(Move move, BoardModel board) {
-        Piece piece = board.pieceAt(move.start());
-
-        if (isCastlingMove(move, board)) {
-            castle(move.start(), move.end());
-        } else if (isEnPassantMove(move, board)) {
-            enPassant(move.start(), move.end());
-        } else {
-            board.movePiece(move.start(), move.end());
-        }
-
+        Piece piece = board.pieceAt(move.getStart());
+        move.execute(board);
         if (piece instanceof King) {
-            currentPlayer.setKingLocation(move.end());
+            currentPlayer.setKingLocation(move.getEnd());
         }
-    }
-
-    private void castle(Location kingStart, Location kingEnd) {
-        board.movePiece(kingStart, kingEnd);
-
-        Location rookStart, rookEnd;
-        if (kingStart.file() > kingEnd.file()) {
-            // Long castling
-            rookStart = new Location(kingStart.rank(), 1);
-            rookEnd = new Location(kingStart.rank(), 4);
-        } else {
-            // Short castling
-            rookStart = new Location(kingStart.rank(), 8);
-            rookEnd = new Location(kingStart.rank(), 6);
-        }
-
-        board.movePiece(rookStart, rookEnd);
-    }
-
-    private boolean isCastlingMove(Move move, BoardModel board) {
-        Piece king = board.pieceAt(move.start());
-        if (!(king instanceof King) || board.pieceAt(move.end()) == null) {
-            return false;
-        }
-
-        if (move.start().file() != 5 || move.start().rank() != move.end().rank()) {
-            return false;
-        }
-
-        if (king.getAlliance() == Alliance.WHITE && move.start().rank() != 1) {
-            return false;
-        }
-
-        if (king.getAlliance() == Alliance.BLACK && move.start().rank() != 8) {
-            return false;
-        }
-
-        if (move.end().file() == 3) {
-            Piece rook = board.pieceAt(new Location(move.start().rank(), 1));
-            return rook instanceof Rook
-                    && board.isEmpty(new Location(move.start().rank(), 2))
-                    && board.isEmpty(new Location(move.start().rank(), 3))
-                    && board.isEmpty(new Location(move.start().rank(), 4));
-        } else if (move.end().file() == 7) {
-            Piece rook = board.pieceAt(new Location(move.start().rank(), 8));
-            return rook instanceof Rook
-                    && board.isEmpty(new Location(move.start().rank(), 6))
-                    && board.isEmpty(new Location(move.start().rank(), 7));
-        }
-
-        return false;
-    }
-
-    private void enPassant(Location pawnStart, Location pawnEnd) {
-        Location capturedPawnLocation = new Location(pawnStart.rank(), pawnEnd.file());
-        board.movePiece(capturedPawnLocation, pawnEnd);
-        board.movePiece(pawnStart, pawnEnd);
-    }
-
-    private boolean isEnPassantMove(Move move, BoardModel board) {
-        Piece pawn = board.pieceAt(move.start());
-        if (!(pawn instanceof Pawn) || board.pieceAt(move.end()) == null) {
-            return false;
-        }
-
-        Piece enemyPawn = board.pieceAt(move.start());
-        if (!pawn.isEnemyOf(enemyPawn) || !(enemyPawn instanceof Pawn)) {
-            return false;
-        }
-
-        return Math.abs(move.start().file() - move.end().file()) == 1
-                && move.start().rank() == pawn.getAlliance().getEnPassantStartingRank()
-                && move.end().rank() == pawn.getAlliance().getEnPassantEndingRank();
     }
 
     public Player getNextPlayer() {
