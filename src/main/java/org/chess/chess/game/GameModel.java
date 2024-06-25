@@ -143,6 +143,10 @@ public class GameModel {
             Piece piece = entry.getValue();
             List<Path> candidatePaths = piece.getCandidatePaths(location);
             for (Path path : candidatePaths) {
+                if (!path.isWithinBounds()) {
+                    continue;
+                }
+
                 Move candidateMove = findMoveFromPath(path, board);
                 if (candidateMove != null && isValidMove(candidateMove)
                         && piece.canMoveFrom(path.start(), location, board)) {
