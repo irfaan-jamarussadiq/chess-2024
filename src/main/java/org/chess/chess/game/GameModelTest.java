@@ -70,10 +70,10 @@ public class GameModelTest {
     @Test
     public void testMoveOutOfBoundsIsInvalid() {
         GameModel game = new GameModel();
-        assertFalse(game.isValidMove(new Move(new Location(1, 4), new Location(0, 4))));
-        assertFalse(game.isValidMove(new Move(new Location(1, 1), new Location(1, -1))));
-        assertFalse(game.isValidMove(new Move(new Location(8, 8), new Location(8, 9))));
-        assertFalse(game.isValidMove(new Move(new Location(8, 1), new Location(9, 1))));
+        assertFalse(game.isValidMove(new NormalMove(new Location(1, 4), new Location(0, 4))));
+        assertFalse(game.isValidMove(new NormalMove(new Location(1, 1), new Location(1, -1))));
+        assertFalse(game.isValidMove(new NormalMove(new Location(8, 8), new Location(8, 9))));
+        assertFalse(game.isValidMove(new NormalMove(new Location(8, 1), new Location(9, 1))));
     }
 
     @Test

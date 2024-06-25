@@ -23,8 +23,8 @@ public class GameModel {
     }
 
     public void move(Location start, Location end) {
-        Move move = new Move(start, end);
-        if (isValidMove(move)) {
+        Move move = findMoveFromPath(new Path(start, end), board);
+        if (move != null && isValidMove(move)) {
             executeMove(move, board);
             currentPlayer = getNextPlayer();
         }
@@ -36,9 +36,10 @@ public class GameModel {
         }
 
         Piece piece = board.pieceAt(move.getStart());
-        List<Move> candidateMoves = piece.getCandidateMoves(move.getStart());
-        for (Move candidateMove : candidateMoves) {
-            if (candidateMove.equals(move)) {
+        List<Path> candidatePaths = piece.getCandidatePaths(move.getStart());
+        for (Path path : candidatePaths) {
+            Move candidateMove = findMoveFromPath(path, board);
+            if (candidateMove != null && candidateMove.equals(move)) {
                 BoardSnapshot boardSnapshot = new BoardSnapshot(board, currentPlayer);
                 executeMove(candidateMove, board);
                 boolean movePutPlayerInCheck = isInCheck(currentPlayer);
@@ -60,11 +61,15 @@ public class GameModel {
         }
 
         Piece piece = board.pieceAt(location);
-        List<Move> candidateMoves = piece.getCandidateMoves(location);
+        List<Path> candidatePaths = piece.getCandidatePaths(location);
 
-        for (Move candidateMove : candidateMoves) {
-            if (currentPlayer.isPieceAlly(piece) && piece.canMoveFrom(location, candidateMove.getEnd(), board)) {
+        for (Path path : candidatePaths) {
+            if (currentPlayer.isPieceAlly(piece) && piece.canMoveFrom(location, path.end(), board)) {
                 BoardSnapshot boardSnapshot = new BoardSnapshot(board, currentPlayer);
+                Move candidateMove = findMoveFromPath(path, board);
+                if (candidateMove == null) {
+                    continue;
+                }
                 executeMove(candidateMove, board);
                 boolean movePutPlayerInCheck = isInCheck(currentPlayer);
                 restoreFromMemento(boardSnapshot);
@@ -77,14 +82,30 @@ public class GameModel {
         return legalMoves;
     }
 
+    private Move findMoveFromPath(Path path, BoardModel board) {
+        Move[] possibleMoves = new Move[] {
+                new NormalMove(path.start(), path.end()),
+                new EnPassantMove(path.start(), path.end()),
+                new CastlingMove(path.start(), path.end())
+        };
+
+        for (Move move : possibleMoves) {
+            if (move.isValid(board)) {
+                return move;
+            }
+        }
+
+        return null;
+    }
+
     public boolean isInCheck(Player player) {
         Piece king = board.pieceAt(player.getKingLocation());
-        List<Move> movesAtKingLocation = MoveListHelpers.getAllPossibleMoves(player.getKingLocation(), BoardModel.SIZE);
-        for (Move move : movesAtKingLocation) {
-            if (move.isWithinBounds()) {
-                Piece potentialEnemy = board.pieceAt(move.getEnd());
+        List<Path> movesAtKingLocation = PathHelpers.getAllPossiblePaths(player.getKingLocation(), BoardModel.SIZE);
+        for (Path path : movesAtKingLocation) {
+            if (path.isWithinBounds()) {
+                Piece potentialEnemy = board.pieceAt(path.end());
                 if (king.isEnemyOf(potentialEnemy)
-                        && potentialEnemy.canMoveFrom(move.getEnd(), move.getStart(), board)) {
+                        && potentialEnemy.canMoveFrom(path.end(), path.start(), board)) {
                     return true;
                 }
             }
@@ -116,9 +137,11 @@ public class GameModel {
         for (Map.Entry<Location, Piece> entry : playerPieces.entrySet()) {
             Location location = entry.getKey();
             Piece piece = entry.getValue();
-            List<Move> candidateMoves = piece.getCandidateMoves(location);
-            for (Move move : candidateMoves) {
-                if (isValidMove(move) && piece.canMoveFrom(move.getEnd(), location, board)) {
+            List<Path> candidatePaths = piece.getCandidatePaths(location);
+            for (Path path : candidatePaths) {
+                Move candidateMove = findMoveFromPath(path, board);
+                if (candidateMove != null && isValidMove(candidateMove)
+                        && piece.canMoveFrom(path.start(), location, board)) {
                     return false;
                 }
             }

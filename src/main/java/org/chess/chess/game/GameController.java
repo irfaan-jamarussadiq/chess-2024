@@ -29,9 +29,15 @@ public class GameController implements EventHandler<MouseEvent> {
         int file = (int) mouseEvent.getX() / TileView.SIDE_LENGTH + 1;
 
         Location location = new Location(rank, file);
+
+        System.out.println(location);
+        System.out.println(movesHighlighted);
+
         if (movesHighlighted.isEmpty()) {
             selectedPieceLocation = location;
             movesHighlighted = gameModel.getLegalMoves(location);
+            System.out.println("Moves second time");
+            System.out.println(movesHighlighted);
             gameView.highlightSquares(movesHighlighted);
         } else {
             gameView.resetSquares(movesHighlighted);

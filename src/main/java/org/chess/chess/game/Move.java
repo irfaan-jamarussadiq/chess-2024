@@ -2,11 +2,8 @@ package org.chess.chess.game;
 
 import org.chess.chess.board.BoardModel;
 import org.chess.chess.board.Location;
-import org.chess.chess.board.piece.Piece;
 
-import java.util.List;
-
-public class Move {
+public abstract class Move {
     private final Location start;
     private final Location end;
 
@@ -19,14 +16,9 @@ public class Move {
         return start.isWithinBounds() && end.isWithinBounds();
     }
 
-    public void execute(BoardModel board) {
-        board.movePiece(start, end);
-    }
+    public abstract void execute(BoardModel board);
 
-    public boolean isValid(BoardModel board) {
-        Piece piece = board.pieceAt(getStart());
-        return piece.canMoveFrom(start, end, board);
-    }
+    public abstract boolean isValid(BoardModel board);
 
     public Location getStart() {
         return start;
@@ -34,5 +26,15 @@ public class Move {
 
     public Location getEnd() {
         return end;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == null || getClass() != other.getClass()) {
+            return false;
+        }
+
+        Move otherMove = (Move) other;
+        return start.equals(otherMove.start) && end.equals(otherMove.end);
     }
 }

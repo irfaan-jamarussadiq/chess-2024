@@ -1,11 +1,6 @@
 package org.chess.chess.board;
 
-import javafx.event.EventHandler;
-import javafx.scene.input.MouseEvent;
 import org.chess.chess.board.piece.Piece;
-import org.chess.chess.game.Move;
-
-import java.util.List;
 
 public class BoardController {
     private final BoardModel boardModel;

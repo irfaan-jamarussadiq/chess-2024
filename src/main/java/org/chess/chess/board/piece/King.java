@@ -2,9 +2,9 @@ package org.chess.chess.board.piece;
 
 import org.chess.chess.board.BoardModel;
 import org.chess.chess.game.Direction;
-import org.chess.chess.game.Move;
 import org.chess.chess.board.Alliance;
 import org.chess.chess.board.Location;
+import org.chess.chess.game.Path;
 
 import java.util.List;
 
@@ -14,18 +14,18 @@ public class King extends Piece {
     }
 
     @Override
-    public List<Move> getCandidateMoves(Location location) {
+    public List<Path> getCandidatePaths(Location location) {
         return List.of(
-                new Move(location, location.shift(new Direction(-1, -1))),
-                new Move(location, location.shift(new Direction(-1, 0))),
-                new Move(location, location.shift(new Direction(-1, 1))),
-                new Move(location, location.shift(new Direction(0, -1))),
-                new Move(location, location.shift(new Direction(0, 1))),
-                new Move(location, location.shift(new Direction(1, -1))),
-                new Move(location, location.shift(new Direction(1, 0))),
-                new Move(location, location.shift(new Direction(1, 1))),
-                new Move(location, location.shift(new Direction(0, -2))),
-                new Move(location, location.shift(new Direction(0, 2)))
+                new Path(location, new Direction(-1, -1)),
+                new Path(location, new Direction(-1, 0)),
+                new Path(location, new Direction(-1, 1)),
+                new Path(location, new Direction(0, -1)),
+                new Path(location, new Direction(0, 1)),
+                new Path(location, new Direction(1, -1)),
+                new Path(location, new Direction(1, 0)),
+                new Path(location, new Direction(1, 1)),
+                new Path(location, new Direction(0, -2)),
+                new Path(location, new Direction(0, 2))
         );
     }
 

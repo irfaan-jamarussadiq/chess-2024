@@ -2,9 +2,9 @@ package org.chess.chess.board.piece;
 
 import org.chess.chess.board.BoardModel;
 import org.chess.chess.game.Direction;
-import org.chess.chess.game.Move;
 import org.chess.chess.board.Alliance;
 import org.chess.chess.board.Location;
+import org.chess.chess.game.Path;
 
 import java.util.List;
 
@@ -14,13 +14,13 @@ public class Pawn extends Piece {
     }
 
     @Override
-    public List<Move> getCandidateMoves(Location location) {
+    public List<Path> getCandidatePaths(Location location) {
         int pawnRankOffset = (getAlliance() == Alliance.WHITE) ? 1 : -1;
         return List.of(
-                new Move(location, location.shift(new Direction(pawnRankOffset, 0))),
-                new Move(location, location.shift(new Direction(pawnRankOffset, 0), 2)),
-                new Move(location, location.shift(new Direction(pawnRankOffset, -1))),
-                new Move(location, location.shift(new Direction(pawnRankOffset, 1)))
+                new Path(location, new Direction(pawnRankOffset, 0)),
+                new Path(location, new Direction(2 * pawnRankOffset, 0)),
+                new Path(location, new Direction(pawnRankOffset, -1)),
+                new Path(location, new Direction(pawnRankOffset, 1))
         );
     }
 

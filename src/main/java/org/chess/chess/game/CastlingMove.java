@@ -14,7 +14,7 @@ public class CastlingMove extends Move {
 
     @Override
     public void execute(BoardModel board) {
-        super.execute(board);
+        board.movePiece(getStart(), getEnd());
 
         Location rookStart, rookEnd;
         if (getStart().file() > getEnd().file()) {
