@@ -5,25 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cb32eb40-b065-4f3d-bc40-daac67398af0" name="Changes" comment="Add Path class to separate move execution from possible paths">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/TODO" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/NormalMove.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/Path.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/PathHelpers.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/BoardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Bishop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Bishop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/King.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/King.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Knight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Knight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Pawn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Pawn.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Piece.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Queen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Queen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Rook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Rook.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/CastlingMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/CastlingMove.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModelTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/Move.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/Move.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/MoveListHelpers.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,22 +123,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GameModelTest.testCastlingInvalidAtStart" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="chess" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.chess.chess.game.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.chess.chess.game" />
-      <option name="MAIN_CLASS_NAME" value="org.chess.chess.game.GameModelTest" />
-      <option name="METHOD_NAME" value="testCastlingInvalidAtStart" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="GameModelTest.testMoveChangesTurn" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="chess" />
       <extension name="coverage">
@@ -172,13 +139,29 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="GameModelTest.testPlayerKingLocationUpdatesOnKingMove" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="chess" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.chess.chess.game.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.chess.chess.game" />
+      <option name="MAIN_CLASS_NAME" value="org.chess.chess.game.GameModelTest" />
+      <option name="METHOD_NAME" value="testPlayerKingLocationUpdatesOnKingMove" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.GameModelTest" />
-        <item itemvalue="JUnit.GameModelTest.testMoveChangesTurn" />
+        <item itemvalue="JUnit.GameModelTest.testPlayerKingLocationUpdatesOnKingMove" />
         <item itemvalue="JUnit.BoardModelTest" />
+        <item itemvalue="JUnit.GameModelTest.testMoveChangesTurn" />
         <item itemvalue="Application.ChessApplication" />
-        <item itemvalue="JUnit.GameModelTest.testCastlingInvalidAtStart" />
       </list>
     </recent_temporary>
   </component>
@@ -543,7 +526,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718677123664</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="Add Path class to separate move execution from possible paths">
+      <option name="closed" value="true" />
+      <created>1719280543607</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1719280543607</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

@@ -38,6 +38,10 @@ public class GameModel {
         Piece piece = board.pieceAt(move.getStart());
         List<Path> candidatePaths = piece.getCandidatePaths(move.getStart());
         for (Path path : candidatePaths) {
+            if (!path.isWithinBounds()) {
+                continue;
+            }
+
             Move candidateMove = findMoveFromPath(path, board);
             if (candidateMove != null && candidateMove.equals(move)) {
                 BoardSnapshot boardSnapshot = new BoardSnapshot(board, currentPlayer);
