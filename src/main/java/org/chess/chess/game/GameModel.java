@@ -17,9 +17,13 @@ public class GameModel {
     private Player currentPlayer;
     private BoardModel board;
 
-    public GameModel() {
+    public GameModel(BoardModel board) {
         this.currentPlayer = white;
-        this.board = new BoardModel();
+        this.board = board;
+    }
+
+    public GameModel() {
+        this(new BoardModel());
     }
 
     public void move(Location start, Location end) {

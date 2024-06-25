@@ -42,12 +42,12 @@ public class Rook extends Piece {
         Location current = start.shift(direction);
         while (current.isWithinBounds() && !current.equals(end)) {
             if (!board.isEmpty(current)) {
-                break;
+                return false;
             }
 
             current = current.shift(direction);
         }
 
-        return current.isWithinBounds() && !this.isFriendOf(board.pieceAt(current));
+        return current.isWithinBounds() && current.equals(end) && !this.isFriendOf(board.pieceAt(current));
     }
 }

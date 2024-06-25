@@ -1,8 +1,10 @@
 package org.chess.chess.game;
 
 import org.chess.chess.board.Alliance;
+import org.chess.chess.board.BoardModel;
 import org.chess.chess.board.Location;
 import org.chess.chess.board.piece.King;
+import org.chess.chess.board.piece.Piece;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -19,6 +21,20 @@ public class GameModelTest {
         GameModel game = new GameModel();
         moveHelper(game, 2, 4, 4, 4);
         assertEquals(game.getNextPlayer(), game.white);
+    }
+
+    @Test
+    public void testCanMoveFrom() {
+        BoardModel board = new BoardModel();
+        GameModel game = new GameModel(board);
+
+        moveHelper(game, 2, 5, 4, 5);
+        moveHelper(game, 7, 4, 5, 4);
+        moveHelper(game, 5, 4, 4, 5);
+
+        Location start = new Location(8, 4);
+        Piece piece = board.pieceAt(start);
+        assertFalse(piece.canMoveFrom(start, new Location(1, 4), game.getBoard()));
     }
 
     @Test

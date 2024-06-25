@@ -35,7 +35,7 @@ public class Bishop extends Piece {
         Location current = start.shift(direction);
         while (current.isWithinBounds() && !current.equals(end)) {
             if (!board.isEmpty(current)) {
-                break;
+                return false;
             }
 
             current = current.shift(direction);
