@@ -5,6 +5,7 @@ import org.chess.chess.board.BoardModel;
 import org.chess.chess.board.Location;
 import org.chess.chess.board.piece.King;
 import org.chess.chess.board.piece.Piece;
+import org.chess.chess.board.piece.Rook;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -99,8 +100,21 @@ public class GameModelTest {
         assertEquals(game.getBoard().pieceAt(new Location(1, 5)), new King(Alliance.WHITE));
     }
 
+    @Test
+    public void testCastlingIsSuccessful() {
+        GameModel game = new GameModel();
+        moveHelper(game, 2, 5, 4, 5);
+        moveHelper(game, 7, 5, 5, 5);
+        moveHelper(game, 1, 7, 3, 6);
+        moveHelper(game, 8, 7, 6, 6);
+        moveHelper(game, 1, 6, 4, 3);
+        moveHelper(game, 8, 6, 5, 3);
+        moveHelper(game, 1, 5, 1, 7);
+        assertEquals(game.getBoard().pieceAt(new Location(1, 7)), new King(Alliance.WHITE));
+        assertEquals(game.getBoard().pieceAt(new Location(1, 6)), new Rook(Alliance.WHITE));
+    }
+
     private void moveHelper(GameModel game, int startRank, int startFile, int endRank, int endFile) {
         game.move(new Location(startRank, startFile), new Location(endRank, endFile));
-        System.out.println(game.getBoard());
     }
 }
