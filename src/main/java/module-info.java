@@ -2,6 +2,7 @@ module org.chess.chess {
     requires javafx.controls;
     requires javafx.fxml;
     requires junit;
+    requires org.slf4j;
 
 
     opens org.chess.chess to javafx.fxml;

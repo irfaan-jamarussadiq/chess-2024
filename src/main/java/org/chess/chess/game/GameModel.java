@@ -11,11 +11,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class GameModel {
     public final Player white = new Player(Alliance.WHITE, new Location(1, 5));
     public final Player black = new Player(Alliance.BLACK, new Location(8, 5));
     private Player currentPlayer;
     private BoardModel board;
+
+    private static final Logger logger = LoggerFactory.getLogger(GameModel.class);
 
     public GameModel(BoardModel board) {
         this.currentPlayer = white;
@@ -32,6 +37,8 @@ public class GameModel {
             executeMove(move, board);
             currentPlayer = getNextPlayer();
         }
+
+        logger.debug("\n" + board.toString());
     }
 
     boolean isValidMove(Move move) {
@@ -62,6 +69,7 @@ public class GameModel {
     }
 
     public List<Move> getLegalMoves(Location location) {
+        logger.info("Finding legal moves...");
         List<Move> legalMoves = new ArrayList<>();
 
         if (board.isEmpty(location)) {
@@ -72,12 +80,13 @@ public class GameModel {
         List<Path> candidatePaths = piece.getCandidatePaths(location);
 
         for (Path path : candidatePaths) {
-            if (currentPlayer.isPieceAlly(piece) && piece.canMoveFrom(location, path.end(), board)) {
+            if (!path.isWithinBounds()) {
+                continue;
+            }
+
+            Move candidateMove = findMoveFromPath(path, board);
+            if (currentPlayer.isPieceAlly(piece) && candidateMove != null && candidateMove.isValid(board)) {
                 BoardSnapshot boardSnapshot = new BoardSnapshot(board, currentPlayer);
-                Move candidateMove = findMoveFromPath(path, board);
-                if (candidateMove == null) {
-                    continue;
-                }
                 executeMove(candidateMove, board);
                 boolean movePutPlayerInCheck = isInCheck(currentPlayer);
                 restoreFromMemento(boardSnapshot);
@@ -87,6 +96,7 @@ public class GameModel {
             }
         }
 
+        logger.debug("Legal moves at " + location + " are " + legalMoves);
         return legalMoves;
     }
 

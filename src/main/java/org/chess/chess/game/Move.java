@@ -37,4 +37,9 @@ public abstract class Move {
         Move otherMove = (Move) other;
         return start.equals(otherMove.start) && end.equals(otherMove.end);
     }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + " from " + start + " to " + end;
+    }
 }

@@ -4,11 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb32eb40-b065-4f3d-bc40-daac67398af0" name="Changes" comment="Fix bug in checkmate detection tests">
+    <list default="true" id="cb32eb40-b065-4f3d-bc40-daac67398af0" name="Changes" comment="Fix bugs with possible highlighted moves for bishop and rook moves">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/simplelogger.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Rook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Rook.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/ChessApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/ChessApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/BoardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/King.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/King.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/CastlingMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/CastlingMove.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModelTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/Move.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/Move.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +64,7 @@
     "JUnit.GameModelTest.executor": "Run",
     "JUnit.GameModelTest.testCanMoveFrom.executor": "Run",
     "JUnit.GameModelTest.testCastlingInvalidAtStart.executor": "Run",
+    "JUnit.GameModelTest.testCastlingIsSuccessful.executor": "Run",
     "JUnit.GameModelTest.testFoolsMateIsCheckmate.executor": "Run",
     "JUnit.GameModelTest.testGameStartsOnWhiteTurn.executor": "Run",
     "JUnit.GameModelTest.testMoveChangesTurn.executor": "Run",
@@ -83,21 +92,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="BoardModelTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="chess" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.chess.chess.board.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.chess.chess.board" />
-      <option name="MAIN_CLASS_NAME" value="org.chess.chess.board.BoardModelTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="GameModelTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="chess" />
       <extension name="coverage">
@@ -124,6 +118,22 @@
       <option name="PACKAGE_NAME" value="org.chess.chess.game" />
       <option name="MAIN_CLASS_NAME" value="org.chess.chess.game.GameModelTest" />
       <option name="METHOD_NAME" value="testCanMoveFrom" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GameModelTest.testCastlingIsSuccessful" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="chess" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.chess.chess.game.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.chess.chess.game" />
+      <option name="MAIN_CLASS_NAME" value="org.chess.chess.game.GameModelTest" />
+      <option name="METHOD_NAME" value="testCastlingIsSuccessful" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -163,11 +173,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.GameModelTest.testCastlingIsSuccessful" />
         <item itemvalue="JUnit.GameModelTest.testCanMoveFrom" />
         <item itemvalue="JUnit.GameModelTest" />
         <item itemvalue="JUnit.GameModelTest.testFoolsMateIsCheckmate" />
         <item itemvalue="JUnit.GameModelTest.testPlayerKingLocationUpdatesOnKingMove" />
-        <item itemvalue="JUnit.BoardModelTest" />
       </list>
     </recent_temporary>
   </component>
@@ -556,11 +566,18 @@
       <option name="project" value="LOCAL" />
       <updated>1719281748687</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="Fix bugs with possible highlighted moves for bishop and rook moves">
+      <option name="closed" value="true" />
+      <created>1719322620407</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1719322620407</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Move check, checkmate, and stalemate methods from Player to Game class" />
     <MESSAGE value="Fix bug in checkmate detection" />
     <MESSAGE value="Add more tests to GameModel class" />
     <MESSAGE value="Add piece images" />
@@ -585,15 +602,21 @@
     <MESSAGE value="Add Path class to separate move execution from possible paths" />
     <MESSAGE value="Fix bug in player king location test" />
     <MESSAGE value="Fix bug in checkmate detection tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix bug in checkmate detection tests" />
+    <MESSAGE value="Fix bugs with possible highlighted moves for bishop and rook moves" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix bugs with possible highlighted moves for bishop and rook moves" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/chess/chess/game/CastlingMove.java</url>
+          <line>16</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModelTest.java</url>
-          <line>42</line>
-          <option name="timeStamp" value="10" />
+          <line>111</line>
+          <option name="timeStamp" value="12" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

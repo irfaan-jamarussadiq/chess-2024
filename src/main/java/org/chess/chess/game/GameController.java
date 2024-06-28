@@ -6,8 +6,12 @@ import org.chess.chess.board.BoardView;
 import org.chess.chess.board.Location;
 import org.chess.chess.board.TileView;
 import org.chess.chess.board.piece.Piece;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 public class GameController implements EventHandler<MouseEvent> {
@@ -15,6 +19,7 @@ public class GameController implements EventHandler<MouseEvent> {
     private final GameView gameView;
     private Location selectedPieceLocation;
     private List<Move> movesHighlighted;
+    private static final Logger logger = LoggerFactory.getLogger(GameController.class);
 
     public GameController() {
         gameModel = new GameModel();
@@ -30,16 +35,14 @@ public class GameController implements EventHandler<MouseEvent> {
 
         Location location = new Location(rank, file);
 
-        System.out.println(location);
-        System.out.println(movesHighlighted);
-
         if (movesHighlighted.isEmpty()) {
+            logger.info("Highlighting possible moves at " + location);
             selectedPieceLocation = location;
             movesHighlighted = gameModel.getLegalMoves(location);
-            System.out.println("Moves second time");
-            System.out.println(movesHighlighted);
+            logger.debug(movesHighlighted.toString());
             gameView.highlightSquares(movesHighlighted);
         } else {
+            logger.info("Moving piece from " + selectedPieceLocation + " to " + location);
             gameView.resetSquares(movesHighlighted);
             movesHighlighted.clear();
             move(selectedPieceLocation, location);
