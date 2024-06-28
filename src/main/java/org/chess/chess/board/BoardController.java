@@ -1,11 +1,8 @@
 package org.chess.chess.board;
 
-import org.chess.chess.board.piece.Piece;
-
 public class BoardController {
     private final BoardModel boardModel;
     private final BoardView boardView;
-    private Piece selectedPiece;
 
     public BoardController() {
         this.boardModel = new BoardModel();

@@ -4,8 +4,6 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.chess.chess.board.BoardController;
-import org.chess.chess.board.BoardView;
 import org.chess.chess.game.GameController;
 
 public class ChessApplication extends Application {
