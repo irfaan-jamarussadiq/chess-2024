@@ -31,21 +31,12 @@ public class King extends Piece {
 
     @Override
     public boolean canMoveFrom(Location start, Location end, BoardModel board) {
-        if (!start.isWithinBounds() || !end.isWithinBounds()) {
+        if (!start.isWithinBounds() || !end.isWithinBounds() || start.equals(end)) {
             return false;
         }
 
         int diffRank = Math.abs(end.rank() - start.rank());
         int diffFile = Math.abs(end.file() - start.file());
-
-        if (diffRank > 1) {
-            return false;
-        }
-
-        int firstRank = (getAlliance() == Alliance.WHITE) ? 1 : BoardModel.SIZE;
-        boolean isCastlingMove = start.rank() == firstRank && end.rank() == firstRank && start.file() == 5
-                && (end.file() == 3 || end.file() == 7);
-        boolean isFriend = !this.isFriendOf(board.pieceAt(end));
-        return (diffFile > 1 && isCastlingMove && isFriend) || (!isCastlingMove && isFriend);
+        return diffRank <= 1 && diffFile <= 1 && !isFriendOf(board.pieceAt(end));
     }
 }
