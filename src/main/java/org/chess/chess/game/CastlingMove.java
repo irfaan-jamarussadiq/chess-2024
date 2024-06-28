@@ -33,7 +33,7 @@ public class CastlingMove extends Move {
     @Override
     public boolean isValid(BoardModel board) {
         Piece king = board.pieceAt(getStart());
-        if (!(king instanceof King) || board.pieceAt(getEnd()) == null) {
+        if (!(king instanceof King) || board.pieceAt(getEnd()) != null) {
             return false;
         }
 
