@@ -10,8 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 public class GameController implements EventHandler<MouseEvent> {
@@ -52,12 +50,19 @@ public class GameController implements EventHandler<MouseEvent> {
 
     public void move(Location start, Location end) {
         Piece piece = gameModel.getBoard().pieceAt(start);
-        if (piece == null || !piece.canMoveFrom(start, end, gameModel.getBoard())) {
+        if (piece == null) {
+            logger.debug("Piece at starting location " + start + " was null!!");
             return;
         }
 
-        gameModel.move(start, end);
-        gameView.move(start, end);
+        if (!piece.canMoveFrom(start, end, gameModel.getBoard())) {
+            logger.debug("Piece cannot move from starting location " + start + " to ending location " + end + "!!");
+            return;
+        }
+
+        Move move = gameModel.findMoveFromPath(new Path(start, end), gameModel.getBoard());
+        gameModel.move(move);
+        gameView.move(move, move.getLocationMappings(gameModel.getBoard()));
     }
 
     public GameView getGameView() {

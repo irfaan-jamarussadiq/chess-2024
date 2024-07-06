@@ -6,6 +6,7 @@ import org.chess.chess.board.Location;
 import org.chess.chess.board.piece.Piece;
 
 import java.util.List;
+import java.util.Map;
 
 public class GameView extends BorderPane {
     private final BoardView boardView;
@@ -31,14 +32,16 @@ public class GameView extends BorderPane {
         }
     }
 
-    public void move(Location start, Location end) {
-        Piece pieceStart = boardView.pieceAt(start);
-        Piece pieceEnd = boardView.pieceAt(end);
+    public void move(Move move, Map<Location, Location> toUpdate) {
+        Piece pieceStart = boardView.pieceAt(move.getStart());
+        Piece pieceEnd = boardView.pieceAt(move.getEnd());
 
         if (pieceStart.isFriendOf(pieceEnd)) {
             return;
         }
 
-        boardView.move(start, end);
+        for (Location location : toUpdate.keySet()) {
+            boardView.move(location, toUpdate.get(location));
+        }
     }
 }

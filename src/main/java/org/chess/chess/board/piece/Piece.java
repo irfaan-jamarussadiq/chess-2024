@@ -9,6 +9,7 @@ import java.util.List;
 
 public abstract class Piece {
     private final Alliance alliance;
+    private boolean hasMoved;
 
     public Piece(Alliance alliance) {
         this.alliance = alliance;
@@ -36,5 +37,13 @@ public abstract class Piece {
 
     public boolean isFriendOf(Piece friend) {
         return friend != null && alliance == friend.alliance;
+    }
+
+    public void setHasMoved(boolean hasMoved) {
+        this.hasMoved = hasMoved;
+    }
+
+    public boolean hasMoved() {
+        return hasMoved;
     }
 }

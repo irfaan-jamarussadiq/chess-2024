@@ -61,6 +61,7 @@ public class BoardModel {
             throw new IllegalArgumentException("No piece at starting square.");
         }
 
+        piece.setHasMoved(true);
         removePiece(start);
         addPiece(piece, end);
     }

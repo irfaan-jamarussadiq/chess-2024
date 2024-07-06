@@ -4,6 +4,7 @@ import org.chess.chess.board.Alliance;
 import org.chess.chess.board.BoardModel;
 import org.chess.chess.board.Location;
 import org.chess.chess.board.piece.King;
+import org.chess.chess.board.piece.Pawn;
 import org.chess.chess.board.piece.Piece;
 import org.chess.chess.board.piece.Rook;
 import org.junit.Test;
@@ -112,6 +113,50 @@ public class GameModelTest {
         moveHelper(game, 1, 5, 1, 7);
         assertEquals(game.getBoard().pieceAt(new Location(1, 7)), new King(Alliance.WHITE));
         assertEquals(game.getBoard().pieceAt(new Location(1, 6)), new Rook(Alliance.WHITE));
+    }
+
+    @Test
+    public void testPawnTwoSquareMoveIsSuccessful() {
+        GameModel game = new GameModel();
+        Location start = new Location(2, 5);
+        Location end = new Location(4, 5);
+        Piece piece = game.getBoard().pieceAt(start);
+        assertTrue(piece.canMoveFrom(start, end, game.getBoard()));
+        game.move(start, end);
+        Piece pawn = game.getBoard().pieceAt(end);
+        assertEquals(pawn, new Pawn(Alliance.WHITE));
+    }
+
+    @Test
+    public void testPawnTwoSquareMoveIsValid() {
+        GameModel game = new GameModel();
+        Location start = new Location(2, 5);
+        Location end = new Location(4, 5);
+        TwoSquarePawnMove move = new TwoSquarePawnMove(start, end);
+        assertFalse(game.isInCheck(game.white));
+        assertTrue(move.isValid(game.getBoard()));
+    }
+
+    @Test
+    public void testPawnCanEnPassant() {
+        GameModel game = new GameModel();
+        moveHelper(game, 2, 4, 4, 4);
+        moveHelper(game, 7, 4, 6, 4);
+        moveHelper(game, 4, 4, 5, 4);
+        moveHelper(game, 7, 5, 5, 5);
+        moveHelper(game, 5, 4, 6, 5);
+        assertEquals(game.getBoard().pieceAt(new Location(6, 5)), new Pawn(Alliance.WHITE));
+    }
+
+    @Test
+    public void testPawnCanEnPassant2() {
+        GameModel game = new GameModel();
+        moveHelper(game, 2, 5, 4, 5);
+        moveHelper(game, 7, 5, 6, 5);
+        moveHelper(game, 4, 5, 5, 5);
+        moveHelper(game, 7, 4, 5, 4);
+        moveHelper(game, 5, 5, 6, 4);
+        assertEquals(game.getBoard().pieceAt(new Location(6, 4)), new Pawn(Alliance.WHITE));
     }
 
     private void moveHelper(GameModel game, int startRank, int startFile, int endRank, int endFile) {

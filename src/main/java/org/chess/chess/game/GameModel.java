@@ -41,6 +41,10 @@ public class GameModel {
         logger.debug("\n" + board.toString());
     }
 
+    public void move(Move move) {
+        move(move.getStart(), move.getEnd());
+    }
+
     boolean isValidMove(Move move) {
         if (!move.isWithinBounds() || move.getStart().equals(move.getEnd()) || !move.isValid(board)) {
             return false;
@@ -55,10 +59,12 @@ public class GameModel {
 
             Move candidateMove = findMoveFromPath(path, board);
             if (candidateMove != null && candidateMove.equals(move)) {
-                BoardSnapshot boardSnapshot = new BoardSnapshot(board, currentPlayer);
+                BoardModel copy = new BoardModel(board);
+                boolean hasMoved = piece.hasMoved();
                 executeMove(candidateMove, board);
                 boolean movePutPlayerInCheck = isInCheck(currentPlayer);
-                restoreFromMemento(boardSnapshot);
+                board = copy;
+                board.pieceAt(move.getStart()).setHasMoved(hasMoved);
                 if (!movePutPlayerInCheck) {
                     return true;
                 }
@@ -86,10 +92,15 @@ public class GameModel {
 
             Move candidateMove = findMoveFromPath(path, board);
             if (currentPlayer.isPieceAlly(piece) && candidateMove != null && candidateMove.isValid(board)) {
-                BoardSnapshot boardSnapshot = new BoardSnapshot(board, currentPlayer);
+                BoardModel copy = new BoardModel(board);
+                boolean hasMoved = piece.hasMoved();
                 executeMove(candidateMove, board);
                 boolean movePutPlayerInCheck = isInCheck(currentPlayer);
-                restoreFromMemento(boardSnapshot);
+                board = copy;
+                Map<Location, Location> toUpdate = candidateMove.getLocationMappings(board);
+                for (Location l : toUpdate.keySet()) {
+                    board.pieceAt(l).setHasMoved(hasMoved);
+                }
                 if (!movePutPlayerInCheck) {
                     legalMoves.add(candidateMove);
                 }
@@ -100,11 +111,12 @@ public class GameModel {
         return legalMoves;
     }
 
-    private Move findMoveFromPath(Path path, BoardModel board) {
+    Move findMoveFromPath(Path path, BoardModel board) {
         Move[] possibleMoves = new Move[] {
-                new NormalMove(path.start(), path.end()),
+                new TwoSquarePawnMove(path.start(), path.end()),
+                new CastlingMove(path.start(), path.end()),
                 new EnPassantMove(path.start(), path.end()),
-                new CastlingMove(path.start(), path.end())
+                new NormalMove(path.start(), path.end())
         };
 
         for (Move move : possibleMoves) {
@@ -172,9 +184,9 @@ public class GameModel {
         return true;
     }
 
-    private void restoreFromMemento(BoardSnapshot boardSnapshot) {
-        this.board = boardSnapshot.board();
-        this.currentPlayer.setKingLocation(boardSnapshot.getPlayer().getKingLocation());
+    private void restoreFromMemento(MoveSnapshot moveSnapshot) {
+        this.board = moveSnapshot.board();
+        this.currentPlayer.setKingLocation(moveSnapshot.getPlayer().getKingLocation());
     }
 
     private void executeMove(Move move, BoardModel board) {

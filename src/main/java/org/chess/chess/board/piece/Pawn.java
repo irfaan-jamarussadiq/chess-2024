@@ -9,6 +9,7 @@ import org.chess.chess.game.Path;
 import java.util.List;
 
 public class Pawn extends Piece {
+
     public Pawn(Alliance alliance) {
         super(alliance);
     }
@@ -37,11 +38,19 @@ public class Pawn extends Piece {
         Location rightPawnLocation = new Location(start.rank() + pawnDir, start.file() + 1);
 
         if (leftPawnLocation.isWithinBounds() && end.equals(leftPawnLocation)) {
-            return this.isEnemyOf(endPiece);
+            Location enPassantLocation = new Location(start.rank(), end.file());
+            Piece enPassantPawn = new Pawn(getAlliance() == Alliance.WHITE ? Alliance.BLACK : Alliance.WHITE);
+            Piece actualEnPassantPiece = board.pieceAt(enPassantLocation);
+            return this.isEnemyOf(endPiece)
+                    || (this.isEnemyOf(actualEnPassantPiece) && actualEnPassantPiece.equals(enPassantPawn)
+                    && leftPawnLocation.rank() == getAlliance().getEnPassantEndingRank());
         }
 
         if (rightPawnLocation.isWithinBounds() && end.equals(rightPawnLocation)) {
-            return this.isEnemyOf(endPiece);
+            Location enemyPawnLocation = new Location(start.rank(), end.file());
+            return this.isEnemyOf(endPiece)
+                    || (this.isEnemyOf(board.pieceAt(enemyPawnLocation))
+                        && rightPawnLocation.rank() == getAlliance().getEnPassantEndingRank());
         }
 
         Location oneSquareForward = new Location(start.rank() + pawnDir, start.file());
@@ -51,7 +60,7 @@ public class Pawn extends Piece {
 
         Location twoSquaresForward = new Location(start.rank() + 2 * pawnDir, start.file());
         if (twoSquaresForward.isWithinBounds() && end.equals(twoSquaresForward)) {
-            return board.isEmpty(twoSquaresForward);
+            return !hasMoved() && board.isEmpty(oneSquareForward) && board.isEmpty(twoSquaresForward);
         }
 
         return false;
