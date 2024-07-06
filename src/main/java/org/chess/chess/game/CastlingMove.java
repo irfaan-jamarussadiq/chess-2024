@@ -7,6 +7,9 @@ import org.chess.chess.board.piece.King;
 import org.chess.chess.board.piece.Piece;
 import org.chess.chess.board.piece.Rook;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class CastlingMove extends Move {
     public CastlingMove(Location start, Location end) {
         super(start, end);
@@ -33,7 +36,7 @@ public class CastlingMove extends Move {
     @Override
     public boolean isValid(BoardModel board) {
         Piece king = board.pieceAt(getStart());
-        if (!(king instanceof King) || board.pieceAt(getEnd()) != null) {
+        if (!(king instanceof King) || king.hasMoved() || board.pieceAt(getEnd()) != null) {
             return false;
         }
 
@@ -51,17 +54,37 @@ public class CastlingMove extends Move {
 
         if (getEnd().file() == 3) {
             Piece rook = board.pieceAt(new Location(getStart().rank(), 1));
-            return rook instanceof Rook
+            return rook instanceof Rook && !rook.hasMoved()
                     && board.isEmpty(new Location(getStart().rank(), 2))
                     && board.isEmpty(new Location(getStart().rank(), 3))
                     && board.isEmpty(new Location(getStart().rank(), 4));
         } else if (getEnd().file() == 7) {
             Piece rook = board.pieceAt(new Location(getStart().rank(), 8));
-            return rook instanceof Rook
+            return rook instanceof Rook && !rook.hasMoved()
                     && board.isEmpty(new Location(getStart().rank(), 6))
                     && board.isEmpty(new Location(getStart().rank(), 7));
         }
 
         return false;
+    }
+
+    @Override
+    public Map<Location, Location> getLocationMappings(BoardModel board) {
+        Map<Location, Location> locationMappings = new HashMap<>(4);
+
+        Location rookStart, rookEnd;
+        if (getStart().file() > getEnd().file()) {
+            // Long castling
+            rookStart = new Location(getStart().rank(), 1);
+            rookEnd = new Location(getStart().rank(), 4);
+        } else {
+            // Short castling
+            rookStart = new Location(getStart().rank(), 8);
+            rookEnd = new Location(getStart().rank(), 6);
+        }
+
+        locationMappings.put(getStart(), getEnd());
+        locationMappings.put(rookStart, rookEnd);
+        return locationMappings;
     }
 }

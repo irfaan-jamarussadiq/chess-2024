@@ -5,6 +5,9 @@ import org.chess.chess.board.Location;
 import org.chess.chess.board.piece.Pawn;
 import org.chess.chess.board.piece.Piece;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class EnPassantMove extends Move {
     public EnPassantMove(Location start, Location end) {
         super(start, end);
@@ -20,11 +23,12 @@ public class EnPassantMove extends Move {
     @Override
     public boolean isValid(BoardModel board) {
         Piece pawn = board.pieceAt(getStart());
-        if (!(pawn instanceof Pawn) || board.pieceAt(getEnd()) == null) {
+        if (!(pawn instanceof Pawn) || board.pieceAt(getEnd()) != null) {
             return false;
         }
 
-        Piece enemyPawn = board.pieceAt(getStart());
+        Location enemyPawnLocation = new Location(getEnd().rank(), getStart().file());
+        Piece enemyPawn = board.pieceAt(enemyPawnLocation);
         if (!pawn.isEnemyOf(enemyPawn) || !(enemyPawn instanceof Pawn)) {
             return false;
         }
@@ -32,5 +36,15 @@ public class EnPassantMove extends Move {
         return Math.abs(getStart().file() - getEnd().file()) == 1
                 && getStart().rank() == pawn.getAlliance().getEnPassantStartingRank()
                 && getEnd().rank() == pawn.getAlliance().getEnPassantEndingRank();
+    }
+
+    @Override
+    public Map<Location, Location> getLocationMappings(BoardModel board) {
+        Map<Location, Location> affectedLocations = new HashMap<>(3);
+        Location capturedPawnStart = new Location(getStart().rank(), getEnd().file());
+        Location capturedPawnEnd = new Location(getEnd().file(), getStart().rank());
+        affectedLocations.put(getStart(), getEnd());
+        affectedLocations.put(capturedPawnStart, capturedPawnEnd);
+        return affectedLocations;
     }
 }

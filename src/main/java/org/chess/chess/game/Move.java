@@ -2,6 +2,9 @@ package org.chess.chess.game;
 
 import org.chess.chess.board.BoardModel;
 import org.chess.chess.board.Location;
+import org.chess.chess.board.piece.Piece;
+
+import java.util.Map;
 
 public abstract class Move {
     private final Location start;
@@ -19,6 +22,8 @@ public abstract class Move {
     public abstract void execute(BoardModel board);
 
     public abstract boolean isValid(BoardModel board);
+
+    public abstract Map<Location, Location> getLocationMappings(BoardModel board);
 
     public Location getStart() {
         return start;
