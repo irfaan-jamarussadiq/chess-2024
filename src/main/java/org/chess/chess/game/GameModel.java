@@ -184,11 +184,6 @@ public class GameModel {
         return true;
     }
 
-    private void restoreFromMemento(MoveSnapshot moveSnapshot) {
-        this.board = moveSnapshot.board();
-        this.currentPlayer.setKingLocation(moveSnapshot.getPlayer().getKingLocation());
-    }
-
     private void executeMove(Move move, BoardModel board) {
         Piece piece = board.pieceAt(move.getStart());
         move.execute(board);

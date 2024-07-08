@@ -4,18 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb32eb40-b065-4f3d-bc40-daac67398af0" name="Changes" comment="Create Move hierarchy">
+    <list default="true" id="cb32eb40-b065-4f3d-bc40-daac67398af0" name="Changes" comment="Fix bugs related to updating moves in UI">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/Alliance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/Alliance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/BoardModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/BoardModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/King.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/King.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Pawn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Pawn.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/piece/Piece.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/BoardSnapshot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/MoveSnapshot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModelTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,14 +181,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1717878056242</updated>
-    </task>
-    <task id="LOCAL-00006" summary="Generate list of moves by piece">
-      <option name="closed" value="true" />
-      <created>1717896896101</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1717896896101</updated>
     </task>
     <task id="LOCAL-00007" summary="Add getter for alliance in Player class">
       <option name="closed" value="true" />
@@ -584,11 +566,18 @@
       <option name="project" value="LOCAL" />
       <updated>1720227872135</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="Fix bugs related to updating moves in UI">
+      <option name="closed" value="true" />
+      <created>1720228023364</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1720228023364</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Set highlighting of squares" />
     <MESSAGE value="Create GameController" />
     <MESSAGE value="Highlight all legal moves and fix bug in Knight class" />
     <MESSAGE value="Remove debugging print statements" />
@@ -613,7 +602,8 @@
     <MESSAGE value="Add test for castling" />
     <MESSAGE value="Add logging capabilities using slf4j" />
     <MESSAGE value="Create Move hierarchy" />
-    <option name="LAST_COMMIT_MESSAGE" value="Create Move hierarchy" />
+    <MESSAGE value="Fix bugs related to updating moves in UI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix bugs related to updating moves in UI" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
