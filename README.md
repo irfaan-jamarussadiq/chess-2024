@@ -1,5 +1,6 @@
 # Chess
 ![img.png](img.png)
+
 Chess program written in Java. Graphics made with JavaFX.
 
 ## Design
