@@ -1,8 +1,7 @@
-package org.chess.chess.game;
+package org.chess.chess.game.move;
 
 import org.chess.chess.board.BoardModel;
 import org.chess.chess.board.Location;
-import org.chess.chess.board.piece.Piece;
 
 import java.util.Map;
 

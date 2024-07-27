@@ -1,4 +1,4 @@
-package org.chess.chess.game;
+package org.chess.chess.game.move;
 
 import org.chess.chess.board.Alliance;
 import org.chess.chess.board.BoardModel;

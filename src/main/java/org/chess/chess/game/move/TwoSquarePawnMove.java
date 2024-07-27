@@ -1,11 +1,9 @@
-package org.chess.chess.game;
+package org.chess.chess.game.move;
 
 import org.chess.chess.board.BoardModel;
 import org.chess.chess.board.Location;
 import org.chess.chess.board.piece.Pawn;
 import org.chess.chess.board.piece.Piece;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;

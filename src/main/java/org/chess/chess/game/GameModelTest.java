@@ -7,6 +7,8 @@ import org.chess.chess.board.piece.King;
 import org.chess.chess.board.piece.Pawn;
 import org.chess.chess.board.piece.Piece;
 import org.chess.chess.board.piece.Rook;
+import org.chess.chess.game.move.NormalMove;
+import org.chess.chess.game.move.TwoSquarePawnMove;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

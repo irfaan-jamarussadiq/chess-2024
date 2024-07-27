@@ -6,6 +6,7 @@ import org.chess.chess.board.BoardView;
 import org.chess.chess.board.Location;
 import org.chess.chess.board.TileView;
 import org.chess.chess.board.piece.Piece;
+import org.chess.chess.game.move.Move;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

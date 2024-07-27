@@ -4,10 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb32eb40-b065-4f3d-bc40-daac67398af0" name="Changes" comment="Delete unused MoveSnapshot class">
+    <list default="true" id="cb32eb40-b065-4f3d-bc40-daac67398af0" name="Changes" comment="Add image to README">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/CastlingMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/move/CastlingMove.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/EnPassantMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/move/EnPassantMove.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/MoveSnapshot.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModelTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/Move.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/move/Move.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/NormalMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/move/NormalMove.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/TwoSquarePawnMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/move/TwoSquarePawnMove.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,38 +53,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.ChessApplication.executor": "Debug",
-    "JUnit.BoardModelTest.executor": "Run",
-    "JUnit.BoardModelTest.testMovePiece.executor": "Run",
-    "JUnit.BoardModelTest.testMovePieceAtEmptySquareFails.executor": "Run",
-    "JUnit.BoardModelTest.testPieceAtOutOfBounds.executor": "Run",
-    "JUnit.GameModelTest.executor": "Run",
-    "JUnit.GameModelTest.testCanMoveFrom.executor": "Run",
-    "JUnit.GameModelTest.testCastlingInvalidAtStart.executor": "Run",
-    "JUnit.GameModelTest.testCastlingIsSuccessful.executor": "Run",
-    "JUnit.GameModelTest.testFoolsMateIsCheckmate.executor": "Run",
-    "JUnit.GameModelTest.testGameStartsOnWhiteTurn.executor": "Run",
-    "JUnit.GameModelTest.testMoveChangesTurn.executor": "Run",
-    "JUnit.GameModelTest.testMoveOutOfBoundsIsInvalid.executor": "Run",
-    "JUnit.GameModelTest.testPawnCanEnPassant.executor": "Run",
-    "JUnit.GameModelTest.testPawnCanEnPassant2.executor": "Run",
-    "JUnit.GameModelTest.testPawnTwoSquareMoveIsSuccessful.executor": "Debug",
-    "JUnit.GameModelTest.testPawnTwoSquareMoveIsValid.executor": "Run",
-    "JUnit.GameModelTest.testPlayerKingLocationUpdatesOnKingMove.executor": "Run",
-    "JUnit.GameModelTest.testScholarsMateIsCheckmate.executor": "Run",
-    "JUnit.GameModelTest.testWhiteIsInCheck.executor": "Run",
-    "JUnit.org.chess.chess.board in chess.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "jdk.selected.JAVA_MODULE": "17",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/irfaan/Documents/Programming/Java/chess/assets",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.ChessApplication.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BoardModelTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BoardModelTest.testMovePiece.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BoardModelTest.testMovePieceAtEmptySquareFails.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.BoardModelTest.testPieceAtOutOfBounds.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GameModelTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GameModelTest.testCanMoveFrom.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GameModelTest.testCastlingInvalidAtStart.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GameModelTest.testCastlingIsSuccessful.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GameModelTest.testFoolsMateIsCheckmate.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GameModelTest.testGameStartsOnWhiteTurn.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GameModelTest.testMoveChangesTurn.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GameModelTest.testMoveOutOfBoundsIsInvalid.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GameModelTest.testPawnCanEnPassant.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GameModelTest.testPawnCanEnPassant2.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GameModelTest.testPawnTwoSquareMoveIsSuccessful.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.GameModelTest.testPawnTwoSquareMoveIsValid.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GameModelTest.testPlayerKingLocationUpdatesOnKingMove.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GameModelTest.testScholarsMateIsCheckmate.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GameModelTest.testWhiteIsInCheck.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.org.chess.chess.board in chess.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/irfaan/Documents/Programming/Java/chess/assets&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="org.chess.chess.board" />
@@ -86,7 +94,20 @@
       <recent name="$PROJECT_DIR$/assets" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.ChessApplication">
+    <configuration name="ChessApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.chess.chess.ChessApplication" />
+      <module name="chess" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.chess.chess.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="BoardModelTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="chess" />
       <extension name="coverage">
@@ -106,7 +127,7 @@
       <module name="chess" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.chess.chess.game.*" />
+          <option name="PATTERN" value="org.chess.chess.game.move.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -121,7 +142,7 @@
       <module name="chess" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.chess.chess.game.*" />
+          <option name="PATTERN" value="org.chess.chess.game.move.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -137,7 +158,7 @@
       <module name="chess" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.chess.chess.game.*" />
+          <option name="PATTERN" value="org.chess.chess.game.move.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -149,29 +170,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GameModelTest.testPawnTwoSquareMoveIsValid" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="chess" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.chess.chess.game.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.chess.chess.game" />
-      <option name="MAIN_CLASS_NAME" value="org.chess.chess.game.GameModelTest" />
-      <option name="METHOD_NAME" value="testPawnTwoSquareMoveIsValid" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.ChessApplication" />
         <item itemvalue="JUnit.GameModelTest.testPawnCanEnPassant2" />
         <item itemvalue="JUnit.GameModelTest.testPawnCanEnPassant" />
         <item itemvalue="JUnit.GameModelTest" />
         <item itemvalue="JUnit.BoardModelTest" />
-        <item itemvalue="JUnit.GameModelTest.testPawnTwoSquareMoveIsValid" />
       </list>
     </recent_temporary>
   </component>
@@ -183,22 +188,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1717878056242</updated>
-    </task>
-    <task id="LOCAL-00008" summary="Add methods for executing en passant, castling, and other moves">
-      <option name="closed" value="true" />
-      <created>1717898411819</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1717898411819</updated>
-    </task>
-    <task id="LOCAL-00009" summary="Add methods for validating castling and en passant">
-      <option name="closed" value="true" />
-      <created>1717899141309</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1717899141309</updated>
     </task>
     <task id="LOCAL-00010" summary="Create game package and move classes">
       <option name="closed" value="true" />
@@ -576,12 +565,26 @@
       <option name="project" value="LOCAL" />
       <updated>1720481133538</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="Remove TODO">
+      <option name="closed" value="true" />
+      <created>1720481211125</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1720481211125</updated>
+    </task>
+    <task id="LOCAL-00058" summary="Add image to README">
+      <option name="closed" value="true" />
+      <created>1720481257276</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1720481257276</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Highlight all legal moves and fix bug in Knight class" />
-    <MESSAGE value="Remove debugging print statements" />
     <MESSAGE value="Fix bugs in Bishop and Rook classes suggesting illegal moves" />
     <MESSAGE value="Fix bug that generates pawn captures even if squares are empty" />
     <MESSAGE value="Allow moves to be selected and deselected and simplify GameController class a bit" />
@@ -605,7 +608,9 @@
     <MESSAGE value="Create Move hierarchy" />
     <MESSAGE value="Fix bugs related to updating moves in UI" />
     <MESSAGE value="Delete unused MoveSnapshot class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Delete unused MoveSnapshot class" />
+    <MESSAGE value="Remove TODO" />
+    <MESSAGE value="Add image to README" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add image to README" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
