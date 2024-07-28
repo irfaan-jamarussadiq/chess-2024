@@ -5,6 +5,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import org.chess.chess.ChessApplication;
 import org.chess.chess.board.piece.Piece;
 
 public class TileView extends StackPane {
@@ -33,8 +34,8 @@ public class TileView extends StackPane {
         this.piece = piece;
         String type = piece.getClass().getSimpleName().toLowerCase();
         String colorNumber = piece.getAlliance() == Alliance.WHITE ? "" : "2";
-        String piecePath = String.format("file:assets/%s%s.png", type, colorNumber);
-        Image pieceImage = new Image(piecePath);
+        String piecePath = String.format("%s%s.png", type, colorNumber);
+        Image pieceImage = new Image(String.valueOf(ChessApplication.class.getResource("/images/" + piecePath)));
         pieceView.setImage(pieceImage);
         pieceView.setFitWidth(tile.getWidth());
         pieceView.setFitHeight(tile.getHeight());
