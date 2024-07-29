@@ -6,16 +6,14 @@ import org.chess.chess.board.Location;
 import org.chess.chess.board.piece.King;
 import org.chess.chess.board.piece.Piece;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.chess.chess.game.move.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class GameModel {
+    private Collection<Move> history;
     public final Player white = new Player(Alliance.WHITE, new Location(1, 5));
     public final Player black = new Player(Alliance.BLACK, new Location(8, 5));
     private Player currentPlayer;
@@ -26,6 +24,7 @@ public class GameModel {
     public GameModel(BoardModel board) {
         this.currentPlayer = white;
         this.board = board;
+        this.history = new Stack<>();
     }
 
     public GameModel() {
@@ -37,6 +36,7 @@ public class GameModel {
         if (move != null && isValidMove(move)) {
             executeMove(move, board);
             currentPlayer = getNextPlayer();
+            history.add(move);
         }
 
         logger.debug("\n" + board.toString());
@@ -200,4 +200,7 @@ public class GameModel {
     public BoardModel getBoard() {
         return board;
     }
+
+    public Collection<Move> getHistory() { return history; }
+
 }

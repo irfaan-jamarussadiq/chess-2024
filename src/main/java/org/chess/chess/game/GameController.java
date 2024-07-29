@@ -20,9 +20,9 @@ public class GameController implements EventHandler<MouseEvent> {
     private List<Move> movesHighlighted;
     private static final Logger logger = LoggerFactory.getLogger(GameController.class);
 
-    public GameController() {
-        gameModel = new GameModel();
-        gameView = new GameView();
+    public GameController(GameModel model, GameView view) {
+        gameModel = model;
+        gameView = view;
         movesHighlighted = new ArrayList<>();
         gameView.addEventHandler(MouseEvent.MOUSE_CLICKED, this);
     }
@@ -64,9 +64,5 @@ public class GameController implements EventHandler<MouseEvent> {
         Move move = gameModel.findMoveFromPath(new Path(start, end), gameModel.getBoard());
         gameModel.move(move);
         gameView.move(move, move.getLocationMappings(gameModel.getBoard()));
-    }
-
-    public GameView getGameView() {
-        return gameView;
     }
 }

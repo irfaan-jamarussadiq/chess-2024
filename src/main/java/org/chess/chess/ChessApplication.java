@@ -7,15 +7,22 @@ import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import org.chess.chess.board.Location;
 import org.chess.chess.game.GameController;
+import org.chess.chess.game.GameModel;
+import org.chess.chess.game.GameView;
+import org.chess.chess.game.move.Move;
+
+import java.util.List;
 
 public class ChessApplication extends Application {
     @Override
     public void start(Stage stage) {
         BorderPane root = new BorderPane();
-        root.setCenter(new GameController().getGameView());
-        root.setRight(createMoveList());
+        GameView view = new GameView();
+        GameModel model = new GameModel();
+        GameController controller = new GameController(model, view);
+        root.setCenter(view);
+        root.setRight(createMoveList(model));
 
         Scene scene = new Scene(root, 1000, 1000);
         stage.setTitle("Chess");
@@ -23,9 +30,13 @@ public class ChessApplication extends Application {
         stage.show();
     }
 
-    private ListView<Location> createMoveList() {
-        ListView<Location> moveList = new ListView<>();
-        ObservableList<Location> moves = FXCollections.observableArrayList (new Location(2, 2), new Location(2, 4));
+    private ListView<String> createMoveList(GameModel model) {
+        List<String> moveHistory = model.getHistory()
+                .stream()
+                .map(Move::toString)
+                .toList();
+        ObservableList<String> moves = FXCollections.observableList(moveHistory);
+        ListView<String> moveList = new ListView<>();
         moveList.setItems(moves);
         return moveList;
     }

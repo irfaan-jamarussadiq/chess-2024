@@ -9,29 +9,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cb32eb40-b065-4f3d-bc40-daac67398af0" name="Changes" comment="Add jar file for program">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/Launcher.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/bishop.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/bishop2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/chess-gui-castling.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/chess-gui-check.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/chess-gui-checkmate.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/chess-gui-normal.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/king.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/king2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/knight.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/knight2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/pawn.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/pawn2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/queen.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/queen2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/rook.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/rook2.png" afterDir="false" />
+    <list default="true" id="cb32eb40-b065-4f3d-bc40-daac67398af0" name="Changes" comment="Move images into resources folder">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/chess_jar/chess.jar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/ChessApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/ChessApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/TileView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/board/TileView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/chess/chess/game/GameModel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,6 +94,9 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources" />
       <recent name="$PROJECT_DIR$/assets" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/images" />
     </key>
   </component>
   <component name="RunManager" selected="Application.ChessApplication">
@@ -208,14 +193,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1717878056242</updated>
-    </task>
-    <task id="LOCAL-00012" summary="Create board snapshot class to undo moves">
-      <option name="closed" value="true" />
-      <created>1717941313866</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1717941313866</updated>
     </task>
     <task id="LOCAL-00013" summary="Update import message after game package refactor">
       <option name="closed" value="true" />
@@ -601,11 +578,18 @@
       <option name="project" value="LOCAL" />
       <updated>1722192139936</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="Move images into resources folder">
+      <option name="closed" value="true" />
+      <created>1722194947188</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1722194947188</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Allow moves to be selected and deselected and simplify GameController class a bit" />
     <MESSAGE value="Highlight moves that are for current player only" />
     <MESSAGE value="Fix bugs in king and knight canMoveFrom() methods throwing an exception when location is out of bounds" />
     <MESSAGE value="Remove unused import" />
@@ -630,7 +614,8 @@
     <MESSAGE value="Add image to README" />
     <MESSAGE value="Create move package" />
     <MESSAGE value="Add jar file for program" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add jar file for program" />
+    <MESSAGE value="Move images into resources folder" />
+    <option name="LAST_COMMIT_MESSAGE" value="Move images into resources folder" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
