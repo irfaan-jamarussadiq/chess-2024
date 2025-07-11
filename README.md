@@ -2,6 +2,8 @@
 
 This project implements a chess game with a graphical user interface (GUI) using JavaFX.  The game logic handles piece movement, turn-based gameplay, and check/checkmate detection.
 
+![image](img.png)
+
 
 ## Features
 
