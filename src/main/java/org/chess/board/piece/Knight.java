@@ -33,7 +33,7 @@ public class Knight extends Piece {
         int diffFile = Math.abs(end.file() - start.file());
 
         if ((diffRank == 2 && diffFile == 1) || (diffRank == 1 && diffFile == 2)) {
-            return start.isWithinBounds() && end.isWithinBounds() && !this.isFriendOf(board.pieceAt(end));
+            return start.isWithinBounds() && end.isWithinBounds() && !Piece.areAllies(this, board.pieceAt(end));
         }
 
         return false;

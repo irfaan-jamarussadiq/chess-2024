@@ -15,8 +15,24 @@ public abstract class Piece {
         this.alliance = alliance;
     }
 
+    public static boolean areEnemies(Piece piece1, Piece piece2) {
+        return piece1 != null && piece2 != null && piece1.alliance != piece2.alliance;
+    }
+
+    public static boolean areAllies(Piece piece1, Piece piece2) {
+        return piece1 != null && piece2 != null && piece1.alliance == piece2.alliance;
+    }
+
     public Alliance getAlliance() {
         return alliance;
+    } 
+
+    public void setHasMoved(boolean hasMoved) {
+        this.hasMoved = hasMoved;
+    }
+
+    public boolean hasMoved() {
+        return hasMoved;
     }
 
     public boolean equals(Object other) {
@@ -30,20 +46,4 @@ public abstract class Piece {
 
     public abstract List<Path> getCandidatePaths(Location location);
     public abstract boolean canMoveFrom(Location start, Location end, BoardModel board);
-
-    public boolean isEnemyOf(Piece enemy) {
-        return enemy != null && alliance != enemy.alliance;
-    }
-
-    public boolean isFriendOf(Piece friend) {
-        return friend != null && alliance == friend.alliance;
-    }
-
-    public void setHasMoved(boolean hasMoved) {
-        this.hasMoved = hasMoved;
-    }
-
-    public boolean hasMoved() {
-        return hasMoved;
-    }
 }

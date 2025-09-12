@@ -38,7 +38,7 @@ public class GameView extends BorderPane {
         Piece pieceStart = boardView.pieceAt(move.getStart());
         Piece pieceEnd = boardView.pieceAt(move.getEnd());
 
-        if (pieceStart.isFriendOf(pieceEnd)) {
+        if (Piece.areAllies(pieceStart, pieceEnd)) {
             return;
         }
 

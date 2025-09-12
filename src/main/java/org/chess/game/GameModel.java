@@ -134,7 +134,7 @@ public class GameModel {
         for (Path path : movesAtKingLocation) {
             if (path.isWithinBounds()) {
                 Piece potentialEnemy = board.pieceAt(path.end());
-                if (king.isEnemyOf(potentialEnemy)
+                if (Piece.areEnemies(king, potentialEnemy)
                         && potentialEnemy.canMoveFrom(path.end(), path.start(), board)) {
                     return true;
                 }

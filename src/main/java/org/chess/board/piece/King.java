@@ -38,11 +38,11 @@ public class King extends Piece {
         // Check if castling move
         if (start.file() == 5 && (start.rank() == 1 || start.rank() == 8) && start.rank() == end.rank()
                 && (end.file() == 7 || end.file() == 3)) {
-            return !isFriendOf(board.pieceAt(end));
+            return !Piece.areAllies(this, board.pieceAt(end));
         }
 
         int diffRank = Math.abs(end.rank() - start.rank());
         int diffFile = Math.abs(end.file() - start.file());
-        return diffRank <= 1 && diffFile <= 1 && !isFriendOf(board.pieceAt(end));
+        return diffRank <= 1 && diffFile <= 1 && !Piece.areAllies(this, board.pieceAt(end));
     }
 }

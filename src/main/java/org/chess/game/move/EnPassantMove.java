@@ -29,7 +29,7 @@ public class EnPassantMove extends Move {
 
         Location enemyPawnLocation = new Location(getEnd().rank(), getStart().file());
         Piece enemyPawn = board.pieceAt(enemyPawnLocation);
-        if (!pawn.isEnemyOf(enemyPawn) || !(enemyPawn instanceof Pawn)) {
+        if (!Piece.areEnemies(pawn, enemyPawn) || !(enemyPawn instanceof Pawn)) {
             return false;
         }
 

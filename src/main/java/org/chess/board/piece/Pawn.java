@@ -41,15 +41,15 @@ public class Pawn extends Piece {
             Location enPassantLocation = new Location(start.rank(), end.file());
             Piece enPassantPawn = new Pawn(getAlliance() == Alliance.WHITE ? Alliance.BLACK : Alliance.WHITE);
             Piece actualEnPassantPiece = board.pieceAt(enPassantLocation);
-            return this.isEnemyOf(endPiece)
-                    || (this.isEnemyOf(actualEnPassantPiece) && actualEnPassantPiece.equals(enPassantPawn)
+            return Piece.areEnemies(this, endPiece)
+                    || (Piece.areEnemies(this, actualEnPassantPiece) && actualEnPassantPiece.equals(enPassantPawn)
                     && leftPawnLocation.rank() == getAlliance().getEnPassantEndingRank());
         }
 
         if (rightPawnLocation.isWithinBounds() && end.equals(rightPawnLocation)) {
             Location enemyPawnLocation = new Location(start.rank(), end.file());
-            return this.isEnemyOf(endPiece)
-                    || (this.isEnemyOf(board.pieceAt(enemyPawnLocation))
+            return Piece.areEnemies(this, endPiece)
+                    || (Piece.areEnemies(this, board.pieceAt(enemyPawnLocation))
                         && rightPawnLocation.rank() == getAlliance().getEnPassantEndingRank());
         }
 
