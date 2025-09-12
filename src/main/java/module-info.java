@@ -1,16 +1,17 @@
 module org.chess.chess {
     requires javafx.controls;
     requires javafx.fxml;
+    requires transitive javafx.graphics;
     requires junit;
     requires org.slf4j;
 
 
-    opens org.chess.chess to javafx.fxml;
-    exports org.chess.chess;
-    exports org.chess.chess.board;
-    exports org.chess.chess.board.piece;
-    exports org.chess.chess.game;
-    opens org.chess.chess.game to javafx.fxml;
-    exports org.chess.chess.game.move;
-    opens org.chess.chess.game.move to javafx.fxml;
+    opens org.chess to javafx.fxml;
+    exports org.chess;
+    exports org.chess.board;
+    exports org.chess.board.piece;
+    exports org.chess.game;
+    opens org.chess.game to javafx.fxml;
+    exports org.chess.game.move;
+    opens org.chess.game.move to javafx.fxml;
 }
