@@ -34,9 +34,9 @@ public class TileView extends StackPane {
 
         this.piece = piece;
         String type = piece.getClass().getSimpleName().toLowerCase();
-        String colorNumber = piece.getAlliance() == Alliance.WHITE ? "" : "2";
-        String piecePath = String.format("%s%s.png", type, colorNumber);
-        Image pieceImage = new Image(String.valueOf(ChessApplication.class.getResource("/images/" + piecePath)));
+        String color = piece.getAlliance() == Alliance.WHITE ? "white" : "black";
+        String piecePath = String.format("/images/%s_%s.png", color, type);
+        Image pieceImage = new Image(String.valueOf(ChessApplication.class.getResource(piecePath)));
         pieceView.setImage(pieceImage);
         pieceView.setFitWidth(tile.getWidth());
         pieceView.setFitHeight(tile.getHeight());
