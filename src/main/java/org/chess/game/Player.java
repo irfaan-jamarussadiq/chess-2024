@@ -5,12 +5,15 @@ import org.chess.board.Location;
 import org.chess.piece.Piece;
 
 public class Player {
+    private final static Player WHITE = new Player(Alliance.WHITE); 
+    private final static Player BLACK = new Player(Alliance.BLACK); 
+
     private final Alliance alliance;
     private Location kingLocation;
 
-    public Player(Alliance alliance, Location kingLocation) {
+    private Player(Alliance alliance) {
         this.alliance = alliance;
-        this.kingLocation = kingLocation;
+        this.kingLocation = new Location(alliance.isWhite() ? 1 : 8, 5);
     }
 
     public boolean isPieceAlly(Piece piece) {
@@ -27,5 +30,13 @@ public class Player {
 
     public void setKingLocation(Location location) {
         this.kingLocation = location;
+    }
+
+    public static Player getPlayer(Alliance alliance) {
+        return alliance.isWhite() ? WHITE : BLACK;
+    }
+
+    public Player getOpponent() {
+        return alliance.isWhite() ? BLACK : WHITE;
     }
 }

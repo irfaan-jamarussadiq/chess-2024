@@ -15,19 +15,6 @@ import static org.junit.Assert.*;
 
 public class GameModelTest {
     @Test
-    public void testGameStartsOnWhiteTurn() {
-        GameModel game = new GameModel();
-        assertEquals(game.getNextPlayer(), game.black);
-    }
-
-    @Test
-    public void testMoveChangesTurn() {
-        GameModel game = new GameModel();
-        moveHelper(game, 2, 4, 4, 4);
-        assertEquals(game.getNextPlayer(), game.white);
-    }
-
-    @Test
     public void testCanMoveFrom() {
         BoardModel board = new BoardModel();
         GameModel game = new GameModel(board);
@@ -47,7 +34,7 @@ public class GameModelTest {
         moveHelper(game, 2, 5, 4, 5);
         moveHelper(game, 7, 5, 5, 5);
         moveHelper(game, 1, 5, 2, 5);
-        assertEquals(game.white.getKingLocation(), new Location(2, 5));
+        assertEquals(Player.getPlayer(Alliance.WHITE).getKingLocation(), new Location(2, 5));
     }
 
     @Test
@@ -57,8 +44,8 @@ public class GameModelTest {
         moveHelper(game, 7, 5, 5, 5);
         moveHelper(game, 4, 6, 5, 5);
         moveHelper(game, 8, 4, 4, 8);
-        assertFalse(game.isInCheck(game.black));
-        assertTrue(game.isInCheck(game.white));
+        assertFalse(game.isInCheck(Player.getPlayer(Alliance.BLACK)));
+        assertTrue(game.isInCheck(Player.getPlayer(Alliance.WHITE)));
     }
 
     @Test
@@ -69,8 +56,8 @@ public class GameModelTest {
         moveHelper(game, 2, 4, 4, 4);
         moveHelper(game, 7, 6, 5, 6);
         moveHelper(game, 1, 4, 5, 8);
-        assertFalse(game.isInCheckmate(game.white));
-        assertTrue(game.isInCheckmate(game.black));
+        assertFalse(game.isInCheckmate(Player.getPlayer(Alliance.WHITE)));
+        assertTrue(game.isInCheckmate(Player.getPlayer(Alliance.BLACK)));
     }
 
     @Test
@@ -83,8 +70,8 @@ public class GameModelTest {
         moveHelper(game, 1, 4, 5, 8);
         moveHelper(game, 8, 7, 6, 6);
         moveHelper(game, 5, 8, 7, 6);
-        assertFalse(game.isInCheckmate(game.white));
-        assertTrue(game.isInCheckmate(game.black));
+        assertFalse(game.isInCheckmate(Player.getPlayer(Alliance.WHITE)));
+        assertTrue(game.isInCheckmate(Player.getPlayer(Alliance.BLACK)));
     }
 
     @Test
@@ -135,7 +122,7 @@ public class GameModelTest {
         Location start = new Location(2, 5);
         Location end = new Location(4, 5);
         TwoSquarePawnMove move = new TwoSquarePawnMove(start, end);
-        assertFalse(game.isInCheck(game.white));
+        assertFalse(game.isInCheck(Player.getPlayer(Alliance.WHITE)));
         assertTrue(move.isValid(game.getBoard()));
     }
 

@@ -13,15 +13,13 @@ import org.slf4j.LoggerFactory;
 
 public class GameModel {
     private Collection<Move> history;
-    public final Player white = new Player(Alliance.WHITE, new Location(1, 5));
-    public final Player black = new Player(Alliance.BLACK, new Location(8, 5));
     private Player currentPlayer;
     private BoardModel board;
 
     private static final Logger logger = LoggerFactory.getLogger(GameModel.class);
 
     public GameModel(BoardModel board) {
-        this.currentPlayer = white;
+        this.currentPlayer = Player.getPlayer(Alliance.WHITE);
         this.board = board;
         this.history = new Stack<>();
     }
@@ -34,7 +32,7 @@ public class GameModel {
         Move move = findMoveFromPath(new Path(start, end), board);
         if (move != null && isValidMove(move)) {
             executeMove(move, board);
-            currentPlayer = getNextPlayer();
+            currentPlayer = currentPlayer.getOpponent();
             history.add(move);
         }
 
@@ -190,10 +188,6 @@ public class GameModel {
         if (piece instanceof King) {
             currentPlayer.setKingLocation(move.getEnd());
         }
-    }
-
-    public Player getNextPlayer() {
-        return (currentPlayer == white) ? black : white;
     }
 
     public BoardModel getBoard() {
