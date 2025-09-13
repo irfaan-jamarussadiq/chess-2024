@@ -84,7 +84,7 @@ public class BoardModel {
                     sb.append(". ");
                 } else {
                     String p = piece.getClass().getSimpleName().charAt(0) + "";
-                    String p2 = (piece.getAlliance() == Alliance.WHITE) ? p.toUpperCase() : p.toLowerCase();
+                    String p2 = piece.getAlliance().isWhite() ? p.toUpperCase() : p.toLowerCase();
                     sb.append(p2).append(" ");
                 }
             }

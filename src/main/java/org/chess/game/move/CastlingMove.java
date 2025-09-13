@@ -3,7 +3,6 @@ package org.chess.game.move;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.chess.board.Alliance;
 import org.chess.board.BoardModel;
 import org.chess.board.Location;
 import org.chess.board.piece.King;
@@ -44,11 +43,11 @@ public class CastlingMove extends Move {
             return false;
         }
 
-        if (king.getAlliance() == Alliance.WHITE && getStart().rank() != 1) {
+        if (king.getAlliance().isWhite() && getStart().rank() != 1) {
             return false;
         }
 
-        if (king.getAlliance() == Alliance.BLACK && getStart().rank() != 8) {
+        if (!king.getAlliance().isWhite() && getStart().rank() != 8) {
             return false;
         }
 

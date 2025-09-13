@@ -8,7 +8,7 @@ import org.chess.game.Path;
 import java.util.List;
 
 public abstract class Piece {
-    private final Alliance alliance;
+    protected final Alliance alliance;
     private boolean hasMoved;
 
     public Piece(Alliance alliance) {

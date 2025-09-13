@@ -3,6 +3,11 @@ package org.chess.board;
 public enum Alliance {
     WHITE {
         @Override
+        public boolean isWhite() {
+            return true;
+        }
+
+        @Override
         public int getEnPassantStartingRank() {
             return 5;
         }
@@ -18,6 +23,11 @@ public enum Alliance {
         }
     }, BLACK {
         @Override
+        public boolean isWhite() {
+            return false;
+        }
+
+        @Override
         public int getEnPassantStartingRank() {
             return 4;
         }
@@ -32,6 +42,8 @@ public enum Alliance {
             return -1;
         }
     };
+
+    public abstract boolean isWhite();
 
     public abstract int getEnPassantStartingRank();
 
