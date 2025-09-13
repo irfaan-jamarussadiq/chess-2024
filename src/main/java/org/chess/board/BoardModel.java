@@ -79,14 +79,9 @@ public class BoardModel {
         StringBuilder sb = new StringBuilder();
         for (int rank = 1; rank <= SIZE; rank++) {
             for (int file = 1; file <= SIZE; file++) {
-                Piece piece = pieceAt(new Location(9 - rank, file));
-                if (piece == null) {
-                    sb.append(". ");
-                } else {
-                    String p = piece.getClass().getSimpleName().charAt(0) + "";
-                    String p2 = piece.getAlliance().isWhite() ? p.toUpperCase() : p.toLowerCase();
-                    sb.append(p2).append(" ");
-                }
+                Location location = new Location(9 - rank, file);
+                char pieceLetter = isEmpty(location) ? '.' : pieceAt(location).getLetter();
+                sb.append(pieceLetter + " ");
             }
             sb.append("\n");
         }

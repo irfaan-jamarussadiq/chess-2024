@@ -74,4 +74,9 @@ public class Pawn extends Piece {
             || (diffRank == pawnDirection && diffFile == -1)
             || (diffRank == pawnDirection && diffFile == 1); 
     }
+
+    @Override
+    public char getLetter() {
+        return alliance.isWhite() ? 'P' : 'p';
+    }
 }

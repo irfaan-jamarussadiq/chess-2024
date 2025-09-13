@@ -47,4 +47,9 @@ public class King extends Piece {
         int diffFile = Math.abs(start.file() - end.file());
         return !start.equals(end) && diffRank <= 1 && diffFile <= 1;
     }
+
+    @Override
+    public char getLetter() {
+        return alliance.isWhite() ? 'K' : 'k';
+    }
 }

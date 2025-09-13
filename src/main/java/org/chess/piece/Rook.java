@@ -61,4 +61,9 @@ public class Rook extends Piece {
         int diffFile = Math.abs(start.file() - end.file());
         return !start.equals(end) && ((diffRank != 0 && diffFile == 0) || (diffFile == 0 && diffFile != 0));
     }
+    
+    @Override
+    public char getLetter() {
+        return alliance.isWhite() ? 'R' : 'r';
+    }
 }

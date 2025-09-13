@@ -54,4 +54,9 @@ public class Bishop extends Piece {
         int diffFile = Math.abs(start.file() - end.file());
         return !start.equals(end) && diffRank == diffFile;
     }
+
+    @Override
+    public char getLetter() {
+        return alliance.isWhite() ? 'B' : 'b';
+    }
 }

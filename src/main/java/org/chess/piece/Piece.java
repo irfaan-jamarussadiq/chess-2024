@@ -48,4 +48,6 @@ public abstract class Piece {
     public abstract boolean canMoveFrom(Location start, Location end);
 
     public abstract boolean canMoveFrom(Location start, Location end, BoardModel board);
+
+    public abstract char getLetter();
 }

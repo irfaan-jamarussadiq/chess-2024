@@ -44,4 +44,9 @@ public class Knight extends Piece {
         int diffFile = Math.abs(start.file() - end.file());
         return !start.equals(end) && ((diffRank == 2 && diffFile == 1) || (diffRank == 1 && diffFile == 2));
     }
+    
+    @Override
+    public char getLetter() {
+        return alliance.isWhite() ? 'N' : 'n';
+    }
 }

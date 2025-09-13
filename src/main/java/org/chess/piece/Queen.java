@@ -33,4 +33,9 @@ public class Queen extends Piece {
         Piece rook = new Rook(alliance);
         return bishop.canMoveFrom(start, end) || rook.canMoveFrom(start, end);
     }
+    
+    @Override
+    public char getLetter() {
+        return alliance.isWhite() ? 'Q' : 'q';
+    }
 }
