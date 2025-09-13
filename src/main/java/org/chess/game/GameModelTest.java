@@ -3,12 +3,12 @@ package org.chess.game;
 import org.chess.board.Alliance;
 import org.chess.board.BoardModel;
 import org.chess.board.Location;
-import org.chess.board.piece.King;
-import org.chess.board.piece.Pawn;
-import org.chess.board.piece.Piece;
-import org.chess.board.piece.Rook;
 import org.chess.game.move.NormalMove;
 import org.chess.game.move.TwoSquarePawnMove;
+import org.chess.piece.King;
+import org.chess.piece.Pawn;
+import org.chess.piece.Piece;
+import org.chess.piece.Rook;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

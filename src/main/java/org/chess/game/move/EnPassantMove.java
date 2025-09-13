@@ -5,8 +5,8 @@ import java.util.Map;
 
 import org.chess.board.BoardModel;
 import org.chess.board.Location;
-import org.chess.board.piece.Pawn;
-import org.chess.board.piece.Piece;
+import org.chess.piece.Pawn;
+import org.chess.piece.Piece;
 
 public class EnPassantMove extends Move {
     public EnPassantMove(Location start, Location end) {

@@ -1,10 +1,11 @@
-package org.chess.board.piece;
+package org.chess.piece;
 
 import org.chess.board.Alliance;
 import org.chess.board.BoardModel;
 import org.chess.board.Location;
 import org.chess.game.Path;
 
+import java.util.Collection;
 import java.util.List;
 
 public abstract class Piece {
@@ -44,6 +45,11 @@ public abstract class Piece {
         return otherPiece.alliance == this.alliance;
     }
 
+    public abstract Collection<Location> getPossibleDestinations(Location location);
+
+    public abstract boolean canMoveFrom(Location start, Location end);
+
     public abstract List<Path> getCandidatePaths(Location location);
+
     public abstract boolean canMoveFrom(Location start, Location end, BoardModel board);
 }

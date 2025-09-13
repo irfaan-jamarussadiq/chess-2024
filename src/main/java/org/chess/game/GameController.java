@@ -6,8 +6,8 @@ import javafx.scene.input.MouseEvent;
 import org.chess.board.BoardView;
 import org.chess.board.Location;
 import org.chess.board.TileView;
-import org.chess.board.piece.Piece;
 import org.chess.game.move.Move;
+import org.chess.piece.Piece;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

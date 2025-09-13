@@ -7,6 +7,10 @@ public record Location(int rank, int file) {
         return rank >= 1 && rank <= BoardModel.SIZE && file >= 1 && file <= BoardModel.SIZE;
     }
 
+    public Location offset(int rankOffset, int fileOffset) {
+        return new Location(rank + rankOffset, file + fileOffset);
+    }
+
     public Location shift(Direction direction, int amount) {
         return new Location(rank + amount * direction.rankOffset(), file + amount * direction.fileOffset());
     }

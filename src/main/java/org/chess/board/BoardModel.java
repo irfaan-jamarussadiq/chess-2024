@@ -1,6 +1,6 @@
 package org.chess.board;
 
-import org.chess.board.piece.*;
+import org.chess.piece.*;
 
 public class BoardModel {
     public static final int SIZE = 8;

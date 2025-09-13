@@ -1,4 +1,4 @@
-package org.chess.board.piece;
+package org.chess.piece;
 
 import org.chess.board.Alliance;
 import org.chess.board.BoardModel;
@@ -7,6 +7,8 @@ import org.chess.game.Path;
 import org.chess.game.PathHelpers;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
 public class Queen extends Piece {
@@ -32,5 +34,20 @@ public class Queen extends Piece {
         Piece bishop = new Bishop(alliance);
         Piece rook = new Rook(alliance);
         return bishop.canMoveFrom(start, end, board) || rook.canMoveFrom(start, end, board);
+    }
+
+    @Override
+    public Collection<Location> getPossibleDestinations(Location location) {
+        Collection<Location> possibleDestinations = new HashSet<>();
+        possibleDestinations.addAll(new Bishop(alliance).getPossibleDestinations(location));
+        possibleDestinations.addAll(new Rook(alliance).getPossibleDestinations(location));
+        return possibleDestinations;
+    }
+
+    @Override
+    public boolean canMoveFrom(Location start, Location end) {
+        Piece bishop = new Bishop(alliance);
+        Piece rook = new Rook(alliance);
+        return bishop.canMoveFrom(start, end) || rook.canMoveFrom(start, end);
     }
 }

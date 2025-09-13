@@ -6,8 +6,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThrows;
 
-import org.chess.board.piece.Pawn;
-import org.chess.board.piece.Rook;
+import org.chess.piece.Pawn;
+import org.chess.piece.Rook;
 
 public class BoardModelTest {
     @Test

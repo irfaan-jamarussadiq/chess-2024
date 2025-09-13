@@ -2,7 +2,7 @@ package org.chess.game;
 
 import org.chess.board.Alliance;
 import org.chess.board.Location;
-import org.chess.board.piece.Piece;
+import org.chess.piece.Piece;
 
 public class Player {
     private final Alliance alliance;

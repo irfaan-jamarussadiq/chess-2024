@@ -1,4 +1,4 @@
-package org.chess.board.piece;
+package org.chess.piece;
 
 import org.chess.board.Alliance;
 import org.chess.board.BoardModel;
@@ -6,7 +6,9 @@ import org.chess.board.Location;
 import org.chess.game.Direction;
 import org.chess.game.Path;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 public class Pawn extends Piece {
 
@@ -64,5 +66,26 @@ public class Pawn extends Piece {
         }
 
         return false;
+    }
+
+    @Override
+    public Collection<Location> getPossibleDestinations(Location location) {
+        return Set.of(
+            location.offset(alliance.getPawnDirection(), 0),
+            location.offset(2 * alliance.getPawnDirection(), 0),
+            location.offset(alliance.getPawnDirection(), -1),
+            location.offset(alliance.getPawnDirection(), 1)
+        );
+    }
+
+    @Override
+    public boolean canMoveFrom(Location start, Location end) {
+        int diffRank = end.rank() - start.rank();
+        int diffFile = end.file() - start.file();
+        int pawnDirection = alliance.getPawnDirection();
+        return (diffRank == pawnDirection && diffFile == 0)
+            || (diffRank == 2 * pawnDirection && diffFile == 0)
+            || (diffRank == pawnDirection && diffFile == -1)
+            || (diffRank == pawnDirection && diffFile == 1); 
     }
 }

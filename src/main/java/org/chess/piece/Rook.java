@@ -1,4 +1,4 @@
-package org.chess.board.piece;
+package org.chess.piece;
 
 import org.chess.board.Alliance;
 import org.chess.board.BoardModel;
@@ -7,6 +7,8 @@ import org.chess.game.Direction;
 import org.chess.game.Path;
 import org.chess.game.PathHelpers;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
 public class Rook extends Piece {
@@ -49,5 +51,25 @@ public class Rook extends Piece {
         }
 
         return current.isWithinBounds() && current.equals(end) && !Piece.areAllies(this, board.pieceAt(current));
+    }
+
+    @Override
+    public Collection<Location> getPossibleDestinations(Location location) {
+        Collection<Location> possibleDestinations = new HashSet<>();
+        for (int step = 1; step <= 8; step++) {
+            possibleDestinations.add(location.offset(-step, 0));
+            possibleDestinations.add(location.offset(step, 0));
+            possibleDestinations.add(location.offset(0, -step));
+            possibleDestinations.add(location.offset(0, step));
+        }
+
+        return possibleDestinations;
+    }
+
+    @Override
+    public boolean canMoveFrom(Location start, Location end) {
+        int diffRank = Math.abs(start.rank() - end.rank());
+        int diffFile = Math.abs(start.file() - end.file());
+        return !start.equals(end) && ((diffRank != 0 && diffFile == 0) || (diffFile == 0 && diffFile != 0));
     }
 }

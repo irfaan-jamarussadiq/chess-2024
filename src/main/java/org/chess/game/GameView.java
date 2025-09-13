@@ -4,8 +4,8 @@ import javafx.scene.layout.BorderPane;
 
 import org.chess.board.BoardView;
 import org.chess.board.Location;
-import org.chess.board.piece.Piece;
 import org.chess.game.move.Move;
+import org.chess.piece.Piece;
 
 import java.util.List;
 import java.util.Map;

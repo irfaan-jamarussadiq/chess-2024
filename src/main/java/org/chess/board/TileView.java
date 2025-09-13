@@ -7,7 +7,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 import org.chess.ChessApplication;
-import org.chess.board.piece.Piece;
+import org.chess.piece.Piece;
 
 public class TileView extends StackPane {
     public static final int SIDE_LENGTH = 80;

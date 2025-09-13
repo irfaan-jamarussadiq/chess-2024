@@ -1,6 +1,6 @@
 package org.chess.board;
 
-import org.chess.board.piece.Piece;
+import org.chess.piece.Piece;
 
 public class Tile {
     private Piece piece;

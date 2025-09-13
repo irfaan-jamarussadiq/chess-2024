@@ -5,9 +5,9 @@ import java.util.Map;
 
 import org.chess.board.BoardModel;
 import org.chess.board.Location;
-import org.chess.board.piece.King;
-import org.chess.board.piece.Piece;
-import org.chess.board.piece.Rook;
+import org.chess.piece.King;
+import org.chess.piece.Piece;
+import org.chess.piece.Rook;
 
 public class CastlingMove extends Move {
     public CastlingMove(Location start, Location end) {

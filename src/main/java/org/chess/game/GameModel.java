@@ -5,9 +5,9 @@ import java.util.*;
 import org.chess.board.Alliance;
 import org.chess.board.BoardModel;
 import org.chess.board.Location;
-import org.chess.board.piece.King;
-import org.chess.board.piece.Piece;
 import org.chess.game.move.*;
+import org.chess.piece.King;
+import org.chess.piece.Piece;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

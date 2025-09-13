@@ -1,4 +1,4 @@
-package org.chess.board.piece;
+package org.chess.piece;
 
 import org.chess.board.Alliance;
 import org.chess.board.BoardModel;
@@ -6,7 +6,9 @@ import org.chess.board.Location;
 import org.chess.game.Direction;
 import org.chess.game.Path;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 public class Knight extends Piece {
     public Knight(Alliance alliance) {
@@ -37,5 +39,26 @@ public class Knight extends Piece {
         }
 
         return false;
+    }
+
+    @Override
+    public Collection<Location> getPossibleDestinations(Location location) {
+        return Set.of(
+            location.offset(-2, -1),
+            location.offset(-2, 1),
+            location.offset(-1, -2),
+            location.offset(-1, 2),
+            location.offset(1, -2),
+            location.offset(1, 2),
+            location.offset(2, -1),
+            location.offset(2, 1)
+        );
+    }
+
+    @Override
+    public boolean canMoveFrom(Location start, Location end) {
+        int diffRank = Math.abs(start.rank() - end.rank());
+        int diffFile = Math.abs(start.file() - end.file());
+        return !start.equals(end) && ((diffRank == 2 && diffFile == 1) || (diffRank == 1 && diffFile == 2));
     }
 }

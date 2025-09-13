@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.chess.board.BoardModel;
 import org.chess.board.Location;
-import org.chess.board.piece.Piece;
+import org.chess.piece.Piece;
 
 public class NormalMove extends Move {
     public NormalMove(Location start, Location end) {
