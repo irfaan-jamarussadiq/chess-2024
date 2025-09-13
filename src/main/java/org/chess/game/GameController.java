@@ -62,7 +62,7 @@ public class GameController implements EventHandler<MouseEvent> {
             return;
         }
 
-        Move move = gameModel.findMoveFromPath(new Path(start, end), gameModel.getBoard());
+        Move move = gameModel.findMoveFromPath(start, end, gameModel.getBoard());
         gameModel.move(move);
         gameView.move(move, move.getLocationMappings(gameModel.getBoard()));
     }

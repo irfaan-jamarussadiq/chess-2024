@@ -3,30 +3,13 @@ package org.chess.piece;
 import org.chess.board.Alliance;
 import org.chess.board.BoardModel;
 import org.chess.board.Location;
-import org.chess.game.Direction;
-import org.chess.game.Path;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 
 public class Knight extends Piece {
     public Knight(Alliance alliance) {
         super(alliance);
-    }
-
-    @Override
-    public List<Path> getCandidatePaths(Location location) {
-        return List.of(
-                new Path(location, new Direction(-2, 1)),
-                new Path(location, new Direction(-1, -2)),
-                new Path(location, new Direction(-2, -1)),
-                new Path(location, new Direction(-1, 2)),
-                new Path(location, new Direction(1, -2)),
-                new Path(location, new Direction(1, 2)),
-                new Path(location, new Direction(2, -1)),
-                new Path(location, new Direction(2, 1))
-        );
     }
 
     @Override

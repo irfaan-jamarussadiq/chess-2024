@@ -3,28 +3,14 @@ package org.chess.piece;
 import org.chess.board.Alliance;
 import org.chess.board.BoardModel;
 import org.chess.board.Location;
-import org.chess.game.Direction;
-import org.chess.game.Path;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 
 public class Pawn extends Piece {
 
     public Pawn(Alliance alliance) {
         super(alliance);
-    }
-
-    @Override
-    public List<Path> getCandidatePaths(Location location) {
-        int pawnDir = alliance.getPawnDirection();
-        return List.of(
-                new Path(location, new Direction(pawnDir, 0)),
-                new Path(location, new Direction(2 * pawnDir, 0)),
-                new Path(location, new Direction(pawnDir, -1)),
-                new Path(location, new Direction(pawnDir, 1))
-        );
     }
 
     @Override

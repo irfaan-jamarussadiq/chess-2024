@@ -4,26 +4,15 @@ import org.chess.board.Alliance;
 import org.chess.board.BoardModel;
 import org.chess.board.Location;
 import org.chess.game.Direction;
-import org.chess.game.Path;
-import org.chess.game.PathHelpers;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 
 public class Bishop extends Piece {
     public Bishop(Alliance alliance) {
         super(alliance);
     }
-
-    @Override
-    public List<Path> getCandidatePaths(Location location) {
-        int maxRank = Math.max(location.rank(), BoardModel.SIZE - location.rank());
-        int maxFile = Math.max(location.file(), BoardModel.SIZE - location.file());
-        int maxSquares = Math.max(maxRank, maxFile);
-        return PathHelpers.getAllDiagonalPaths(location, maxSquares);
-    }
-
+    
     @Override
     public boolean canMoveFrom(Location start, Location end, BoardModel board) {
         if (Math.abs(end.rank() - start.rank()) != Math.abs(end.file() - start.file())) {

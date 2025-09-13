@@ -29,7 +29,7 @@ public class GameModel {
     }
 
     public void move(Location start, Location end) {
-        Move move = findMoveFromPath(new Path(start, end), board);
+        Move move = findMoveFromPath(start, end, board);
         if (move != null && isValidMove(move)) {
             executeMove(move, board);
             currentPlayer = currentPlayer.getOpponent();
@@ -49,13 +49,14 @@ public class GameModel {
         }
 
         Piece piece = board.pieceAt(move.getStart());
-        List<Path> candidatePaths = piece.getCandidatePaths(move.getStart());
-        for (Path path : candidatePaths) {
-            if (!path.isWithinBounds()) {
+        Collection<Location> possibleDestinations = piece.getPossibleDestinations(move.getStart());
+
+        for (Location destination : possibleDestinations) {
+            if (!destination.isWithinBounds()) {
                 continue;
             }
 
-            Move candidateMove = findMoveFromPath(path, board);
+            Move candidateMove = findMoveFromPath(move.getStart(), destination, board);
             if (candidateMove != null && candidateMove.equals(move)) {
                 BoardModel copy = new BoardModel(board);
                 boolean hasMoved = piece.hasMoved();
@@ -81,14 +82,14 @@ public class GameModel {
         }
 
         Piece piece = board.pieceAt(location);
-        List<Path> candidatePaths = piece.getCandidatePaths(location);
+        Collection<Location> possibleDestinations = piece.getPossibleDestinations(location);
 
-        for (Path path : candidatePaths) {
-            if (!path.isWithinBounds()) {
+        for (Location destination : possibleDestinations) {
+            if (!destination.isWithinBounds()) {
                 continue;
             }
 
-            Move candidateMove = findMoveFromPath(path, board);
+            Move candidateMove = findMoveFromPath(location, destination, board);
             if (currentPlayer.isPieceAlly(piece) && candidateMove != null && candidateMove.isValid(board)) {
                 BoardModel copy = new BoardModel(board);
                 boolean hasMoved = piece.hasMoved();
@@ -109,12 +110,12 @@ public class GameModel {
         return legalMoves;
     }
 
-    Move findMoveFromPath(Path path, BoardModel board) {
+    Move findMoveFromPath(Location start, Location end, BoardModel board) {
         Move[] possibleMoves = new Move[] {
-                new TwoSquarePawnMove(path.start(), path.end()),
-                new CastlingMove(path.start(), path.end()),
-                new EnPassantMove(path.start(), path.end()),
-                new NormalMove(path.start(), path.end())
+                new TwoSquarePawnMove(start, end),
+                new CastlingMove(start, end),
+                new EnPassantMove(start, end),
+                new NormalMove(start, end)
         };
 
         for (Move move : possibleMoves) {
@@ -165,15 +166,15 @@ public class GameModel {
         for (Map.Entry<Location, Piece> entry : playerPieces.entrySet()) {
             Location location = entry.getKey();
             Piece piece = entry.getValue();
-            List<Path> candidatePaths = piece.getCandidatePaths(location);
-            for (Path path : candidatePaths) {
-                if (!path.isWithinBounds()) {
+            Collection<Location> possibleDestinations = piece.getPossibleDestinations(location);
+            for (Location destination : possibleDestinations) {
+                if (!destination.isWithinBounds()) {
                     continue;
                 }
 
-                Move candidateMove = findMoveFromPath(path, board);
+                Move candidateMove = findMoveFromPath(location, destination, board);
                 if (candidateMove != null && isValidMove(candidateMove)
-                        && piece.canMoveFrom(path.start(), location, board)) {
+                        && piece.canMoveFrom(location, destination, board)) {
                     return false;
                 }
             }
