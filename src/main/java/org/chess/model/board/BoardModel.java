@@ -1,10 +1,14 @@
 package org.chess.model.board;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.chess.model.piece.*;
 
 public class BoardModel {
     public static final int SIZE = 8;
     private final Tile[] tiles;
+    private Set<Piece> movedPieces;
 
     public BoardModel() {
         tiles = new Tile[SIZE * SIZE];
@@ -34,6 +38,8 @@ public class BoardModel {
         addPiece(new Bishop(Alliance.BLACK), new Location(SIZE, 6));
         addPiece(new Knight(Alliance.BLACK), new Location(SIZE, 7));
         addPiece(new Rook(Alliance.BLACK), new Location(SIZE, 8));
+
+        movedPieces = new HashSet<>();
     }
 
     public BoardModel(BoardModel board) {
@@ -47,7 +53,7 @@ public class BoardModel {
     public void movePiece(Location start, Location end) {
         if (start.isWithinBounds() && end.isWithinBounds() && !isEmpty(start)) {
             Piece piece = pieceAt(start);
-            piece.setHasMoved(true);
+            movedPieces.add(piece);
             removePiece(start);
             addPiece(piece, end);
         }
@@ -58,8 +64,7 @@ public class BoardModel {
             throw new IllegalArgumentException("Location is out of bounds");
         }
 
-        int tileCoordinate = SIZE * (location.rank() - 1) + (location.file() - 1);
-        return tiles[tileCoordinate].getPiece();
+        return tiles[location.getCoordinate()].getPiece();
     }
 
     public boolean isEmpty(Location location) {
@@ -75,6 +80,7 @@ public class BoardModel {
                 char pieceLetter = isEmpty(location) ? '.' : pieceAt(location).getLetter();
                 sb.append(pieceLetter + " ");
             }
+
             sb.append("\n");
         }
 
@@ -82,12 +88,14 @@ public class BoardModel {
     }
 
     private void addPiece(Piece piece, Location location) {
-        int tileCoordinate = SIZE * (location.rank() - 1) + (location.file() - 1);
-        tiles[tileCoordinate].setPiece(piece);
+        tiles[location.getCoordinate()].setPiece(piece);
     }
 
     private void removePiece(Location location) {
-        int tileCoordinate = SIZE * (location.rank() - 1) + (location.file() - 1);
-        tiles[tileCoordinate].removePiece();
+        tiles[location.getCoordinate()].removePiece();
+    }
+
+    public boolean hasPieceNotMoved(Piece piece) {
+        return !movedPieces.contains(piece);
     }
 }

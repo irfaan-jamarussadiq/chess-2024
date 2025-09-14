@@ -7,8 +7,8 @@ import org.chess.model.board.BoardModel;
 import org.chess.model.board.Location;
 import org.chess.model.piece.Piece;
 
-public class NormalMove extends Move {
-    public NormalMove(Location start, Location end) {
+public class StandardMove extends Move {
+    public StandardMove(Location start, Location end) {
         super(start, end);
     }
 

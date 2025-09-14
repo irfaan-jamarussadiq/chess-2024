@@ -8,4 +8,8 @@ public record Location(int rank, int file) {
     public Location offset(int rankOffset, int fileOffset) {
         return new Location(rank + rankOffset, file + fileOffset);
     }
+
+    public int getCoordinate() {
+        return BoardModel.SIZE * (rank - 1) + (file - 1);
+    }
 }

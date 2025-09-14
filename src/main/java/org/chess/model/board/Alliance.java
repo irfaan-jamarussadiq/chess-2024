@@ -21,6 +21,11 @@ public enum Alliance {
         public int getPawnDirection() {
             return 1;
         }
+
+        @Override
+        public int getStartingPieceRank() {
+            return 1;
+        }
     }, BLACK {
         @Override
         public boolean isWhite() {
@@ -41,6 +46,11 @@ public enum Alliance {
         public int getPawnDirection() {
             return -1;
         }
+
+        @Override
+        public int getStartingPieceRank() {
+            return BoardModel.SIZE;
+        }
     };
 
     public abstract boolean isWhite();
@@ -50,4 +60,6 @@ public enum Alliance {
     public abstract int getEnPassantEndingRank();
 
     public abstract int getPawnDirection();
+
+    public abstract int getStartingPieceRank();
 }
