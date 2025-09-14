@@ -2,7 +2,8 @@ package org.chess.game;
 
 import static org.junit.Assert.*;
 
-import org.chess.board.Alliance;
+import org.chess.model.board.Alliance;
+import org.chess.model.game.Player;
 import org.junit.Test;
 
 public class PlayerTest {

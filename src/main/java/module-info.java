@@ -8,10 +8,10 @@ module org.chess.chess {
 
     opens org.chess to javafx.fxml;
     exports org.chess;
-    exports org.chess.board;
-    exports org.chess.piece;
-    exports org.chess.game;
-    opens org.chess.game to javafx.fxml;
-    exports org.chess.game.move;
-    opens org.chess.game.move to javafx.fxml;
+    exports org.chess.model.board;
+    exports org.chess.model.piece;
+    exports org.chess.model.game;
+    opens org.chess.model.game to javafx.fxml;
+    exports org.chess.model.game.move;
+    opens org.chess.model.game.move to javafx.fxml;
 }

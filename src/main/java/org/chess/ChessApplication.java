@@ -10,10 +10,10 @@ import javafx.stage.Stage;
 
 import java.util.List;
 
-import org.chess.game.GameController;
-import org.chess.game.GameModel;
-import org.chess.game.GameView;
-import org.chess.game.move.Move;
+import org.chess.controller.GameController;
+import org.chess.model.game.GameModel;
+import org.chess.model.game.move.Move;
+import org.chess.view.game.GameView;
 
 public class ChessApplication extends Application {
     @Override
