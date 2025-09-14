@@ -40,8 +40,7 @@ public class BoardModel {
         tiles = new Tile[SIZE * SIZE];
         for (int i = 0; i < SIZE * SIZE; i++) {
             Piece piece = board.tiles[i].getPiece();
-            tiles[i] = new Tile();
-            tiles[i].setPiece(piece);
+            tiles[i] = new Tile(piece);
         }
     }
 
