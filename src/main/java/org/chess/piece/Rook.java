@@ -3,7 +3,6 @@ package org.chess.piece;
 import org.chess.board.Alliance;
 import org.chess.board.BoardModel;
 import org.chess.board.Location;
-import org.chess.game.Direction;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -21,22 +20,15 @@ public class Rook extends Piece {
             return false;
         }
 
-        Direction direction;
-        if (diffRank == 0) {
-            int fileOffset = (start.file() < end.file()) ? 1 : -1;
-            direction = new Direction(0, fileOffset);
-        } else { // diffFile == 0
-            int rankOffset = (start.rank() < end.rank()) ? 1 : -1;
-            direction = new Direction(rankOffset, 0);
-        }
-
-        Location current = start.offset(direction.rankOffset(), direction.fileOffset());
+        int rankOffset = diffRank == 0 ? Integer.signum(end.rank() - start.rank()) : 0;
+        int fileOffset = diffFile == 0 ? Integer.signum(end.file() - start.file()) : 0;
+        Location current = start.offset(rankOffset, fileOffset);
         while (current.isWithinBounds() && !current.equals(end)) {
             if (!board.isEmpty(current)) {
                 return false;
             }
 
-            current = current.offset(direction.rankOffset(), direction.fileOffset());
+            current = current.offset(rankOffset, fileOffset);
         }
 
         return current.isWithinBounds() && current.equals(end) && !Piece.areAllies(this, board.pieceAt(current));

@@ -3,7 +3,6 @@ package org.chess.piece;
 import org.chess.board.Alliance;
 import org.chess.board.BoardModel;
 import org.chess.board.Location;
-import org.chess.game.Direction;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -19,17 +18,15 @@ public class Bishop extends Piece {
             return false;
         }
 
-        int rankOffset = (start.rank() < end.rank()) ? 1 : -1;
-        int fileOffset = (start.file() < end.file()) ? 1 : -1;
-        Direction direction = new Direction(rankOffset, fileOffset);
-
-        Location current = start.offset(direction.rankOffset(), direction.fileOffset());
+        int rankOffset = Integer.signum(end.rank() - start.rank());
+        int fileOffset = Integer.signum(end.file() - start.file());
+        Location current = start.offset(rankOffset, fileOffset);
         while (current.isWithinBounds() && !current.equals(end)) {
             if (!board.isEmpty(current)) {
                 return false;
             }
 
-            current = current.offset(direction.rankOffset(), direction.fileOffset());
+            current = current.offset(rankOffset, fileOffset);
         }
 
         return current.isWithinBounds() && !Piece.areAllies(this, board.pieceAt(current));
