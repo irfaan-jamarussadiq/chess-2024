@@ -53,7 +53,7 @@ public final class PathHelpers {
     private static List<Path> getLineOfPossiblePaths(Location location, Direction direction, int maxSquares) {
         List<Path> paths = new ArrayList<>();
         for (int numSquares = 1; numSquares <= maxSquares; numSquares++) {
-            Location end = location.shift(direction, numSquares);
+            Location end = location.offset(direction.rankOffset() * numSquares, direction.fileOffset() * numSquares);
             Path path = new Path(location, end);
             paths.add(path);
         }

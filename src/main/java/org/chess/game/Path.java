@@ -4,7 +4,7 @@ import org.chess.board.Location;
 
 public record Path(Location start, Location end) {
     public Path(Location location, Direction direction) {
-        this(location, location.shift(direction));
+        this(location, location.offset(direction.rankOffset(), direction.fileOffset()));
     }
 
     public boolean isWithinBounds() {

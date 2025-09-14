@@ -23,13 +23,13 @@ public class Bishop extends Piece {
         int fileOffset = (start.file() < end.file()) ? 1 : -1;
         Direction direction = new Direction(rankOffset, fileOffset);
 
-        Location current = start.shift(direction);
+        Location current = start.offset(direction.rankOffset(), direction.fileOffset());
         while (current.isWithinBounds() && !current.equals(end)) {
             if (!board.isEmpty(current)) {
                 return false;
             }
 
-            current = current.shift(direction);
+            current = current.offset(direction.rankOffset(), direction.fileOffset());
         }
 
         return current.isWithinBounds() && !Piece.areAllies(this, board.pieceAt(current));

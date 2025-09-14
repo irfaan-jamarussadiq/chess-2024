@@ -30,13 +30,13 @@ public class Rook extends Piece {
             direction = new Direction(rankOffset, 0);
         }
 
-        Location current = start.shift(direction);
+        Location current = start.offset(direction.rankOffset(), direction.fileOffset());
         while (current.isWithinBounds() && !current.equals(end)) {
             if (!board.isEmpty(current)) {
                 return false;
             }
 
-            current = current.shift(direction);
+            current = current.offset(direction.rankOffset(), direction.fileOffset());
         }
 
         return current.isWithinBounds() && current.equals(end) && !Piece.areAllies(this, board.pieceAt(current));
