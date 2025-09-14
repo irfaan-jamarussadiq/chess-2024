@@ -46,19 +46,12 @@ public class BoardModel {
     }
 
     public void movePiece(Location start, Location end) {
-        if (!start.isWithinBounds() || !end.isWithinBounds()) {
-            return;
+        if (start.isWithinBounds() && end.isWithinBounds() && !isEmpty(start)) {
+            Piece piece = pieceAt(start);
+            piece.setHasMoved(true);
+            removePiece(start);
+            addPiece(piece, end);
         }
-
-        Piece piece = pieceAt(start);
-
-        if (piece == null) {
-            throw new IllegalArgumentException("No piece at starting square.");
-        }
-
-        piece.setHasMoved(true);
-        removePiece(start);
-        addPiece(piece, end);
     }
 
     public Piece pieceAt(Location location) {
