@@ -1,11 +1,13 @@
 package org.chess.model.piece;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 import org.chess.model.board.Alliance;
 import org.chess.model.board.BoardModel;
 import org.chess.model.board.Location;
+import org.chess.model.game.MoveRecord;
 
 public class Knight extends Piece {
     public Knight(Alliance alliance) {
@@ -48,5 +50,22 @@ public class Knight extends Piece {
     @Override
     public char getLetter() {
         return alliance.isWhite() ? 'N' : 'n';
+    }
+
+    @Override
+    public Collection<MoveRecord> getLegalMoves(Location location, BoardModel board) {
+        Collection<MoveRecord> legalMoves = new HashSet<>();
+        if (board.isEmpty(location)) {
+            return legalMoves;
+        }
+
+        Collection<Location> possibleDestinations = getPossibleDestinations(location);
+        for (Location possibleDestination : possibleDestinations) {
+            if (!Piece.areAllies(this, board.pieceAt(possibleDestination))) {
+                legalMoves.add(new MoveRecord(location, possibleDestination));
+            }
+        }
+
+        return legalMoves;
     }
 }

@@ -6,6 +6,7 @@ import java.util.HashSet;
 import org.chess.model.board.Alliance;
 import org.chess.model.board.BoardModel;
 import org.chess.model.board.Location;
+import org.chess.model.game.MoveRecord;
 
 public class Queen extends Piece {
     public Queen(Alliance alliance) {
@@ -37,5 +38,13 @@ public class Queen extends Piece {
     @Override
     public char getLetter() {
         return alliance.isWhite() ? 'Q' : 'q';
+    }
+
+    @Override
+    public Collection<MoveRecord> getLegalMoves(Location location, BoardModel board) {
+        Collection<MoveRecord> legalMoves = new HashSet<>();
+        legalMoves.addAll(new Bishop(alliance).getLegalMoves(location, board));
+        legalMoves.addAll(new Rook(alliance).getLegalMoves(location, board));
+        return legalMoves;
     }
 }

@@ -69,9 +69,9 @@ public class GameModel {
 
     private Optional<Move> identifyMove(Location start, Location end) {
         if (isShortCastlingMove(start, end)) {
-            return Optional.of(new CastlingMove(start, end));
+            return Optional.of(new ShortCastlingMove(start, end));
         } else if (isLongCastlingMove(start, end)) {
-            return Optional.of(new CastlingMove(start, end));
+            return Optional.of(new LongCastlingMove(start, end));
         } else if (isEnPassantMove(start, end)) {
             return Optional.of(new EnPassantMove(start, end));
         } else if (isTwoSquarePawnMove(start, end)) {
@@ -86,9 +86,8 @@ public class GameModel {
     private boolean isShortCastlingMove(Location start, Location end) {
 		Piece king = board.pieceAt(start);
 		Piece rook = board.pieceAt(start.offset(0, 3));
-		int rankDiff = end.rank() - start.rank(); 
 
-		return rankDiff == 0 
+		return start.rank() == end.rank() 
 			&& start.rank() == king.getAlliance().getStartingPieceRank() 
 			&& start.file() == 5 
 			&& end.file() == 7
@@ -217,7 +216,7 @@ public class GameModel {
     public Move findMoveFromPath(Location start, Location end, BoardModel board) {
         Move[] possibleMoves = new Move[] {
                 new TwoSquarePawnMove(start, end),
-                new CastlingMove(start, end),
+                new ShortCastlingMove(start, end),
                 new EnPassantMove(start, end),
                 new StandardMove(start, end)
         };

@@ -1,11 +1,13 @@
 package org.chess.model.piece;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 import org.chess.model.board.Alliance;
 import org.chess.model.board.BoardModel;
 import org.chess.model.board.Location;
+import org.chess.model.game.MoveRecord;
 
 public class Pawn extends Piece {
 
@@ -78,5 +80,19 @@ public class Pawn extends Piece {
     @Override
     public char getLetter() {
         return alliance.isWhite() ? 'P' : 'p';
+    }
+
+    @Override
+    public Collection<MoveRecord> getLegalMoves(Location location, BoardModel board) {
+        Collection<MoveRecord> legalMoves = new HashSet<>();
+
+        Collection<Location> possibleDestinations = getPossibleDestinations(location);
+        for (Location possibleDestination : possibleDestinations) {
+            if (!Piece.areAllies(this, board.pieceAt(possibleDestination))) {
+                legalMoves.add(new MoveRecord(location, possibleDestination));
+            }
+        }
+
+        return legalMoves;
     }
 }

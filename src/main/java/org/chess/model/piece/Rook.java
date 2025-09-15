@@ -6,6 +6,7 @@ import java.util.HashSet;
 import org.chess.model.board.Alliance;
 import org.chess.model.board.BoardModel;
 import org.chess.model.board.Location;
+import org.chess.model.game.MoveRecord;
 
 public class Rook extends Piece {
     public Rook(Alliance alliance) {
@@ -57,5 +58,40 @@ public class Rook extends Piece {
     @Override
     public char getLetter() {
         return alliance.isWhite() ? 'R' : 'r';
+    }
+
+    @Override
+    public Collection<MoveRecord> getLegalMoves(Location location, BoardModel board) {
+        Collection<MoveRecord> legalMoves = new HashSet<>();
+        if (board.isEmpty(location)) {
+            return legalMoves;
+        }
+
+        legalMoves.addAll(getMovesOnDiagonal(location, board, -1, 0));
+        legalMoves.addAll(getMovesOnDiagonal(location, board, 1, 0));
+        legalMoves.addAll(getMovesOnDiagonal(location, board, 0, -1));
+        legalMoves.addAll(getMovesOnDiagonal(location, board, 0, 1));
+        return legalMoves;
+    }
+
+    private Collection<MoveRecord> getMovesOnDiagonal(Location location, BoardModel board, int rankOffset, int fileOffset) {
+        Collection<MoveRecord> diagonalMoves = new HashSet<>();
+
+        Location currentLocation = location.offset(rankOffset, fileOffset);
+        while (currentLocation.isWithinBounds()) {
+            if (Piece.areAllies(this, board.pieceAt(currentLocation))) {
+                break;
+            }
+
+            diagonalMoves.add(new MoveRecord(location, currentLocation));
+
+            if (Piece.areEnemies(this, board.pieceAt(currentLocation))) {
+                break;
+            }
+
+            currentLocation = currentLocation.offset(rankOffset, fileOffset);
+        }
+
+        return diagonalMoves;
     }
 }
