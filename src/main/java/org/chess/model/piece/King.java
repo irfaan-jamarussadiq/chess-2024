@@ -16,19 +16,12 @@ public class King extends Piece {
 
     @Override
     public boolean canMoveFrom(Location start, Location end, BoardModel board) {
-        if (!start.isWithinBounds() || !end.isWithinBounds() || start.equals(end)) {
-            return false;
-        }
-
-        // Check if castling move
-        if (start.file() == 5 && (start.rank() == 1 || start.rank() == 8) && start.rank() == end.rank()
-                && (end.file() == 7 || end.file() == 3)) {
-            return !Piece.areAllies(this, board.pieceAt(end));
-        }
-
-        int diffRank = Math.abs(end.rank() - start.rank());
-        int diffFile = Math.abs(end.file() - start.file());
-        return diffRank <= 1 && diffFile <= 1 && !Piece.areAllies(this, board.pieceAt(end));
+        return start.isWithinBounds() && end.isWithinBounds()
+            && !start.equals(end)
+            && Math.abs(end.rank() - start.rank()) == Math.abs(end.file() - start.file())
+            && Math.abs(end.rank() - start.rank()) <= 1
+            && Math.abs(end.file() - start.file()) <= 1
+            && !Piece.areAllies(this, board.pieceAt(end));
     }
 
     @Override
@@ -71,11 +64,46 @@ public class King extends Piece {
         legalMoves.add(new MoveRecord(location, location.offset(1, 0)));
         legalMoves.add(new MoveRecord(location, location.offset(1, 1)));
 
-        if (location.rank() == alliance.getStartingPieceRank() && location.file() == 5) {
-            legalMoves.add(new MoveRecord(location, new Location(alliance.getStartingPieceRank(), 3)));
+        if (isShortCastlingMove(location, new Location(alliance.getStartingPieceRank(),7), board)) {
             legalMoves.add(new MoveRecord(location, new Location(alliance.getStartingPieceRank(), 7)));
         }
 
+        if (isLongCastlingMove(location, new Location(alliance.getStartingPieceRank(), 3), board)) {
+            legalMoves.add(new MoveRecord(location, new Location(alliance.getStartingPieceRank(), 3)));
+        }
+
         return legalMoves;
+    }
+
+    public static boolean isShortCastlingMove(Location start, Location end, BoardModel board) {
+		Piece king = board.pieceAt(start);
+		Piece rook = board.pieceAt(start.offset(0, 3));
+
+		return start.rank() == end.rank() 
+			&& start.rank() == king.getAlliance().getStartingPieceRank() 
+			&& start.file() == 5 
+			&& end.file() == 7
+			&& king instanceof King
+			&& rook instanceof Rook
+			&& board.isEmpty(start.offset(0, 1))
+			&& board.isEmpty(start.offset(0, 2))
+			&& board.hasPieceNotMoved(king)
+			&& board.hasPieceNotMoved(rook);
+    }
+
+    public static boolean isLongCastlingMove(Location start, Location end, BoardModel board) {
+		Piece king = board.pieceAt(start);
+		Piece rook = board.pieceAt(start.offset(0, -3));
+
+		return start.rank() == end.rank() 
+			&& start.rank() == king.getAlliance().getStartingPieceRank() 
+			&& start.file() == 5 
+			&& end.file() == 3
+			&& king instanceof King
+			&& rook instanceof Rook
+			&& board.isEmpty(start.offset(0, -1))
+			&& board.isEmpty(start.offset(0, -2))
+			&& board.hasPieceNotMoved(king)
+			&& board.hasPieceNotMoved(rook);
     }
 }

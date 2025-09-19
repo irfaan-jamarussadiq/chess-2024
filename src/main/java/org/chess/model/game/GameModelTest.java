@@ -34,7 +34,7 @@ public class GameModelTest {
         moveHelper(game, 2, 5, 4, 5);
         moveHelper(game, 7, 5, 5, 5);
         moveHelper(game, 1, 5, 2, 5);
-        assertEquals(Player.getPlayer(Alliance.WHITE).getKingLocation(), new Location(2, 5));
+        assertEquals(new King(Alliance.WHITE), game.getBoard().pieceAt(new Location(2, 5)));
     }
 
     @Test

@@ -17,43 +17,11 @@ public class Pawn extends Piece {
 
     @Override
     public boolean canMoveFrom(Location start, Location end, BoardModel board) {
-        if (!start.isWithinBounds() || !end.isWithinBounds()) {
-            return false;
-        }
-
-        Piece endPiece = board.pieceAt(end);
-
-        int pawnDir = alliance.getPawnDirection();
-        Location leftPawnLocation = new Location(start.rank() + pawnDir, start.file() - 1);
-        Location rightPawnLocation = new Location(start.rank() + pawnDir, start.file() + 1);
-
-        if (leftPawnLocation.isWithinBounds() && end.equals(leftPawnLocation)) {
-            Location enPassantLocation = new Location(start.rank(), end.file());
-            Piece enPassantPawn = new Pawn(alliance == Alliance.WHITE ? Alliance.BLACK : Alliance.WHITE);
-            Piece actualEnPassantPiece = board.pieceAt(enPassantLocation);
-            return Piece.areEnemies(this, endPiece)
-                    || (Piece.areEnemies(this, actualEnPassantPiece) && actualEnPassantPiece.equals(enPassantPawn)
-                    && leftPawnLocation.rank() == getAlliance().getEnPassantEndingRank());
-        }
-
-        if (rightPawnLocation.isWithinBounds() && end.equals(rightPawnLocation)) {
-            Location enemyPawnLocation = new Location(start.rank(), end.file());
-            return Piece.areEnemies(this, endPiece)
-                    || (Piece.areEnemies(this, board.pieceAt(enemyPawnLocation))
-                        && rightPawnLocation.rank() == getAlliance().getEnPassantEndingRank());
-        }
-
-        Location oneSquareForward = new Location(start.rank() + pawnDir, start.file());
-        if (oneSquareForward.isWithinBounds() && end.equals(oneSquareForward)) {
-            return board.isEmpty(oneSquareForward);
-        }
-
-        Location twoSquaresForward = new Location(start.rank() + 2 * pawnDir, start.file());
-        if (twoSquaresForward.isWithinBounds() && end.equals(twoSquaresForward)) {
-            return !hasMoved() && board.isEmpty(oneSquareForward) && board.isEmpty(twoSquaresForward);
-        }
-
-        return false;
+        return start.isWithinBounds() && end.isWithinBounds() 
+            && (isOneSquarePawnMove(start, end, board) 
+                || isTwoSquarePawnMove(start, end, board) 
+                || isCaptureMove(start, end, board)
+                || isEnPassantMove(start, end, board));
     }
 
     @Override
@@ -95,4 +63,55 @@ public class Pawn extends Piece {
 
         return legalMoves;
     }
+
+    public static boolean isOneSquarePawnMove(Location start, Location end, BoardModel board) {
+        Piece pawn = board.pieceAt(start);
+        return start.rank() == end.rank()
+            && start.rank() == pawn.getAlliance().getStartingPieceRank()
+            && end.equals(start.offset(pawn.getAlliance().getPawnDirection(), 0))
+            && board.isEmpty(end);
+    }
+
+    public static boolean isTwoSquarePawnMove(Location start, Location end, BoardModel board) {
+        Piece pawn = board.pieceAt(start);
+		int pawnDirection = pawn.getAlliance().getPawnDirection();
+		return board.hasPieceNotMoved(pawn)
+            && start.rank() == end.rank() 
+            && start.rank() == pawn.getAlliance().getStartingPieceRank() 
+			&& board.isEmpty(start.offset(pawnDirection, 0))
+			&& end.equals(start.offset(2 * pawnDirection, 0))
+			&& board.isEmpty(end);
+    }
+
+    public static boolean isCaptureMove(Location start, Location end, BoardModel board) {
+        Piece pawn = board.pieceAt(start);
+        Location leftCaptureLocation = start.offset(pawn.getAlliance().getPawnDirection(), -1);
+        Location rightCaptureLocation = start.offset(pawn.getAlliance().getPawnDirection(), 1);
+
+        boolean isLeftCapture = leftCaptureLocation.isWithinBounds()
+            && board.pieceAt(leftCaptureLocation) instanceof Pawn
+            && Piece.areEnemies(pawn, board.pieceAt(leftCaptureLocation));
+
+        boolean isRightCapture = rightCaptureLocation.isWithinBounds()
+            && board.pieceAt(rightCaptureLocation) instanceof Pawn
+            && Piece.areEnemies(pawn, board.pieceAt(rightCaptureLocation));
+
+        return isLeftCapture || isRightCapture;
+    }
+
+    public static boolean isEnPassantMove(Location start, Location end, BoardModel board) {
+        Piece pawn = board.pieceAt(start);
+		int rankDiff = end.rank() - start.rank(); 
+		int fileDiff = end.file() - start.file(); 
+
+		Piece enemyPawn = board.pieceAt(end.offset(0, fileDiff));	
+		int enPassantRank = pawn.getAlliance().isWhite() ? 6 : 3; 
+
+		return rankDiff == pawn.getAlliance().getPawnDirection() 
+			&& Math.abs(fileDiff) == 1 
+			&& start.rank() == enPassantRank 
+			&& Piece.areEnemies(pawn, enemyPawn) 
+			&& board.isEmpty(end.offset(0, fileDiff));
+    }
+
 }

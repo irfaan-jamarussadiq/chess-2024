@@ -26,6 +26,11 @@ public enum Alliance {
         public int getStartingPieceRank() {
             return 1;
         }
+
+        @Override
+        public Alliance getEnemy() {
+            return Alliance.BLACK;
+        }
     }, BLACK {
         @Override
         public boolean isWhite() {
@@ -51,6 +56,11 @@ public enum Alliance {
         public int getStartingPieceRank() {
             return BoardModel.SIZE;
         }
+
+        @Override
+        public Alliance getEnemy() {
+            return Alliance.WHITE;
+        }
     };
 
     public abstract boolean isWhite();
@@ -62,4 +72,6 @@ public enum Alliance {
     public abstract int getPawnDirection();
 
     public abstract int getStartingPieceRank();
+
+    public abstract Alliance getEnemy();
 }

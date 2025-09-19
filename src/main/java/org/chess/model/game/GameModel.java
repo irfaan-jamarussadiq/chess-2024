@@ -7,20 +7,22 @@ import org.chess.model.board.BoardModel;
 import org.chess.model.board.Location;
 import org.chess.model.game.move.*;
 import org.chess.model.piece.King;
+import org.chess.model.piece.Pawn;
 import org.chess.model.piece.Piece;
-import org.chess.model.piece.Rook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class GameModel {
     private Collection<Move> history;
     private Player currentPlayer;
+    private Location currentKingLocation;
     private BoardModel board;
 
     private static final Logger logger = LoggerFactory.getLogger(GameModel.class);
 
     public GameModel(BoardModel board) {
         this.currentPlayer = Player.getPlayer(Alliance.WHITE);
+        this.currentKingLocation = new Location(currentPlayer.getAlliance().getStartingPieceRank(), 5);
         this.board = board;
         this.history = new Stack<>();
     }
@@ -68,76 +70,19 @@ public class GameModel {
     }
 
     private Optional<Move> identifyMove(Location start, Location end) {
-        if (isShortCastlingMove(start, end)) {
+        if (King.isShortCastlingMove(start, end, board)) {
             return Optional.of(new ShortCastlingMove(start, end));
-        } else if (isLongCastlingMove(start, end)) {
+        } else if (King.isLongCastlingMove(start, end, board)) {
             return Optional.of(new LongCastlingMove(start, end));
-        } else if (isEnPassantMove(start, end)) {
+        } else if (Pawn.isEnPassantMove(start, end, board)) {
             return Optional.of(new EnPassantMove(start, end));
-        } else if (isTwoSquarePawnMove(start, end)) {
+        } else if (Pawn.isTwoSquarePawnMove(start, end, board)) {
             return Optional.of(new TwoSquarePawnMove(start, end));
         } else if (isStandardMove(start, end)) {
             return Optional.of(new StandardMove(start, end));
         } else {
             return Optional.empty();
         }
-    }
-
-    private boolean isShortCastlingMove(Location start, Location end) {
-		Piece king = board.pieceAt(start);
-		Piece rook = board.pieceAt(start.offset(0, 3));
-
-		return start.rank() == end.rank() 
-			&& start.rank() == king.getAlliance().getStartingPieceRank() 
-			&& start.file() == 5 
-			&& end.file() == 7
-			&& king instanceof King
-			&& rook instanceof Rook
-			&& board.isEmpty(start.offset(0, 1))
-			&& board.isEmpty(start.offset(0, 2))
-			&& board.hasPieceNotMoved(king)
-			&& board.hasPieceNotMoved(rook);
-    }
-
-    private boolean isLongCastlingMove(Location start, Location end) {
-		Piece king = board.pieceAt(start);
-		Piece rook = board.pieceAt(start.offset(0, -3));
-		int rankDiff = end.rank() - start.rank(); 
-
-		return rankDiff == 0 
-			&& start.rank() == king.getAlliance().getStartingPieceRank() 
-			&& start.file() == 5 
-			&& end.file() == 3
-			&& king instanceof King
-			&& rook instanceof Rook
-			&& board.isEmpty(start.offset(0, -1))
-			&& board.isEmpty(start.offset(0, -2))
-			&& board.hasPieceNotMoved(king)
-			&& board.hasPieceNotMoved(rook);
-    }
-
-    private boolean isEnPassantMove(Location start, Location end) {
-		int rankDiff = end.rank() - start.rank(); 
-		int fileDiff = end.file() - start.file(); 
-
-        Piece pawn = board.pieceAt(start);
-		Piece enemyPawn = board.pieceAt(end.offset(0, fileDiff));	
-		int enPassantRank = pawn.getAlliance().isWhite() ? 6 : 3; 
-
-		return rankDiff == pawn.getAlliance().getPawnDirection() 
-			&& Math.abs(fileDiff) == 1 
-			&& start.rank() == enPassantRank 
-			&& Piece.areEnemies(pawn, enemyPawn) 
-			&& board.isEmpty(end.offset(0, fileDiff));
-    }
-
-    private boolean isTwoSquarePawnMove(Location start, Location end) {
-        Piece pawn = board.pieceAt(start);
-		int pawnDirection = 2 * pawn.getAlliance().getPawnDirection();
-		return start.rank() == end.rank() 
-            && start.rank() == pawn.getAlliance().getStartingPieceRank() 
-			&& end.equals(start.offset(pawnDirection, 0))
-			&& board.isEmpty(end);
     }
 
     private boolean isStandardMove(Location start, Location end) {
@@ -195,7 +140,7 @@ public class GameModel {
             Move candidateMove = findMoveFromPath(location, destination, board);
             if (currentPlayer.isPieceAlly(piece) && candidateMove != null && candidateMove.isValid(board)) {
                 BoardModel copy = new BoardModel(board);
-                boolean hasMoved = piece.hasMoved();
+                boolean hasMoved = !board.hasPieceNotMoved(piece); 
                 executeMove(candidateMove, board);
                 boolean movePutPlayerInCheck = isInCheck(currentPlayer);
                 board = copy;
@@ -231,8 +176,8 @@ public class GameModel {
     }
 
     public boolean isInCheck(Player player) {
-        Piece king = board.pieceAt(player.getKingLocation());
-        List<Path> movesAtKingLocation = PathHelpers.getAllPossiblePaths(player.getKingLocation(), BoardModel.SIZE);
+        Piece king = board.pieceAt(currentKingLocation);
+        List<Path> movesAtKingLocation = PathHelpers.getAllPossiblePaths(currentKingLocation, BoardModel.SIZE);
         for (Path path : movesAtKingLocation) {
             if (path.isWithinBounds()) {
                 Piece potentialEnemy = board.pieceAt(path.end());
@@ -290,7 +235,7 @@ public class GameModel {
         Piece piece = board.pieceAt(move.getStart());
         move.execute(board);
         if (piece instanceof King) {
-            currentPlayer.setKingLocation(move.getEnd());
+            currentKingLocation = move.getEnd();
         }
     }
 
