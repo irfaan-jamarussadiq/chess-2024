@@ -36,8 +36,8 @@ public class LongCastlingMove extends Move {
             && king.getAlliance().getStartingPieceRank() == start.rank()
             && king instanceof King
             && rook instanceof Rook 
-            && board.hasPieceNotMoved(king)
-            && board.hasPieceNotMoved(rook)
+            && board.hasPieceAtLocationNotMoved(start)
+            && board.hasPieceAtLocationNotMoved(new Location(start.rank(), 1))
             && board.isEmpty(new Location(getStart().rank(), 2))
             && board.isEmpty(new Location(getStart().rank(), 3))
             && board.isEmpty(new Location(getStart().rank(), 4));

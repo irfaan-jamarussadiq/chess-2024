@@ -72,7 +72,7 @@ public class King extends Piece {
             legalMoves.add(new MoveRecord(location, new Location(alliance.getStartingPieceRank(), 3)));
         }
 
-        return legalMoves;
+        return legalMoves.stream().filter(m -> m.end().isWithinBounds()).toList();
     }
 
     public static boolean isShortCastlingMove(Location start, Location end, BoardModel board) {
@@ -87,8 +87,8 @@ public class King extends Piece {
 			&& rook instanceof Rook
 			&& board.isEmpty(start.offset(0, 1))
 			&& board.isEmpty(start.offset(0, 2))
-			&& board.hasPieceNotMoved(king)
-			&& board.hasPieceNotMoved(rook);
+			&& board.hasPieceAtLocationNotMoved(start)
+			&& board.hasPieceAtLocationNotMoved(start.offset(0, 3));
     }
 
     public static boolean isLongCastlingMove(Location start, Location end, BoardModel board) {
@@ -103,7 +103,7 @@ public class King extends Piece {
 			&& rook instanceof Rook
 			&& board.isEmpty(start.offset(0, -1))
 			&& board.isEmpty(start.offset(0, -2))
-			&& board.hasPieceNotMoved(king)
-			&& board.hasPieceNotMoved(rook);
+			&& board.hasPieceAtLocationNotMoved(start)
+			&& board.hasPieceAtLocationNotMoved(start.offset(0, -3));
     }
 }

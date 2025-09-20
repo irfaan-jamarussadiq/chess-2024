@@ -56,7 +56,8 @@ public class Pawn extends Piece {
 
         Collection<Location> possibleDestinations = getPossibleDestinations(location);
         for (Location possibleDestination : possibleDestinations) {
-            if (!Piece.areAllies(this, board.pieceAt(possibleDestination))) {
+            if (possibleDestination.isWithinBounds() 
+                && (board.isEmpty(possibleDestination) || !Piece.areAllies(this, board.pieceAt(possibleDestination)))) {
                 legalMoves.add(new MoveRecord(location, possibleDestination));
             }
         }
@@ -75,7 +76,7 @@ public class Pawn extends Piece {
     public static boolean isTwoSquarePawnMove(Location start, Location end, BoardModel board) {
         Piece pawn = board.pieceAt(start);
 		int pawnDirection = pawn.getAlliance().getPawnDirection();
-		return board.hasPieceNotMoved(pawn)
+		return board.hasPieceAtLocationNotMoved(start)
             && start.rank() == end.rank() 
             && start.rank() == pawn.getAlliance().getStartingPieceRank() 
 			&& board.isEmpty(start.offset(pawnDirection, 0))

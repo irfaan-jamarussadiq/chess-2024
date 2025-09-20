@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import java.util.List;
 
 import org.chess.controller.GameController;
+import org.chess.model.board.BoardModel;
 import org.chess.model.game.GameModel;
 import org.chess.model.game.move.Move;
 import org.chess.view.game.GameView;
@@ -20,8 +21,9 @@ public class ChessApplication extends Application {
     public void start(Stage stage) {
         BorderPane root = new BorderPane();
         GameView view = new GameView();
-        GameModel model = new GameModel();
-        GameController controller = new GameController(model, view);
+        BoardModel boardModel = new BoardModel();
+        GameModel model = new GameModel(boardModel);
+        new GameController(model, view);
         root.setCenter(view);
         root.setRight(createMoveList(model));
 

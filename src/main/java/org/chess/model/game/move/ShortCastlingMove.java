@@ -28,7 +28,7 @@ public class ShortCastlingMove extends Move {
         Location start = getStart();
         Location end = getEnd();
         Piece king = board.pieceAt(start);
-        if (!(king instanceof King) || !board.hasPieceNotMoved(king) || board.isEmpty(start)) {
+        if (!(king instanceof King) || !board.hasPieceAtLocationNotMoved(start) || board.isEmpty(start)) {
             return false;
         }
 

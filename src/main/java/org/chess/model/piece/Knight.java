@@ -61,7 +61,7 @@ public class Knight extends Piece {
 
         Collection<Location> possibleDestinations = getPossibleDestinations(location);
         for (Location possibleDestination : possibleDestinations) {
-            if (!Piece.areAllies(this, board.pieceAt(possibleDestination))) {
+            if (possibleDestination.isWithinBounds() && !Piece.areAllies(this, board.pieceAt(possibleDestination))) {
                 legalMoves.add(new MoveRecord(location, possibleDestination));
             }
         }

@@ -7,8 +7,10 @@ import org.chess.model.board.BoardModel;
 import org.chess.model.board.Location;
 import org.chess.model.game.move.*;
 import org.chess.model.piece.King;
+import org.chess.model.piece.Knight;
 import org.chess.model.piece.Pawn;
 import org.chess.model.piece.Piece;
+import org.chess.model.piece.Queen;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,12 +25,40 @@ public class GameModel {
     public GameModel(BoardModel board) {
         this.currentPlayer = Player.getPlayer(Alliance.WHITE);
         this.currentKingLocation = new Location(currentPlayer.getAlliance().getStartingPieceRank(), 5);
-        this.board = board;
         this.history = new Stack<>();
+        this.board = board;
     }
 
     public GameModel() {
         this(new BoardModel());
+    }
+
+    public void executeMove(Location start, Location end) {
+        Optional<Move> move = identifyMove(start, end);
+        move.ifPresent((m) -> m.execute(board));
+        logger.debug("\n" + board.toString());
+    }
+
+    private Optional<Move> identifyMove(Location start, Location end) {
+        if (King.isShortCastlingMove(start, end, board)) {
+            return Optional.of(new ShortCastlingMove(start, end));
+        } else if (King.isLongCastlingMove(start, end, board)) {
+            return Optional.of(new LongCastlingMove(start, end));
+        } else if (Pawn.isEnPassantMove(start, end, board)) {
+            return Optional.of(new EnPassantMove(start, end));
+        } else if (Pawn.isTwoSquarePawnMove(start, end, board)) {
+            return Optional.of(new TwoSquarePawnMove(start, end));
+        } else if (isStandardMove(start, end)) {
+            return Optional.of(new StandardMove(start, end));
+        } else {
+            return Optional.empty();
+        }
+    }
+
+    private boolean isStandardMove(Location start, Location end) {
+        Piece piece = board.pieceAt(start);
+        Piece enemy = board.pieceAt(end);
+        return piece.canMoveFrom(start, end) && !Piece.areAllies(piece, enemy);
     }
 
     public void move(Location start, Location end) {
@@ -62,33 +92,6 @@ public class GameModel {
         }
 
         return possibleMoves;
-    }
-
-    public void executeMove(Location start, Location end) {
-        Optional<Move> move = identifyMove(start, end);
-        move.ifPresent((m) -> m.execute(board));
-    }
-
-    private Optional<Move> identifyMove(Location start, Location end) {
-        if (King.isShortCastlingMove(start, end, board)) {
-            return Optional.of(new ShortCastlingMove(start, end));
-        } else if (King.isLongCastlingMove(start, end, board)) {
-            return Optional.of(new LongCastlingMove(start, end));
-        } else if (Pawn.isEnPassantMove(start, end, board)) {
-            return Optional.of(new EnPassantMove(start, end));
-        } else if (Pawn.isTwoSquarePawnMove(start, end, board)) {
-            return Optional.of(new TwoSquarePawnMove(start, end));
-        } else if (isStandardMove(start, end)) {
-            return Optional.of(new StandardMove(start, end));
-        } else {
-            return Optional.empty();
-        }
-    }
-
-    private boolean isStandardMove(Location start, Location end) {
-        Piece piece = board.pieceAt(start);
-        Piece enemy = board.pieceAt(end);
-        return piece.canMoveFrom(start, end) && !Piece.areAllies(piece, enemy);
     }
 
     boolean isValidMove(Move move) {
@@ -140,7 +143,7 @@ public class GameModel {
             Move candidateMove = findMoveFromPath(location, destination, board);
             if (currentPlayer.isPieceAlly(piece) && candidateMove != null && candidateMove.isValid(board)) {
                 BoardModel copy = new BoardModel(board);
-                boolean hasMoved = !board.hasPieceNotMoved(piece); 
+                boolean hasMoved = !board.hasPieceAtLocationNotMoved(location); 
                 executeMove(candidateMove, board);
                 boolean movePutPlayerInCheck = isInCheck(currentPlayer);
                 board = copy;
@@ -175,15 +178,23 @@ public class GameModel {
         return null;
     }
 
+    public boolean isInCheckmate(Player player) {
+        return isInCheck(player) && hasNoPossibleMoves(player);
+    }
+
+    public boolean isInStalemate(Player player) {
+        return !isInCheck(player) && hasNoPossibleMoves(player);
+    }
+
     public boolean isInCheck(Player player) {
         Piece king = board.pieceAt(currentKingLocation);
-        List<Path> movesAtKingLocation = PathHelpers.getAllPossiblePaths(currentKingLocation, BoardModel.SIZE);
-        for (Path path : movesAtKingLocation) {
-            if (path.isWithinBounds()) {
-                Piece potentialEnemy = board.pieceAt(path.end());
-                if (Piece.areEnemies(king, potentialEnemy)
-                        && potentialEnemy.canMoveFrom(path.end(), path.start(), board)) {
-                    return true;
+        for (MoveRecord move : getLegalMoves(player.getOpponent().getAlliance(), currentKingLocation)) {
+            Piece potentialEnemy = board.pieceAt(move.end());
+            if (Piece.areEnemies(king, potentialEnemy)) {
+                for (MoveRecord enemyMove : potentialEnemy.getLegalMoves(move.end(), board)) {
+                    if (enemyMove.end() == currentKingLocation) {
+                        return true;
+                    }
                 }
             }
         }
@@ -191,12 +202,20 @@ public class GameModel {
         return false;
     }
 
-    public boolean isInCheckmate(Player player) {
-        return isInCheck(player) && hasNoPossibleMoves(player);
-    }
+    private Collection<MoveRecord> getLegalMoves(Alliance alliance, Location location) {
+        Collection<MoveRecord> legalMoves = new HashSet<>();
 
-    public boolean isInStalemate(Player player) {
-        return !isInCheck(player) && hasNoPossibleMoves(player);
+        Piece enemyQueen = new Queen(alliance);
+        Piece enemyKing = new King(alliance);
+        Piece enemyKnight = new Knight(alliance);
+        Piece enemyPawn = new Pawn(alliance);
+
+        legalMoves.addAll(enemyQueen.getLegalMoves(location, board));
+        legalMoves.addAll(enemyKing.getLegalMoves(location, board));
+        legalMoves.addAll(enemyKnight.getLegalMoves(location, board));
+        legalMoves.addAll(enemyPawn.getLegalMoves(location, board));
+
+        return legalMoves;
     }
 
     private boolean hasNoPossibleMoves(Player player) {

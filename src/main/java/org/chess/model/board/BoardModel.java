@@ -1,14 +1,11 @@
 package org.chess.model.board;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.chess.model.piece.*;
 
 public class BoardModel {
     public static final int SIZE = 8;
     private final Tile[] tiles;
-    private Set<Piece> movedPieces;
+    private boolean[] movedPieces;
 
     public BoardModel() {
         tiles = new Tile[SIZE * SIZE];
@@ -39,7 +36,7 @@ public class BoardModel {
         addPiece(new Knight(Alliance.BLACK), new Location(SIZE, 7));
         addPiece(new Rook(Alliance.BLACK), new Location(SIZE, 8));
 
-        movedPieces = new HashSet<>();
+        this.movedPieces = new boolean[SIZE * SIZE];
     }
 
     public BoardModel(BoardModel board) {
@@ -48,12 +45,17 @@ public class BoardModel {
             Piece piece = board.tiles[i].getPiece();
             tiles[i] = new Tile(piece);
         }
+
+        this.movedPieces = new boolean[SIZE * SIZE];
+        for (int i = 0; i < SIZE * SIZE; i++) {
+            movedPieces[i] = board.movedPieces[i];
+        }
     }
 
     public void movePiece(Location start, Location end) {
         if (start.isWithinBounds() && end.isWithinBounds() && !isEmpty(start)) {
             Piece piece = pieceAt(start);
-            movedPieces.add(piece);
+            movedPieces[start.getCoordinate() - 1] = true;
             removePiece(start);
             addPiece(piece, end);
         }
@@ -95,7 +97,7 @@ public class BoardModel {
         tiles[location.getCoordinate()].removePiece();
     }
 
-    public boolean hasPieceNotMoved(Piece piece) {
-        return !movedPieces.contains(piece);
+    public boolean hasPieceAtLocationNotMoved(Location location) {
+        return movedPieces[location.getCoordinate() - 1]; 
     }
 }
