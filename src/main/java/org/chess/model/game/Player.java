@@ -28,4 +28,8 @@ public class Player {
     public Player getOpponent() {
         return alliance.isWhite() ? BLACK : WHITE;
     }
+
+    public boolean hasPiece(Piece piece) {
+        return piece.getAlliance() == alliance;
+    }
 }

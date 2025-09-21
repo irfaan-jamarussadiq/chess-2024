@@ -2,13 +2,10 @@ package org.chess.view.game;
 
 import javafx.scene.layout.BorderPane;
 
-import org.chess.model.board.Location;
-import org.chess.model.game.move.Move;
-import org.chess.model.piece.Piece;
+import org.chess.model.game.Move;
 import org.chess.view.board.BoardView;
 
-import java.util.List;
-import java.util.Map;
+import java.util.Collection;
 
 public class GameView extends BorderPane {
     private final BoardView boardView;
@@ -18,32 +15,19 @@ public class GameView extends BorderPane {
         this.setCenter(boardView);
     }
 
-    public void highlightSquares(List<Move> moves) {
-        for (Move move : moves) {
-            if (move.isWithinBounds()) {
-                boardView.highlightSquare(move.getEnd());
-            }
+    public void highlightSquares(Collection<Move> movesHighlighted) {
+        for (Move move : movesHighlighted) {
+            boardView.highlightSquare(move.end());
         }
     }
 
-    public void resetSquares(List<Move> moves) {
-        for (Move move : moves) {
-            if (move.isWithinBounds()) {
-                boardView.resetSquare(move.getEnd());
-            }
+    public void resetSquares(Collection<Move> movesHighlighted) {
+        for (Move move : movesHighlighted) {
+            boardView.resetSquare(move.end());
         }
     }
 
-    public void move(Move move, Map<Location, Location> toUpdate) {
-        Piece pieceStart = boardView.pieceAt(move.getStart());
-        Piece pieceEnd = boardView.pieceAt(move.getEnd());
+    public void move(Move move) {
 
-        if (Piece.areAllies(pieceStart, pieceEnd)) {
-            return;
-        }
-
-        for (Location location : toUpdate.keySet()) {
-            boardView.move(location, toUpdate.get(location));
-        }
     }
 }

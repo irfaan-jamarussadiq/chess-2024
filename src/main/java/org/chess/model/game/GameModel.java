@@ -5,7 +5,6 @@ import java.util.*;
 import org.chess.model.board.Alliance;
 import org.chess.model.board.BoardModel;
 import org.chess.model.board.Location;
-import org.chess.model.game.move.*;
 import org.chess.model.piece.King;
 import org.chess.model.piece.Knight;
 import org.chess.model.piece.Pawn;
@@ -33,26 +32,29 @@ public class GameModel {
         this(new BoardModel());
     }
 
-    public void executeMove(Location start, Location end) {
-        Optional<Move> move = identifyMove(start, end);
-        move.ifPresent((m) -> m.execute(board));
-        logger.debug("\n" + board.toString());
-    }
 
-    private Optional<Move> identifyMove(Location start, Location end) {
+    public void executeMove(Location start, Location end) {
         if (King.isShortCastlingMove(start, end, board)) {
-            return Optional.of(new ShortCastlingMove(start, end));
+            Location rookStart = new Location(start.rank(), 8);
+            Location rookEnd = new Location(start.rank(), 6);
+            board.movePiece(start, end);
+            board.movePiece(rookStart, rookEnd);
         } else if (King.isLongCastlingMove(start, end, board)) {
-            return Optional.of(new LongCastlingMove(start, end));
+            Location rookStart = new Location(start.rank(), 1);
+            Location rookEnd = new Location(start.rank(), 4);
+            board.movePiece(start, end);
+            board.movePiece(rookStart, rookEnd);
         } else if (Pawn.isEnPassantMove(start, end, board)) {
-            return Optional.of(new EnPassantMove(start, end));
+            Location enPassant = new Location(start.rank(), end.file());
+            board.movePiece(start, enPassant);
+            board.movePiece(enPassant, end);
         } else if (Pawn.isTwoSquarePawnMove(start, end, board)) {
-            return Optional.of(new TwoSquarePawnMove(start, end));
+            board.movePiece(start, end);
         } else if (isStandardMove(start, end)) {
-            return Optional.of(new StandardMove(start, end));
-        } else {
-            return Optional.empty();
+            board.movePiece(start, end);
         }
+
+        logger.debug("After executing move: \n" + board.toString());
     }
 
     private boolean isStandardMove(Location start, Location end) {
@@ -62,8 +64,8 @@ public class GameModel {
     }
 
     public void move(Location start, Location end) {
-        Move move = findMoveFromPath(start, end, board);
-        if (move != null && isValidMove(move)) {
+        Move move = new Move(start, end);
+        if (isValidMove(move)) {
             executeMove(move, board);
             currentPlayer = currentPlayer.getOpponent();
             history.add(move);
@@ -73,109 +75,60 @@ public class GameModel {
     }
 
     public void move(Move move) {
-        move(move.getStart(), move.getEnd());
-    }
-
-    public Collection<Move> getPossibleMoves(Location location) {
-        logger.info("Finding possible moves...");
-        Collection<Move> possibleMoves = new HashSet<>();
-        if (board.isEmpty(location)) {
-            return possibleMoves;
-        }
-
-        Piece piece = board.pieceAt(location);
-        for (Location possibleDestination : piece.getPossibleDestinations(location)) {
-            if (possibleDestination.isWithinBounds()) {
-                Optional<Move> move = identifyMove(location, possibleDestination);
-                move.ifPresent((m) -> possibleMoves.add(m)); 
-            }
-        }
-
-        return possibleMoves;
+        move(move.start(), move.end());
     }
 
     boolean isValidMove(Move move) {
-        if (!move.isWithinBounds() || move.getStart().equals(move.getEnd()) || !move.isValid(board)) {
+        if (!move.isWithinBounds() || move.start().equals(move.end())) {
             return false;
         }
 
-        Piece piece = board.pieceAt(move.getStart());
-        Collection<Location> possibleDestinations = piece.getPossibleDestinations(move.getStart());
+        Piece piece = board.pieceAt(move.start());
+        if (!piece.canMoveFrom(move.start(), move.end())) {
+            return false;
+        }
 
+        Collection<Location> possibleDestinations = piece.getPossibleDestinations(move.start());
         for (Location destination : possibleDestinations) {
             if (!destination.isWithinBounds()) {
                 continue;
             }
 
-            Move candidateMove = findMoveFromPath(move.getStart(), destination, board);
-            if (candidateMove != null && candidateMove.equals(move)) {
-                BoardModel copy = new BoardModel(board);
-                boolean hasMoved = piece.hasMoved();
-                executeMove(candidateMove, board);
-                boolean movePutPlayerInCheck = isInCheck(currentPlayer);
-                board = copy;
-                board.pieceAt(move.getStart()).setHasMoved(hasMoved);
-                if (!movePutPlayerInCheck) {
-                    return true;
-                }
+            BoardModel copy = new BoardModel(board);
+            executeMove(move, board);
+            boolean movePutPlayerInCheck = isInCheck(currentPlayer);
+            board = copy;
+            if (!movePutPlayerInCheck) {
+                return true;
             }
         }
 
         return false;
     }
 
-    public List<Move> getLegalMoves(Location location) {
-        logger.info("Finding legal moves...");
-        List<Move> legalMoves = new ArrayList<>();
+    public Collection<Move> getLegalMoves(Location location) {
+        Collection<Move> legalMoves = new ArrayList<>();
 
+        logger.info("Finding legal moves...");
         if (board.isEmpty(location)) {
             return legalMoves;
         }
 
         Piece piece = board.pieceAt(location);
-        Collection<Location> possibleDestinations = piece.getPossibleDestinations(location);
+        Collection<Move> pieceMoves =  piece.getLegalMoves(location, board);
 
-        for (Location destination : possibleDestinations) {
-            if (!destination.isWithinBounds()) {
-                continue;
-            }
-
-            Move candidateMove = findMoveFromPath(location, destination, board);
-            if (currentPlayer.isPieceAlly(piece) && candidateMove != null && candidateMove.isValid(board)) {
-                BoardModel copy = new BoardModel(board);
-                boolean hasMoved = !board.hasPieceAtLocationNotMoved(location); 
-                executeMove(candidateMove, board);
-                boolean movePutPlayerInCheck = isInCheck(currentPlayer);
-                board = copy;
-                Map<Location, Location> toUpdate = candidateMove.getLocationMappings(board);
-                for (Location l : toUpdate.keySet()) {
-                    board.pieceAt(l).setHasMoved(hasMoved);
-                }
-                if (!movePutPlayerInCheck) {
-                    legalMoves.add(candidateMove);
-                }
+        for (Move move : pieceMoves) {
+            BoardModel boardBeforeMakingMove = new BoardModel(board);
+            executeMove(move, board);
+            boolean movePutPlayerInCheck = isInCheck(currentPlayer);
+            board = boardBeforeMakingMove;
+            if (!movePutPlayerInCheck) {
+                legalMoves.add(move);
             }
         }
 
-        logger.debug("Legal moves at " + location + " are " + legalMoves);
+        logger.debug(String.format("Legal moves at %s are %s", location, legalMoves));
         return legalMoves;
-    }
-
-    public Move findMoveFromPath(Location start, Location end, BoardModel board) {
-        Move[] possibleMoves = new Move[] {
-                new TwoSquarePawnMove(start, end),
-                new ShortCastlingMove(start, end),
-                new EnPassantMove(start, end),
-                new StandardMove(start, end)
-        };
-
-        for (Move move : possibleMoves) {
-            if (move.isValid(board)) {
-                return move;
-            }
-        }
-
-        return null;
     }
 
     public boolean isInCheckmate(Player player) {
@@ -188,10 +141,10 @@ public class GameModel {
 
     public boolean isInCheck(Player player) {
         Piece king = board.pieceAt(currentKingLocation);
-        for (MoveRecord move : getLegalMoves(player.getOpponent().getAlliance(), currentKingLocation)) {
+        for (Move move : getLegalMoves(player.getOpponent().getAlliance(), currentKingLocation)) {
             Piece potentialEnemy = board.pieceAt(move.end());
             if (Piece.areEnemies(king, potentialEnemy)) {
-                for (MoveRecord enemyMove : potentialEnemy.getLegalMoves(move.end(), board)) {
+                for (Move enemyMove : potentialEnemy.getLegalMoves(move.end(), board)) {
                     if (enemyMove.end() == currentKingLocation) {
                         return true;
                     }
@@ -202,8 +155,8 @@ public class GameModel {
         return false;
     }
 
-    private Collection<MoveRecord> getLegalMoves(Alliance alliance, Location location) {
-        Collection<MoveRecord> legalMoves = new HashSet<>();
+    private Collection<Move> getLegalMoves(Alliance alliance, Location location) {
+        Collection<Move> legalMoves = new HashSet<>();
 
         Piece enemyQueen = new Queen(alliance);
         Piece enemyKing = new King(alliance);
@@ -219,29 +172,12 @@ public class GameModel {
     }
 
     private boolean hasNoPossibleMoves(Player player) {
-        Map<Location, Piece> playerPieces = new HashMap<>();
         for (int rank = 1; rank <= BoardModel.SIZE; rank++) {
             for (int file = 1; file <= BoardModel.SIZE; file++) {
                 Location location = new Location(rank, file);
                 Piece piece = board.pieceAt(location);
-                if (piece != null && piece.getAlliance() == player.getAlliance()) {
-                    playerPieces.put(location, piece);
-                }
-            }
-        }
-
-        for (Map.Entry<Location, Piece> entry : playerPieces.entrySet()) {
-            Location location = entry.getKey();
-            Piece piece = entry.getValue();
-            Collection<Location> possibleDestinations = piece.getPossibleDestinations(location);
-            for (Location destination : possibleDestinations) {
-                if (!destination.isWithinBounds()) {
-                    continue;
-                }
-
-                Move candidateMove = findMoveFromPath(location, destination, board);
-                if (candidateMove != null && isValidMove(candidateMove)
-                        && piece.canMoveFrom(location, destination, board)) {
+                Collection<Move> moves = getLegalMoves(location);
+                if (!board.isEmpty(location) && player.hasPiece(piece) && !moves.isEmpty()) {
                     return false;
                 }
             }
@@ -251,10 +187,10 @@ public class GameModel {
     }
 
     private void executeMove(Move move, BoardModel board) {
-        Piece piece = board.pieceAt(move.getStart());
-        move.execute(board);
+        Piece piece = board.pieceAt(move.start());
+        executeMove(move, board); 
         if (piece instanceof King) {
-            currentKingLocation = move.getEnd();
+            currentKingLocation = move.end();
         }
     }
 

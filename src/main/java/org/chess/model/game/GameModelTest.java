@@ -3,8 +3,6 @@ package org.chess.model.game;
 import org.chess.model.board.Alliance;
 import org.chess.model.board.BoardModel;
 import org.chess.model.board.Location;
-import org.chess.model.game.move.StandardMove;
-import org.chess.model.game.move.TwoSquarePawnMove;
 import org.chess.model.piece.King;
 import org.chess.model.piece.Pawn;
 import org.chess.model.piece.Piece;
@@ -77,10 +75,10 @@ public class GameModelTest {
     @Test
     public void testMoveOutOfBoundsIsInvalid() {
         GameModel game = new GameModel();
-        assertFalse(game.isValidMove(new StandardMove(new Location(1, 4), new Location(0, 4))));
-        assertFalse(game.isValidMove(new StandardMove(new Location(1, 1), new Location(1, -1))));
-        assertFalse(game.isValidMove(new StandardMove(new Location(8, 8), new Location(8, 9))));
-        assertFalse(game.isValidMove(new StandardMove(new Location(8, 1), new Location(9, 1))));
+        assertFalse(game.isValidMove(new Move(new Location(1, 4), new Location(0, 4))));
+        assertFalse(game.isValidMove(new Move(new Location(1, 1), new Location(1, -1))));
+        assertFalse(game.isValidMove(new Move(new Location(8, 8), new Location(8, 9))));
+        assertFalse(game.isValidMove(new Move(new Location(8, 1), new Location(9, 1))));
     }
 
     @Test
@@ -121,9 +119,8 @@ public class GameModelTest {
         GameModel game = new GameModel();
         Location start = new Location(2, 5);
         Location end = new Location(4, 5);
-        TwoSquarePawnMove move = new TwoSquarePawnMove(start, end);
         assertFalse(game.isInCheck(Player.getPlayer(Alliance.WHITE)));
-        assertTrue(move.isValid(game.getBoard()));
+        assertTrue(game.isValidMove(new Move(start, end)));
     }
 
     @Test

@@ -5,7 +5,7 @@ import javafx.scene.input.MouseEvent;
 
 import org.chess.model.board.Location;
 import org.chess.model.game.GameModel;
-import org.chess.model.game.move.Move;
+import org.chess.model.game.Move;
 import org.chess.model.piece.Piece;
 import org.chess.view.board.BoardView;
 import org.chess.view.board.TileView;
@@ -14,13 +14,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 public class GameController implements EventHandler<MouseEvent> {
     private final GameModel gameModel;
     private final GameView gameView;
     private Location selectedPieceLocation;
-    private List<Move> movesHighlighted;
+    private Collection<Move> movesHighlighted;
     private static final Logger logger = LoggerFactory.getLogger(GameController.class);
 
     public GameController(GameModel model, GameView view) {
@@ -55,7 +55,7 @@ public class GameController implements EventHandler<MouseEvent> {
     public void move(Location start, Location end) {
         Piece piece = gameModel.getBoard().pieceAt(start);
         if (piece == null) {
-            logger.debug("Piece at starting location " + start + " was null!!");
+            logger.debug(String.format("No piece at starting location %s!", start));
             return;
         }
 
@@ -64,8 +64,8 @@ public class GameController implements EventHandler<MouseEvent> {
             return;
         }
 
-        Move move = gameModel.findMoveFromPath(start, end, gameModel.getBoard());
+        Move move = new Move(start, end);
         gameModel.move(move);
-        gameView.move(move, move.getLocationMappings(gameModel.getBoard()));
+        gameView.move(move);
     }
 }

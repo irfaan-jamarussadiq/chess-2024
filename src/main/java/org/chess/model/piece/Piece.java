@@ -5,7 +5,7 @@ import java.util.Collection;
 import org.chess.model.board.Alliance;
 import org.chess.model.board.BoardModel;
 import org.chess.model.board.Location;
-import org.chess.model.game.MoveRecord;
+import org.chess.model.game.Move;
 
 public abstract class Piece {
     protected final Alliance alliance;
@@ -44,7 +44,7 @@ public abstract class Piece {
         return otherPiece.alliance == this.alliance;
     }
 
-    public abstract Collection<MoveRecord> getLegalMoves(Location location, BoardModel board);
+    public abstract Collection<Move> getLegalMoves(Location location, BoardModel board);
 
     public abstract Collection<Location> getPossibleDestinations(Location location);
 

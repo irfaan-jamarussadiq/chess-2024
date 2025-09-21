@@ -6,7 +6,7 @@ import java.util.HashSet;
 import org.chess.model.board.Alliance;
 import org.chess.model.board.BoardModel;
 import org.chess.model.board.Location;
-import org.chess.model.game.MoveRecord;
+import org.chess.model.game.Move;
 
 public class Queen extends Piece {
     public Queen(Alliance alliance) {
@@ -41,8 +41,8 @@ public class Queen extends Piece {
     }
 
     @Override
-    public Collection<MoveRecord> getLegalMoves(Location location, BoardModel board) {
-        Collection<MoveRecord> legalMoves = new HashSet<>();
+    public Collection<Move> getLegalMoves(Location location, BoardModel board) {
+        Collection<Move> legalMoves = new HashSet<>();
         legalMoves.addAll(new Bishop(alliance).getLegalMoves(location, board));
         legalMoves.addAll(new Rook(alliance).getLegalMoves(location, board));
         return legalMoves;

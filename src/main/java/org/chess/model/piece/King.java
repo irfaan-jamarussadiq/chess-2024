@@ -7,7 +7,7 @@ import java.util.Set;
 import org.chess.model.board.Alliance;
 import org.chess.model.board.BoardModel;
 import org.chess.model.board.Location;
-import org.chess.model.game.MoveRecord;
+import org.chess.model.game.Move;
 
 public class King extends Piece {
     public King(Alliance alliance) {
@@ -49,27 +49,27 @@ public class King extends Piece {
     }
 
     @Override
-    public Collection<MoveRecord> getLegalMoves(Location location, BoardModel board) {
-        Collection<MoveRecord> legalMoves = new HashSet<>();
+    public Collection<Move> getLegalMoves(Location location, BoardModel board) {
+        Collection<Move> legalMoves = new HashSet<>();
         if (board.isEmpty(location)) {
             return legalMoves;
         }
 
-        legalMoves.add(new MoveRecord(location, location.offset(-1, -1)));
-        legalMoves.add(new MoveRecord(location, location.offset(-1, 1)));
-        legalMoves.add(new MoveRecord(location, location.offset(0, -1)));
-        legalMoves.add(new MoveRecord(location, location.offset(0, 1)));
-        legalMoves.add(new MoveRecord(location, location.offset(1, -1)));
-        legalMoves.add(new MoveRecord(location, location.offset(-1, 0)));
-        legalMoves.add(new MoveRecord(location, location.offset(1, 0)));
-        legalMoves.add(new MoveRecord(location, location.offset(1, 1)));
+        legalMoves.add(new Move(location, location.offset(-1, -1)));
+        legalMoves.add(new Move(location, location.offset(-1, 1)));
+        legalMoves.add(new Move(location, location.offset(0, -1)));
+        legalMoves.add(new Move(location, location.offset(0, 1)));
+        legalMoves.add(new Move(location, location.offset(1, -1)));
+        legalMoves.add(new Move(location, location.offset(-1, 0)));
+        legalMoves.add(new Move(location, location.offset(1, 0)));
+        legalMoves.add(new Move(location, location.offset(1, 1)));
 
         if (isShortCastlingMove(location, new Location(alliance.getStartingPieceRank(),7), board)) {
-            legalMoves.add(new MoveRecord(location, new Location(alliance.getStartingPieceRank(), 7)));
+            legalMoves.add(new Move(location, new Location(alliance.getStartingPieceRank(), 7)));
         }
 
         if (isLongCastlingMove(location, new Location(alliance.getStartingPieceRank(), 3), board)) {
-            legalMoves.add(new MoveRecord(location, new Location(alliance.getStartingPieceRank(), 3)));
+            legalMoves.add(new Move(location, new Location(alliance.getStartingPieceRank(), 3)));
         }
 
         return legalMoves.stream().filter(m -> m.end().isWithinBounds()).toList();

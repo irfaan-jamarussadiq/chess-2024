@@ -6,7 +6,7 @@ import java.util.HashSet;
 import org.chess.model.board.Alliance;
 import org.chess.model.board.BoardModel;
 import org.chess.model.board.Location;
-import org.chess.model.game.MoveRecord;
+import org.chess.model.game.Move;
 
 public class Bishop extends Piece {
     public Bishop(Alliance alliance) {
@@ -59,8 +59,8 @@ public class Bishop extends Piece {
     }
 
     @Override
-    public Collection<MoveRecord> getLegalMoves(Location location, BoardModel board) {
-        Collection<MoveRecord> legalMoves = new HashSet<>();
+    public Collection<Move> getLegalMoves(Location location, BoardModel board) {
+        Collection<Move> legalMoves = new HashSet<>();
         if (board.isEmpty(location)) {
             return legalMoves;
         }
@@ -72,8 +72,8 @@ public class Bishop extends Piece {
         return legalMoves;
     }
 
-    private Collection<MoveRecord> getMovesOnDiagonal(Location location, BoardModel board, int rankOffset, int fileOffset) {
-        Collection<MoveRecord> diagonalMoves = new HashSet<>();
+    private Collection<Move> getMovesOnDiagonal(Location location, BoardModel board, int rankOffset, int fileOffset) {
+        Collection<Move> diagonalMoves = new HashSet<>();
 
         Location currentLocation = location.offset(rankOffset, fileOffset);
         while (currentLocation.isWithinBounds()) {
@@ -81,7 +81,7 @@ public class Bishop extends Piece {
                 break;
             }
 
-            diagonalMoves.add(new MoveRecord(location, currentLocation));
+            diagonalMoves.add(new Move(location, currentLocation));
 
             if (Piece.areEnemies(this, board.pieceAt(currentLocation))) {
                 break;

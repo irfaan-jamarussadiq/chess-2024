@@ -13,7 +13,7 @@ import java.util.List;
 import org.chess.controller.GameController;
 import org.chess.model.board.BoardModel;
 import org.chess.model.game.GameModel;
-import org.chess.model.game.move.Move;
+import org.chess.model.game.Move;
 import org.chess.view.game.GameView;
 
 public class ChessApplication extends Application {
