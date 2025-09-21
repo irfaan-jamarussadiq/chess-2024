@@ -68,7 +68,6 @@ public class Pawn extends Piece {
     public static boolean isOneSquarePawnMove(Location start, Location end, BoardModel board) {
         Piece pawn = board.pieceAt(start);
         return start.rank() == end.rank()
-            && start.rank() == pawn.getAlliance().getStartingPieceRank()
             && end.equals(start.offset(pawn.getAlliance().getPawnDirection(), 0))
             && board.isEmpty(end);
     }
