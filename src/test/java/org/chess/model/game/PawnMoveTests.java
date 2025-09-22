@@ -1,4 +1,4 @@
-package org.chess.game;
+package org.chess.model.game;
 
 import static org.junit.Assert.assertTrue;
 
@@ -6,7 +6,6 @@ import java.util.Collection;
 
 import org.chess.model.board.BoardModel;
 import org.chess.model.board.Location;
-import org.chess.model.game.Move;
 import org.chess.model.piece.Piece;
 import org.junit.Test;
 
@@ -28,4 +27,22 @@ public class PawnMoveTests {
         Collection<Move> legalMoves = pawn.getLegalMoves(start, boardModel);
         assertTrue(legalMoves.contains(new Move(start, start.offset(2, 0))));
     }     
+
+    @Test
+    public void testBlackPawnCanMoveForwardOneSquare() {
+        BoardModel boardModel = new BoardModel();
+        Location start = new Location(7, 5);
+        Piece pawn = boardModel.pieceAt(start);
+        Collection<Move> legalMoves = pawn.getLegalMoves(start, boardModel);
+        assertTrue(legalMoves.contains(new Move(start, start.offset(-1, 0))));
+    } 
+
+    @Test
+    public void testBlackPawnCanMoveForwardTwoSquares() {
+        BoardModel boardModel = new BoardModel();
+        Location start = new Location(7, 5);
+        Piece pawn = boardModel.pieceAt(start);
+        Collection<Move> legalMoves = pawn.getLegalMoves(start, boardModel);
+        assertTrue(legalMoves.contains(new Move(start, start.offset(-2, 0))));
+    } 
 }
