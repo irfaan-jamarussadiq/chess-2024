@@ -61,6 +61,14 @@ public class BoardModel {
         }
     }
 
+    private void addPiece(Piece piece, Location location) {
+        tiles[location.getCoordinate()].setPiece(piece);
+    }
+
+    private void removePiece(Location location) {
+        tiles[location.getCoordinate()].removePiece();
+    }
+
     public Piece pieceAt(Location location) {
         if (!location.isWithinBounds()) {
             throw new IllegalArgumentException("Location is out of bounds");
@@ -71,6 +79,10 @@ public class BoardModel {
 
     public boolean isEmpty(Location location) {
         return pieceAt(location) == null;
+    }
+
+    public boolean hasPieceAtLocationNotMoved(Location location) {
+        return movedPieces[location.getCoordinate() - 1]; 
     }
 
     @Override
@@ -87,17 +99,5 @@ public class BoardModel {
         }
 
         return sb.toString();
-    }
-
-    private void addPiece(Piece piece, Location location) {
-        tiles[location.getCoordinate()].setPiece(piece);
-    }
-
-    private void removePiece(Location location) {
-        tiles[location.getCoordinate()].removePiece();
-    }
-
-    public boolean hasPieceAtLocationNotMoved(Location location) {
-        return movedPieces[location.getCoordinate() - 1]; 
     }
 }

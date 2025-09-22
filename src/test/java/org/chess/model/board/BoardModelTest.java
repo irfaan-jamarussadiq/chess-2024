@@ -1,14 +1,12 @@
-package org.chess.board;
+package org.chess.model.board;
 
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
-import org.chess.model.board.Alliance;
-import org.chess.model.board.BoardModel;
-import org.chess.model.board.Location;
 import org.chess.model.piece.Pawn;
 import org.chess.model.piece.Rook;
 
@@ -61,5 +59,12 @@ public class BoardModelTest {
         BoardModel board = new BoardModel();
         Location start = new Location(2, 4);
         assertEquals(board.pieceAt(start), new Pawn(Alliance.WHITE));
+    }
+
+    @Test
+    public void testLocationAtRankFourFileFourIsEmpty() {
+        BoardModel board = new BoardModel();
+        Location location = new Location(4, 4);
+        assertTrue(board.isEmpty(location));
     }
 }
