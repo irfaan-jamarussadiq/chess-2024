@@ -15,16 +15,6 @@ public class King extends Piece {
     }
 
     @Override
-    public boolean canMoveFrom(Location start, Location end, BoardModel board) {
-        return start.isWithinBounds() && end.isWithinBounds()
-            && !start.equals(end)
-            && Math.abs(end.rank() - start.rank()) == Math.abs(end.file() - start.file())
-            && Math.abs(end.rank() - start.rank()) <= 1
-            && Math.abs(end.file() - start.file()) <= 1
-            && !Piece.areAllies(this, board.pieceAt(end));
-    }
-
-    @Override
     public Collection<Location> getPossibleDestinations(Location location) {
         return Set.of(
             location.offset(-1, -1),

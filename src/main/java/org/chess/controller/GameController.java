@@ -59,7 +59,7 @@ public class GameController implements EventHandler<MouseEvent> {
             return;
         }
 
-        if (!piece.canMoveFrom(start, end, gameModel.getBoard())) {
+        if (!piece.canMoveFrom(start, end)) {
             logger.debug("Piece cannot move from starting location " + start + " to ending location " + end + "!!");
             return;
         }

@@ -32,8 +32,24 @@ public class GameModel {
         this(new BoardModel());
     }
 
+    public void move(Move move) {
+        Piece piece = board.pieceAt(move.start());
+        if (isValidMove(move)) {
+            executeMove(move.start(), move.end(), board);
+            if (piece instanceof King) {
+                currentKingLocation = move.end();
+            }
+        }
+    }
 
-    public void executeMove(Location start, Location end) {
+    private void executeMove(Location start, Location end, BoardModel board) {
+        Piece piece = board.pieceAt(start);
+        Piece enemy = board.pieceAt(end);
+
+        if (piece == null) {
+            return;
+        }
+
         if (King.isShortCastlingMove(start, end, board)) {
             Location rookStart = new Location(start.rank(), 8);
             Location rookEnd = new Location(start.rank(), 6);
@@ -50,35 +66,14 @@ public class GameModel {
             board.movePiece(enPassant, end);
         } else if (Pawn.isTwoSquarePawnMove(start, end, board)) {
             board.movePiece(start, end);
-        } else if (isStandardMove(start, end)) {
+        } else if (piece.canMoveFrom(start, end) && !Piece.areAllies(piece, enemy)) {
             board.movePiece(start, end);
         }
 
         logger.debug("After executing move: \n" + board.toString());
     }
 
-    private boolean isStandardMove(Location start, Location end) {
-        Piece piece = board.pieceAt(start);
-        Piece enemy = board.pieceAt(end);
-        return piece.canMoveFrom(start, end) && !Piece.areAllies(piece, enemy);
-    }
-
-    public void move(Location start, Location end) {
-        Move move = new Move(start, end);
-        if (isValidMove(move)) {
-            executeMove(move, board);
-            currentPlayer = currentPlayer.getOpponent();
-            history.add(move);
-        }
-
-        logger.debug("\n" + board.toString());
-    }
-
-    public void move(Move move) {
-        move(move.start(), move.end());
-    }
-
-    boolean isValidMove(Move move) {
+    public boolean isValidMove(Move move) {
         if (!move.isWithinBounds() || move.start().equals(move.end())) {
             return false;
         }
@@ -95,7 +90,7 @@ public class GameModel {
             }
 
             BoardModel copy = new BoardModel(board);
-            executeMove(move, board);
+            executeMove(move.start(), move.end(), board);
             boolean movePutPlayerInCheck = isInCheck(currentPlayer);
             board = copy;
             if (!movePutPlayerInCheck) {
@@ -119,7 +114,7 @@ public class GameModel {
 
         for (Move move : pieceMoves) {
             BoardModel boardBeforeMakingMove = new BoardModel(board);
-            executeMove(move, board);
+            executeMove(move.start(), move.end(), board);
             boolean movePutPlayerInCheck = isInCheck(currentPlayer);
             board = boardBeforeMakingMove;
             if (!movePutPlayerInCheck) {
@@ -130,7 +125,7 @@ public class GameModel {
         logger.debug(String.format("Legal moves at %s are %s", location, legalMoves));
         return legalMoves;
     }
-
+ 
     public boolean isInCheckmate(Player player) {
         return isInCheck(player) && hasNoPossibleMoves(player);
     }
@@ -184,14 +179,6 @@ public class GameModel {
         }
 
         return true;
-    }
-
-    private void executeMove(Move move, BoardModel board) {
-        Piece piece = board.pieceAt(move.start());
-        executeMove(move, board); 
-        if (piece instanceof King) {
-            currentKingLocation = move.end();
-        }
     }
 
     public BoardModel getBoard() {

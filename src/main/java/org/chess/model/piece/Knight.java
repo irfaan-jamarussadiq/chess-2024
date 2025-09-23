@@ -15,18 +15,6 @@ public class Knight extends Piece {
     }
 
     @Override
-    public boolean canMoveFrom(Location start, Location end, BoardModel board) {
-        int diffRank = Math.abs(end.rank() - start.rank());
-        int diffFile = Math.abs(end.file() - start.file());
-
-        if ((diffRank == 2 && diffFile == 1) || (diffRank == 1 && diffFile == 2)) {
-            return start.isWithinBounds() && end.isWithinBounds() && !Piece.areAllies(this, board.pieceAt(end));
-        }
-
-        return false;
-    }
-
-    @Override
     public Collection<Location> getPossibleDestinations(Location location) {
         return Set.of(
             location.offset(-2, -1),

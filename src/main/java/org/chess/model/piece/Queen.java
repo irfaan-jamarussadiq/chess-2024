@@ -14,13 +14,6 @@ public class Queen extends Piece {
     }
 
     @Override
-    public boolean canMoveFrom(Location start, Location end, BoardModel board) {
-        Piece bishop = new Bishop(alliance);
-        Piece rook = new Rook(alliance);
-        return bishop.canMoveFrom(start, end, board) || rook.canMoveFrom(start, end, board);
-    }
-
-    @Override
     public Collection<Location> getPossibleDestinations(Location location) {
         Collection<Location> possibleDestinations = new HashSet<>();
         possibleDestinations.addAll(new Bishop(alliance).getPossibleDestinations(location));

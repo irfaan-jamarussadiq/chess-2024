@@ -23,7 +23,7 @@ public class GameModelTest {
 
         Location start = new Location(8, 4);
         Piece piece = board.pieceAt(start);
-        assertFalse(piece.canMoveFrom(start, new Location(1, 4), game.getBoard()));
+        assertFalse(piece.canMoveFrom(start, new Location(1, 4)));
     }
 
     @Test
@@ -108,8 +108,8 @@ public class GameModelTest {
         Location start = new Location(2, 5);
         Location end = new Location(4, 5);
         Piece piece = game.getBoard().pieceAt(start);
-        assertTrue(piece.canMoveFrom(start, end, game.getBoard()));
-        game.move(start, end);
+        assertTrue(piece.canMoveFrom(start, end));
+        game.move(new Move(start, end));
         Piece pawn = game.getBoard().pieceAt(end);
         assertEquals(pawn, new Pawn(Alliance.WHITE));
     }
@@ -146,6 +146,8 @@ public class GameModelTest {
     }
 
     private void moveHelper(GameModel game, int startRank, int startFile, int endRank, int endFile) {
-        game.move(new Location(startRank, startFile), new Location(endRank, endFile));
+        Location start = new Location(startRank, startFile);
+        Location end = new Location(endRank, endFile);
+        game.move(new Move(start, end));
     }
 }

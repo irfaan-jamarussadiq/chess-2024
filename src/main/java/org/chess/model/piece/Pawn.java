@@ -16,15 +16,6 @@ public class Pawn extends Piece {
     }
 
     @Override
-    public boolean canMoveFrom(Location start, Location end, BoardModel board) {
-        return start.isWithinBounds() && end.isWithinBounds() 
-            && (isOneSquarePawnMove(start, end, board) 
-                || isTwoSquarePawnMove(start, end, board) 
-                || isCaptureMove(start, end, board)
-                || isEnPassantMove(start, end, board));
-    }
-
-    @Override
     public Collection<Location> getPossibleDestinations(Location location) {
         return Set.of(
             location.offset(alliance.getPawnDirection(), 0),

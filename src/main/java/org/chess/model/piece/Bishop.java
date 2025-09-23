@@ -14,26 +14,6 @@ public class Bishop extends Piece {
     }
     
     @Override
-    public boolean canMoveFrom(Location start, Location end, BoardModel board) {
-        if (Math.abs(end.rank() - start.rank()) != Math.abs(end.file() - start.file())) {
-            return false;
-        }
-
-        int rankOffset = Integer.signum(end.rank() - start.rank());
-        int fileOffset = Integer.signum(end.file() - start.file());
-        Location current = start.offset(rankOffset, fileOffset);
-        while (current.isWithinBounds() && !current.equals(end)) {
-            if (!board.isEmpty(current)) {
-                return false;
-            }
-
-            current = current.offset(rankOffset, fileOffset);
-        }
-
-        return current.isWithinBounds() && !Piece.areAllies(this, board.pieceAt(current));
-    }
-
-    @Override
     public Collection<Location> getPossibleDestinations(Location location) {
         Collection<Location> possibleDestinations = new HashSet<>();
         for (int step = 1; step <= 8; step++) {
