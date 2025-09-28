@@ -132,6 +132,21 @@ public class GameModel {
         return !isInCheck(player) && hasNoPossibleMoves(player);
     }
 
+    private boolean hasNoPossibleMoves(Player player) {
+        for (int rank = 1; rank <= BoardModel.SIZE; rank++) {
+            for (int file = 1; file <= BoardModel.SIZE; file++) {
+                Location location = new Location(rank, file);
+                Piece piece = board.pieceAt(location);
+                Collection<Move> moves = getLegalMoves(location);
+                if (!board.isEmpty(location) && player.hasPiece(piece) && !moves.isEmpty()) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
     public boolean isInCheck(Player player) {
         Piece king = board.pieceAt(currentKingLocation);
         for (Move move : getLegalMoves(currentKingLocation)) {
@@ -146,21 +161,6 @@ public class GameModel {
         }
 
         return false;
-    }
-
-    private boolean hasNoPossibleMoves(Player player) {
-        for (int rank = 1; rank <= BoardModel.SIZE; rank++) {
-            for (int file = 1; file <= BoardModel.SIZE; file++) {
-                Location location = new Location(rank, file);
-                Piece piece = board.pieceAt(location);
-                Collection<Move> moves = getLegalMoves(location);
-                if (!board.isEmpty(location) && player.hasPiece(piece) && !moves.isEmpty()) {
-                    return false;
-                }
-            }
-        }
-
-        return true;
     }
 
     public BoardModel getBoard() {
