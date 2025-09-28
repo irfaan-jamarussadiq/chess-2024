@@ -6,10 +6,8 @@ import org.chess.model.board.Alliance;
 import org.chess.model.board.BoardModel;
 import org.chess.model.board.Location;
 import org.chess.model.piece.King;
-import org.chess.model.piece.Knight;
 import org.chess.model.piece.Pawn;
 import org.chess.model.piece.Piece;
-import org.chess.model.piece.Queen;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -136,7 +134,7 @@ public class GameModel {
 
     public boolean isInCheck(Player player) {
         Piece king = board.pieceAt(currentKingLocation);
-        for (Move move : getLegalMoves(player.getOpponent().getAlliance(), currentKingLocation)) {
+        for (Move move : getLegalMoves(currentKingLocation)) {
             Piece potentialEnemy = board.pieceAt(move.end());
             if (Piece.areEnemies(king, potentialEnemy)) {
                 for (Move enemyMove : potentialEnemy.getLegalMoves(move.end(), board)) {
@@ -148,22 +146,6 @@ public class GameModel {
         }
 
         return false;
-    }
-
-    private Collection<Move> getLegalMoves(Alliance alliance, Location location) {
-        Collection<Move> legalMoves = new HashSet<>();
-
-        Piece enemyQueen = new Queen(alliance);
-        Piece enemyKing = new King(alliance);
-        Piece enemyKnight = new Knight(alliance);
-        Piece enemyPawn = new Pawn(alliance);
-
-        legalMoves.addAll(enemyQueen.getLegalMoves(location, board));
-        legalMoves.addAll(enemyKing.getLegalMoves(location, board));
-        legalMoves.addAll(enemyKnight.getLegalMoves(location, board));
-        legalMoves.addAll(enemyPawn.getLegalMoves(location, board));
-
-        return legalMoves;
     }
 
     private boolean hasNoPossibleMoves(Player player) {
