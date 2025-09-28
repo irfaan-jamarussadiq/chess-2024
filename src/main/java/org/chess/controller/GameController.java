@@ -34,17 +34,16 @@ public class GameController implements EventHandler<MouseEvent> {
     public void handle(MouseEvent mouseEvent) {
         int rank = BoardView.SIZE - (int) mouseEvent.getY() / TileView.SIDE_LENGTH;
         int file = (int) mouseEvent.getX() / TileView.SIDE_LENGTH + 1;
-
         Location location = new Location(rank, file);
 
         if (movesHighlighted.isEmpty()) {
-            logger.info("Highlighting possible moves at " + location);
+            logger.info(String.format("Highlighting possible moves at %s", location));
             selectedPieceLocation = location;
             movesHighlighted = gameModel.getLegalMoves(location);
             logger.debug(movesHighlighted.toString());
             gameView.highlightSquares(movesHighlighted);
         } else {
-            logger.info("Moving piece from " + selectedPieceLocation + " to " + location);
+            logger.info(String.format("Moving piece from %s to %s", selectedPieceLocation, location));
             gameView.resetSquares(movesHighlighted);
             movesHighlighted.clear();
             move(selectedPieceLocation, location);
@@ -53,14 +52,14 @@ public class GameController implements EventHandler<MouseEvent> {
     }
 
     public void move(Location start, Location end) {
-        Piece piece = gameModel.getBoard().pieceAt(start);
-        if (piece == null) {
+        if (gameModel.getBoard().isEmpty(start)) {
             logger.debug(String.format("No piece at starting location %s!", start));
             return;
         }
 
+        Piece piece = gameModel.getBoard().pieceAt(start);
         if (!piece.canMoveFrom(start, end)) {
-            logger.debug("Piece cannot move from starting location " + start + " to ending location " + end + "!!");
+            logger.debug(String.format("Piece cannot move from %s to %s!!", start, end));
             return;
         }
 
