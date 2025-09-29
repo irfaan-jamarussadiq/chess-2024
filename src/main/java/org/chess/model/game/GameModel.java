@@ -6,8 +6,10 @@ import org.chess.model.board.Alliance;
 import org.chess.model.board.BoardModel;
 import org.chess.model.board.Location;
 import org.chess.model.piece.King;
+import org.chess.model.piece.Knight;
 import org.chess.model.piece.Pawn;
 import org.chess.model.piece.Piece;
+import org.chess.model.piece.Queen;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -123,7 +125,27 @@ public class GameModel {
         logger.debug(String.format("Legal moves at %s are %s", location, legalMoves));
         return legalMoves;
     }
- 
+
+    public boolean isInCheck(Player player) {
+        Piece king = board.pieceAt(currentKingLocation);
+        Collection<Move> enemyAttackMoves = new HashSet<>();
+        enemyAttackMoves.addAll(new Queen(player.getAlliance()).getLegalMoves(currentKingLocation, board));
+        enemyAttackMoves.addAll(new Knight(player.getAlliance()).getLegalMoves(currentKingLocation, board));
+
+        for (Move enemyAttackMove : enemyAttackMoves) {
+            Piece potentialEnemy = board.pieceAt(enemyAttackMove.end());
+            if (Piece.areEnemies(king, potentialEnemy)) {
+                for (Move enemyMove : potentialEnemy.getLegalMoves(enemyAttackMove.end(), board)) {
+                    if (enemyMove.end() == currentKingLocation) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
     public boolean isInCheckmate(Player player) {
         return isInCheck(player) && hasNoPossibleMoves(player);
     }
@@ -145,26 +167,6 @@ public class GameModel {
         }
 
         return true;
-    }
-
-    public boolean isInCheck(Player player) {
-        Piece king = board.pieceAt(currentKingLocation);
-        for (Move move : getLegalMoves(currentKingLocation)) {
-            Piece potentialEnemy = board.pieceAt(move.end());
-            if (Piece.areEnemies(king, potentialEnemy)) {
-                for (Move enemyMove : potentialEnemy.getLegalMoves(move.end(), board)) {
-                    if (enemyMove.end() == currentKingLocation) {
-                        return true;
-                    }
-                }
-            }
-        }
-
-        return false;
-    }
-
-    public BoardModel getBoard() {
-        return board;
     }
 
     public Collection<Move> getHistory() { 
