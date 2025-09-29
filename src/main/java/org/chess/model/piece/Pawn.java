@@ -47,9 +47,12 @@ public class Pawn extends Piece {
 
         Collection<Location> possibleDestinations = getPossibleDestinations(location);
         for (Location possibleDestination : possibleDestinations) {
-            if (possibleDestination.isWithinBounds() 
-                && (board.isEmpty(possibleDestination) || !Piece.areAllies(this, board.pieceAt(possibleDestination)))) {
-                legalMoves.add(new Move(location, possibleDestination));
+            Move move = new Move(location, possibleDestination);
+            if (isOneSquarePawnMove(location, possibleDestination, board)
+                || isTwoSquarePawnMove(location, possibleDestination, board)
+                || isCaptureMove(location, possibleDestination, board)
+                || isEnPassantMove(location, possibleDestination, board)) {
+                    legalMoves.add(move);
             }
         }
 
@@ -58,7 +61,7 @@ public class Pawn extends Piece {
 
     public static boolean isOneSquarePawnMove(Location start, Location end, BoardModel board) {
         Piece pawn = board.pieceAt(start);
-        return start.rank() == end.rank()
+        return start.file() == end.file()
             && end.equals(start.offset(pawn.getAlliance().getPawnDirection(), 0))
             && board.isEmpty(end);
     }
@@ -67,8 +70,8 @@ public class Pawn extends Piece {
         Piece pawn = board.pieceAt(start);
 		int pawnDirection = pawn.getAlliance().getPawnDirection();
 		return board.hasPieceAtLocationNotMoved(start)
-            && start.rank() == end.rank() 
-            && start.rank() == pawn.getAlliance().getStartingPieceRank() 
+            && start.file() == end.file() 
+            && start.rank() == pawn.getAlliance().getStartingPawnRank() 
 			&& board.isEmpty(start.offset(pawnDirection, 0))
 			&& end.equals(start.offset(2 * pawnDirection, 0))
 			&& board.isEmpty(end);
@@ -80,10 +83,12 @@ public class Pawn extends Piece {
         Location rightCaptureLocation = start.offset(pawn.getAlliance().getPawnDirection(), 1);
 
         boolean isLeftCapture = leftCaptureLocation.isWithinBounds()
+            && leftCaptureLocation.equals(end)
             && board.pieceAt(leftCaptureLocation) instanceof Pawn
             && Piece.areEnemies(pawn, board.pieceAt(leftCaptureLocation));
 
         boolean isRightCapture = rightCaptureLocation.isWithinBounds()
+            && rightCaptureLocation.equals(end)
             && board.pieceAt(rightCaptureLocation) instanceof Pawn
             && Piece.areEnemies(pawn, board.pieceAt(rightCaptureLocation));
 

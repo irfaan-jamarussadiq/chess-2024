@@ -74,4 +74,9 @@ public enum Alliance {
     public abstract int getStartingPieceRank();
 
     public abstract Alliance getEnemy();
+
+    public int getStartingPawnRank() {
+        return getStartingPieceRank() + getPawnDirection();
+    }
+
 }

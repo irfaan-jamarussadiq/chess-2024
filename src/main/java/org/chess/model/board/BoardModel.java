@@ -82,7 +82,7 @@ public class BoardModel {
     }
 
     public boolean hasPieceAtLocationNotMoved(Location location) {
-        return movedPieces[location.getCoordinate() - 1]; 
+        return !movedPieces[location.getCoordinate() - 1]; 
     }
 
     @Override
