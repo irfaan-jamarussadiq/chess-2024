@@ -30,8 +30,9 @@ public class GameController implements EventHandler<MouseEvent> {
     public void handle(MouseEvent mouseEvent) {
         int rank = BoardView.SIZE - (int) mouseEvent.getY() / TileView.SIDE_LENGTH;
         int file = (int) mouseEvent.getX() / TileView.SIDE_LENGTH + 1;
-        logger.debug(String.format("Highlight moves for piece at rank %s, file %s", rank, file));
         Location location = new Location(rank, file);
+        logger.debug(String.format("Highlight moves for piece at %s", location));
+        gameView.resetAllSquares();
         Collection<Move> moves = gameModel.getLegalMoves(location);
         gameView.highlightSquares(moves);
     }
@@ -39,6 +40,5 @@ public class GameController implements EventHandler<MouseEvent> {
     public void move(Location start, Location end) {
         Move move = new Move(start, end);
         gameModel.move(move);
-        gameView.move(move);
     }
 }

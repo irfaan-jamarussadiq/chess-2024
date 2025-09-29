@@ -27,4 +27,7 @@ public class GameView extends BorderPane {
         }
     }
 
+    public void resetAllSquares() {
+        boardView.resetAllSquares();
+    }
 }

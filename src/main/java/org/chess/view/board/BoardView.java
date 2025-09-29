@@ -92,4 +92,12 @@ public class BoardView extends GridPane {
         Color defaultColor = (location.rank() + location.file()) % 2 == 0 ? LIGHT_SQUARE : DARK_SQUARE;
         tiles[tileCoordinate].setFill(defaultColor);
     }
+
+    public void resetAllSquares() {
+        for (int rank = 1; rank <= SIZE; rank++) {
+            for (int file = 1; file <= SIZE; file++) {
+                resetSquare(new Location(rank, file));
+            }
+        }
+    }
 }
