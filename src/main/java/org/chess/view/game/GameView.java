@@ -27,7 +27,4 @@ public class GameView extends BorderPane {
         }
     }
 
-    public void move(Move move) {
-
-    }
 }
