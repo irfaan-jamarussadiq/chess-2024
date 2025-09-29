@@ -14,7 +14,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class GameModel {
-    private Collection<Move> history;
     private Player currentPlayer;
     private Location currentKingLocation;
     private BoardModel board;
@@ -24,7 +23,6 @@ public class GameModel {
     public GameModel(BoardModel board) {
         this.currentPlayer = Player.getPlayer(Alliance.WHITE);
         this.currentKingLocation = new Location(currentPlayer.getAlliance().getStartingPieceRank(), 5);
-        this.history = new Stack<>();
         this.board = board;
     }
 
@@ -167,10 +165,6 @@ public class GameModel {
         }
 
         return true;
-    }
-
-    public Collection<Move> getHistory() { 
-        return history; 
     }
 
 }
