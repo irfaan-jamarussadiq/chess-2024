@@ -51,7 +51,8 @@ public class Pawn extends Piece {
             if (isOneSquarePawnMove(location, possibleDestination, board)
                 || isTwoSquarePawnMove(location, possibleDestination, board)
                 || isCaptureMove(location, possibleDestination, board)
-                || isEnPassantMove(location, possibleDestination, board)) {
+                || isEnPassantMove(location, possibleDestination, board)
+                || isPromotionMove(location, possibleDestination, board)) {
                     legalMoves.add(move);
             }
         }
@@ -110,4 +111,11 @@ public class Pawn extends Piece {
 			&& board.isEmpty(end.offset(0, fileDiff));
     }
 
+    public static boolean isPromotionMove(Location start, Location end, BoardModel board) {
+        Piece pawn = board.pieceAt(start);
+        return start.file() == end.file()
+            && end.rank() == start.rank() + pawn.getAlliance().getPawnDirection()
+            && board.isEmpty(end)
+            && end.rank() == pawn.getAlliance().getEnemy().getStartingPieceRank();
+    }
 }

@@ -64,6 +64,9 @@ public class GameModel {
             board.movePiece(enPassant, end);
         } else if (Pawn.isTwoSquarePawnMove(start, end, board)) {
             board.movePiece(start, end);
+        } else if (Pawn.isPromotionMove(start, end, board)) {
+            board.movePiece(start, end);
+            // TODO: Change pawn to promoted piece
         } else if (piece.canMoveFrom(start, end) && !Piece.areAllies(piece, enemy)) {
             board.movePiece(start, end);
         }
