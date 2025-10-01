@@ -26,6 +26,11 @@ public class TileView extends StackPane {
         this.getChildren().addAll(tile, pieceView);
     }
 
+    public TileView(Color color, Piece piece) {
+        this(color);
+        this.setPiece(piece);
+    }
+
     public void setPiece(Piece piece) {
         if (piece == null) {
             this.piece = null;

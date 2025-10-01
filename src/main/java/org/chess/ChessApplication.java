@@ -14,9 +14,9 @@ public class ChessApplication extends Application {
     @Override
     public void start(Stage stage) {
         BorderPane root = new BorderPane();
-        GameView view = new GameView();
         BoardModel boardModel = new BoardModel();
         GameModel model = new GameModel(boardModel);
+        GameView view = new GameView(boardModel);
         new GameController(model, view);
         root.setCenter(view);
 

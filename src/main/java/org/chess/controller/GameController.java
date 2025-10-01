@@ -32,6 +32,7 @@ public class GameController implements EventHandler<MouseEvent> {
         int file = (int) mouseEvent.getX() / TileView.SIDE_LENGTH + 1;
         Location location = new Location(rank, file);
         logger.debug(String.format("Highlight moves for piece at %s", location));
+
         gameView.resetAllSquares();
         Collection<Move> moves = gameModel.getLegalMoves(location);
         gameView.highlightSquares(moves);
