@@ -101,6 +101,10 @@ public class Pawn extends Piece {
 		int rankDiff = end.rank() - start.rank(); 
 		int fileDiff = end.file() - start.file(); 
 
+        if (!end.offset(0, fileDiff).isWithinBounds()) {
+            return false;
+        }
+
 		Piece enemyPawn = board.pieceAt(end.offset(0, fileDiff));	
 		int enPassantRank = pawn.getAlliance().isWhite() ? 6 : 3; 
 

@@ -66,6 +66,10 @@ public class King extends Piece {
     }
 
     public static boolean isShortCastlingMove(Location start, Location end, BoardModel board) {
+        if (!start.offset(0, 3).isWithinBounds()) {
+            return false;
+        }
+
 		Piece king = board.pieceAt(start);
 		Piece rook = board.pieceAt(start.offset(0, 3));
 
