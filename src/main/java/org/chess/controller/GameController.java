@@ -35,7 +35,7 @@ public class GameController implements EventHandler<MouseEvent> {
 
         gameView.resetAllSquares();
         Collection<Move> moves = gameModel.getLegalMoves(location);
-        gameView.highlightSquares(moves);
+        gameView.highlightMoves(moves);
     }
 
     public void move(Location start, Location end) {

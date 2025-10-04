@@ -16,7 +16,7 @@ public class GameView extends BorderPane {
         this.setCenter(boardView);
     }
 
-    public void highlightSquares(Collection<Move> movesHighlighted) {
+    public void highlightMoves(Collection<Move> movesHighlighted) {
         for (Move move : movesHighlighted) {
             boardView.highlightSquare(move.end());
         }
