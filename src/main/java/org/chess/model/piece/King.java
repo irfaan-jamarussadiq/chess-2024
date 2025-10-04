@@ -41,20 +41,33 @@ public class King extends Piece {
     @Override
     public Collection<Move> getLegalMoves(Location location, BoardModel board) {
         Collection<Move> legalMoves = new HashSet<>();
-        if (board.isEmpty(location)) {
+        if (!location.isWithinBounds() || board.isEmpty(location)) {
             return legalMoves;
         }
 
-        legalMoves.add(new Move(location, location.offset(-1, -1)));
-        legalMoves.add(new Move(location, location.offset(-1, 1)));
-        legalMoves.add(new Move(location, location.offset(0, -1)));
-        legalMoves.add(new Move(location, location.offset(0, 1)));
-        legalMoves.add(new Move(location, location.offset(1, -1)));
-        legalMoves.add(new Move(location, location.offset(-1, 0)));
-        legalMoves.add(new Move(location, location.offset(1, 0)));
-        legalMoves.add(new Move(location, location.offset(1, 1)));
+        int[][] locationOffsets = {
+            { -1, -1 },
+            { -1,  0 },
+            { -1,  1 },
+            {  0, -1 },
+            {  0,  1 },
+            {  1, -1 },
+            {  1,  0 },
+            {  1,  1 }
+        };
 
-        if (isShortCastlingMove(location, new Location(alliance.getStartingPieceRank(),7), board)) {
+        for (int[] locationOffset : locationOffsets) {
+            Location destination = location.offset(locationOffset[0], locationOffset[1]);
+            if (!destination.isWithinBounds()) {
+                continue;
+            }
+
+            if (isNormalMove(location, destination, board) || isCaptureMove(location, destination, board)) {
+                legalMoves.add(new Move(location, destination));
+            }
+        }
+
+        if (isShortCastlingMove(location, new Location(alliance.getStartingPieceRank(), 7), board)) {
             legalMoves.add(new Move(location, new Location(alliance.getStartingPieceRank(), 7)));
         }
 
@@ -63,6 +76,17 @@ public class King extends Piece {
         }
 
         return legalMoves.stream().filter(m -> m.end().isWithinBounds()).toList();
+    }
+
+    private static boolean isNormalMove(Location start, Location end, BoardModel board) {
+        Piece king = board.pieceAt(start); 
+        return king.canMoveFrom(start, end) && board.isEmpty(end);
+    }
+
+    private static boolean isCaptureMove(Location start, Location end, BoardModel board) {
+        Piece king = board.pieceAt(start); 
+        Piece enemy = board.pieceAt(end);
+        return king.canMoveFrom(start, end) && Piece.areEnemies(king, enemy);
     }
 
     public static boolean isShortCastlingMove(Location start, Location end, BoardModel board) {
