@@ -13,26 +13,25 @@ import org.junit.Test;
 public class BishopLegalMoveTests {
     @Test
     public void testKingsideBishopCannotMoveInStartingPosition() {
-        testPieceAtLocationHasNoMoves(new Location(1, 3));
+        testPieceAtLocationHasNoMoves(new BoardModel(), new Location(1, 3));
     }
 
     @Test
     public void testQueensideBishopCannotMoveInStartingPosition() {
-        testPieceAtLocationHasNoMoves(new Location(1, 6));
+        testPieceAtLocationHasNoMoves(new BoardModel(), new Location(1, 6));
     }
 
     @Test
     public void testBlackKingsideBishopCannotMoveInStartingPosition() {
-        testPieceAtLocationHasNoMoves(new Location(8, 3));
+        testPieceAtLocationHasNoMoves(new BoardModel(), new Location(8, 3));
     }
 
     @Test
     public void testBlackQueensideBishopCannotMoveInStartingPosition() {
-        testPieceAtLocationHasNoMoves(new Location(8, 6));
+        testPieceAtLocationHasNoMoves(new BoardModel(), new Location(8, 6));
     }
 
-    private void testPieceAtLocationHasNoMoves(Location location) {
-        BoardModel boardModel = new BoardModel();
+    private void testPieceAtLocationHasNoMoves(BoardModel boardModel, Location location) {
         Piece piece = boardModel.pieceAt(location);
         Collection<Move> moves = piece.getLegalMoves(location, boardModel);
         assertEquals(0, moves.size());
