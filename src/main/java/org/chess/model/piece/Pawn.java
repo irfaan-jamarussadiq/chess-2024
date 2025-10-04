@@ -106,13 +106,14 @@ public class Pawn extends Piece {
         }
 
 		Piece enemyPawn = board.pieceAt(end.offset(0, fileDiff));	
-		int enPassantRank = pawn.getAlliance().isWhite() ? 6 : 3; 
+		int enPassantRank = pawn.getAlliance().isWhite() ? 5 : 6; 
 
 		return rankDiff == pawn.getAlliance().getPawnDirection() 
 			&& Math.abs(fileDiff) == 1 
 			&& start.rank() == enPassantRank 
+            && enemyPawn instanceof Pawn
 			&& Piece.areEnemies(pawn, enemyPawn) 
-			&& board.isEmpty(end.offset(0, fileDiff));
+			&& board.isEmpty(end);
     }
 
     public static boolean isPromotionMove(Location start, Location end, BoardModel board) {
