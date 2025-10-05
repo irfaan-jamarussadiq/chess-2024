@@ -111,8 +111,12 @@ public class King extends Piece {
 
     public static boolean isLongCastlingMove(Location start, Location end, BoardModel board) {
 		Piece king = board.pieceAt(start);
-		Piece rook = board.pieceAt(start.offset(0, -3));
 
+        if (!start.offset(0, -3).isWithinBounds()) {
+            return false;
+        }
+
+		Piece rook = board.pieceAt(start.offset(0, -3));
 		return start.rank() == end.rank() 
 			&& start.rank() == king.getAlliance().getStartingPieceRank() 
 			&& start.file() == 5 
