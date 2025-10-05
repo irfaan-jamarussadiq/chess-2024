@@ -32,4 +32,17 @@ public class KnightLegalMoveTests {
         Collection<Move> moves = knight.getLegalMoves(start, boardModel);
         assertEquals(0, moves.size());
     }
+
+    @Test
+    public void testBlackKnightHasEightMoves() {
+        BoardModel boardModel = new BoardModel();
+        boardModel.movePiece(new Location(1, 7), new Location(3, 6));
+        boardModel.movePiece(new Location(7, 5), new Location(5, 5));
+        boardModel.movePiece(new Location(3, 6), new Location(5, 5));
+        System.out.println(boardModel);
+        Location start = new Location(5, 5);
+        Piece knight = boardModel.pieceAt(start);
+        Collection<Move> moves = knight.getLegalMoves(start, boardModel);
+        assertEquals(8, moves.size());
+    }
 }
