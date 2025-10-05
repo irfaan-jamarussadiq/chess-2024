@@ -43,12 +43,12 @@ public class GameModel {
     }
 
     private void executeMove(Location start, Location end, BoardModel board) {
-        Piece piece = board.pieceAt(start);
-        Piece enemy = board.pieceAt(end);
-
-        if (piece == null) {
+        if (board.isEmpty(start)) {
             return;
         }
+
+        Piece piece = board.pieceAt(start);
+        Piece enemy = board.pieceAt(end);
 
         if (King.isShortCastlingMove(start, end, board)) {
             Location rookStart = new Location(start.rank(), 8);
