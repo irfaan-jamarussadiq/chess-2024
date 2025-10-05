@@ -32,11 +32,13 @@ public class GameModel {
 
     public void move(Move move) {
         Piece piece = board.pieceAt(move.start());
-        if (isValidMove(move)) {
+        if (currentPlayer.isPieceAlly(piece) && isValidMove(move)) {
             executeMove(move.start(), move.end(), board);
             if (piece instanceof King) {
                 currentKingLocation = move.end();
             }
+
+            currentPlayer = currentPlayer.getOpponent();
         }
     }
 
@@ -111,6 +113,10 @@ public class GameModel {
         }
 
         Piece piece = board.pieceAt(location);
+        if (!currentPlayer.isPieceAlly(piece)) {
+            return legalMoves;
+        }
+
         Collection<Move> pieceMoves =  piece.getLegalMoves(location, board);
 
         for (Move move : pieceMoves) {
