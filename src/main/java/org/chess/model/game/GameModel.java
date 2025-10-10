@@ -13,10 +13,14 @@ import org.chess.model.piece.Queen;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 public class GameModel {
     private Player currentPlayer;
     private Location currentKingLocation;
     private BoardModel board;
+    private ObservableList<Location> moveDestinations;
 
     private static final Logger logger = LoggerFactory.getLogger(GameModel.class);
 
@@ -24,6 +28,7 @@ public class GameModel {
         this.currentPlayer = Player.getPlayer(Alliance.WHITE);
         this.currentKingLocation = new Location(currentPlayer.getAlliance().getStartingPieceRank(), 5);
         this.board = board;
+        this.moveDestinations = FXCollections.observableArrayList();
     }
 
     public GameModel() {
@@ -176,4 +181,11 @@ public class GameModel {
         return true;
     }
 
+    public void setMoveDestinations(Collection<Move> moves) {
+        for (Move move : moves) {
+            moveDestinations.add(move.end());
+        }
+
+        logger.debug("Move destinations: " + moveDestinations.toString());
+    }
 }

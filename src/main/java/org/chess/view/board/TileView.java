@@ -12,18 +12,19 @@ import org.chess.model.piece.Piece;
 
 public class TileView extends StackPane {
     public static final int SIDE_LENGTH = 80;
+
     private final ImageView pieceView;
-    private final Rectangle tile;
+    private final Rectangle square;
     private Piece piece;
 
     public TileView(Color color) {
-        tile = new Rectangle();
-        tile.setHeight(SIDE_LENGTH);
-        tile.setWidth(SIDE_LENGTH);
-        tile.setFill(color);
+        square = new Rectangle();
+        square.setHeight(SIDE_LENGTH);
+        square.setWidth(SIDE_LENGTH);
+        square.setFill(color);
 
         pieceView = new ImageView();
-        this.getChildren().addAll(tile, pieceView);
+        this.getChildren().addAll(square, pieceView);
     }
 
     public TileView(Color color, Piece piece) {
@@ -44,8 +45,8 @@ public class TileView extends StackPane {
         String piecePath = String.format("/images/%s_%s.png", color, type);
         Image pieceImage = new Image(String.valueOf(ChessApplication.class.getResource(piecePath)));
         pieceView.setImage(pieceImage);
-        pieceView.setFitWidth(tile.getWidth());
-        pieceView.setFitHeight(tile.getHeight());
+        pieceView.setFitWidth(square.getWidth());
+        pieceView.setFitHeight(square.getHeight());
     }
 
     public Piece getPiece() {
@@ -53,6 +54,6 @@ public class TileView extends StackPane {
     }
 
     public void setFill(Color color) {
-        tile.setFill(color);
+        square.setFill(color);
     }
 }

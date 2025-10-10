@@ -2,15 +2,17 @@ package org.chess.model.board;
 
 import org.chess.model.piece.*;
 
+import javafx.beans.property.SimpleObjectProperty;
+
 public class BoardModel {
     public static final int SIZE = 8;
-    private final Tile[] tiles;
+    private final TileModel[] tiles;
     private boolean[] movedPieces;
 
     public BoardModel() {
-        tiles = new Tile[SIZE * SIZE];
+        tiles = new TileModel[SIZE * SIZE];
         for (int i = 0; i < SIZE * SIZE; i++) {
-            tiles[i] = new Tile();
+            tiles[i] = new TileModel();
         }
 
         for (int file = 1; file <= 8; file++) {
@@ -40,10 +42,10 @@ public class BoardModel {
     }
 
     public BoardModel(BoardModel board) {
-        tiles = new Tile[SIZE * SIZE];
+        tiles = new TileModel[SIZE * SIZE];
         for (int i = 0; i < SIZE * SIZE; i++) {
-            Piece piece = board.tiles[i].getPiece();
-            tiles[i] = new Tile(piece);
+            Piece piece = board.tiles[i].getPieceProperty().get();
+            tiles[i] = new TileModel(piece);
         }
 
         this.movedPieces = new boolean[SIZE * SIZE];
@@ -70,11 +72,15 @@ public class BoardModel {
     }
 
     public Piece pieceAt(Location location) {
+        return piecePropertyAt(location).get();
+    }
+
+    public SimpleObjectProperty<Piece> piecePropertyAt(Location location) {
         if (!location.isWithinBounds()) {
             throw new IllegalArgumentException("Location is out of bounds");
         }
 
-        return tiles[location.getCoordinate()].getPiece();
+        return tiles[location.getCoordinate()].getPieceProperty();
     }
 
     public boolean isEmpty(Location location) {
