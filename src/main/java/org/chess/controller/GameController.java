@@ -1,22 +1,28 @@
 package org.chess.controller;
 
-import org.chess.model.board.Location;
+import org.chess.interactor.GameInteractor;
+import org.chess.model.board.BoardModel;
 import org.chess.model.game.GameModel;
-import org.chess.model.game.Move;
-import org.chess.view.game.GameViewBuilder;
+import org.chess.view.board.BoardView;
+import org.chess.view.game.GameView;
+
+import javafx.scene.layout.Region;
 
 public class GameController {
     private final GameModel gameModel;
-    private final GameViewBuilder gameView;
+    private final GameInteractor gameInteractor;
+    private final GameView gameView;
 
-    public GameController(GameModel gameModel, GameViewBuilder gameView) {
-        this.gameModel = gameModel;
-        this.gameView = gameView;
-        // gameView.addEventHandler(MouseEvent.MOUSE_CLICKED, this);
+    public GameController() {
+        BoardModel boardModel = new BoardModel();
+        this.gameModel = new GameModel(boardModel);
+        this.gameInteractor = new GameInteractor(gameModel);
+        BoardView boardView = new BoardView(boardModel);
+        this.gameView = new GameView(gameModel, boardView);
+        gameInteractor.addBoardClickEventHandler(boardView);
     }
-
-    public void move(Location start, Location end) {
-        Move move = new Move(start, end);
-        gameModel.move(move);
+   
+    public Region getView() {
+        return gameView;
     }
 }

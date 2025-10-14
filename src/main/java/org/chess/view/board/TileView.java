@@ -1,59 +1,60 @@
 package org.chess.view.board;
 
+import org.chess.ChessApplication;
+import org.chess.model.board.Alliance;
+import org.chess.model.piece.Piece;
+
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-import org.chess.ChessApplication;
-import org.chess.model.board.Alliance;
-import org.chess.model.piece.Piece;
-
 public class TileView extends StackPane {
-    public static final int SIDE_LENGTH = 80;
+    public static final int TILE_SIZE = 80;
+    private static final Color HIGHLIGHT_SQUARE = Color.rgb(135, 239, 172);
 
-    private final ImageView pieceView;
     private final Rectangle square;
-    private Piece piece;
+    private final Node piece;
+    private final Color baseColor;
 
-    public TileView(Color color) {
-        square = new Rectangle();
-        square.setHeight(SIDE_LENGTH);
-        square.setWidth(SIDE_LENGTH);
+    public TileView(SimpleObjectProperty<Piece> pieceProperty, Color color) {
+        this.square = createSquare(color, TILE_SIZE);
+        this.piece = createPiece(pieceProperty);
+        this.baseColor = color;
+        this.getChildren().addAll(square, piece);
+    }
+
+    public void highlight() {
+        square.setFill(HIGHLIGHT_SQUARE);
+    }
+
+    public void reset() {
+        square.setFill(baseColor);
+    }
+
+    private Rectangle createSquare(Color color, int sideLength) {
+        Rectangle square = new Rectangle(sideLength, sideLength);
+        square.setHeight(TILE_SIZE);
+        square.setWidth(TILE_SIZE);
         square.setFill(color);
-
-        pieceView = new ImageView();
-        this.getChildren().addAll(square, pieceView);
+        return square;
     }
 
-    public TileView(Color color, Piece piece) {
-        this(color);
-        this.setPiece(piece);
-    }
-
-    public void setPiece(Piece piece) {
-        if (piece == null) {
-            this.piece = null;
-            pieceView.setImage(null);
-            return;
+    private Node createPiece(SimpleObjectProperty<Piece> pieceProperty) {
+        ImageView pieceView = new ImageView();
+        if (pieceProperty.get() != null) {
+            String type = pieceProperty.get().getClass().getSimpleName().toLowerCase();
+            String color = pieceProperty.get().getAlliance() == Alliance.WHITE ? "white" : "black";
+            String piecePath = String.format("/images/%s_%s.png", color, type);
+            Image pieceImage = new Image(String.valueOf(ChessApplication.class.getResource(piecePath)));
+            pieceView.setImage(pieceImage);
         }
 
-        this.piece = piece;
-        String type = piece.getClass().getSimpleName().toLowerCase();
-        String color = piece.getAlliance() == Alliance.WHITE ? "white" : "black";
-        String piecePath = String.format("/images/%s_%s.png", color, type);
-        Image pieceImage = new Image(String.valueOf(ChessApplication.class.getResource(piecePath)));
-        pieceView.setImage(pieceImage);
-        pieceView.setFitWidth(square.getWidth());
-        pieceView.setFitHeight(square.getHeight());
-    }
-
-    public Piece getPiece() {
-        return piece;
-    }
-
-    public void setFill(Color color) {
-        square.setFill(color);
+        pieceView.setFitWidth(TILE_SIZE);
+        pieceView.setFitHeight(TILE_SIZE);
+        return pieceView;
     }
 }
