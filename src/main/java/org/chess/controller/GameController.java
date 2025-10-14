@@ -1,6 +1,6 @@
 package org.chess.controller;
 
-import org.chess.interactor.GameInteractor;
+import org.chess.interactor.BoardInteractor;
 import org.chess.model.board.BoardModel;
 import org.chess.model.game.GameModel;
 import org.chess.view.board.BoardView;
@@ -10,13 +10,13 @@ import javafx.scene.layout.Region;
 
 public class GameController {
     private final GameModel gameModel;
-    private final GameInteractor gameInteractor;
+    private final BoardInteractor gameInteractor;
     private final GameView gameView;
 
     public GameController() {
         BoardModel boardModel = new BoardModel();
         this.gameModel = new GameModel(boardModel);
-        this.gameInteractor = new GameInteractor(gameModel);
+        this.gameInteractor = new BoardInteractor(gameModel);
         BoardView boardView = new BoardView(boardModel);
         this.gameView = new GameView(gameModel, boardView);
         gameInteractor.addBoardClickEventHandler(boardView);

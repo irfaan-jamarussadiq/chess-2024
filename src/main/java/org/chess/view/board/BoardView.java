@@ -31,10 +31,15 @@ public class BoardView extends GridPane {
         }
     }
 
-    public void resetSquares(Collection<Location> locations) {
-        for (Location location : locations) {
-            TileView tileView = (TileView) getNodeFromGridPane(this, BoardModel.SIZE - location.rank(), location.file());
-            tileView.reset();
+    public void resetAllSquares() {
+        int size = BoardModel.SIZE;
+        for (int rank = 1; rank <= size; rank++) {
+            for (int file = 1; file <= size; file++) {
+                Location location = new Location(rank, file);
+                TileView tileView = (TileView) getNodeFromGridPane(this, size - location.rank(),
+                        location.file());
+                tileView.reset();
+            }
         }
     }
 

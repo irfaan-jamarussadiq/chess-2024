@@ -12,10 +12,10 @@ import org.chess.view.board.TileView;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
-public class GameInteractor {
+public class BoardInteractor {
     private GameModel gameModel;
 
-    public GameInteractor(GameModel gameModel) {
+    public BoardInteractor(GameModel gameModel) {
         this.gameModel = gameModel;
     }
 
@@ -23,6 +23,7 @@ public class GameInteractor {
         boardView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                boardView.resetAllSquares();
                 int rank = BoardModel.SIZE - (int) event.getY() / TileView.TILE_SIZE;
                 int file = (int) event.getX() / TileView.TILE_SIZE + 1;
                 Location location = new Location(rank, file);
