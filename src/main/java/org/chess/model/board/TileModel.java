@@ -12,7 +12,8 @@ public class TileModel {
     }
 
     public TileModel(Piece piece) {
-        this.pieceProperty = new SimpleObjectProperty<>(piece);
+        this();
+        setPiece(piece);
     }
 
     public SimpleObjectProperty<Piece> getPieceProperty() {

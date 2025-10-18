@@ -57,7 +57,7 @@ public class BoardModel {
     public void movePiece(Location start, Location end) {
         if (start.isWithinBounds() && end.isWithinBounds() && !isEmpty(start)) {
             Piece piece = pieceAt(start);
-            movedPieces[start.getCoordinate() - 1] = true;
+            piece.setHasMoved(true);
             removePiece(start);
             addPiece(piece, end);
         }
@@ -88,7 +88,7 @@ public class BoardModel {
     }
 
     public boolean hasPieceAtLocationNotMoved(Location location) {
-        return !movedPieces[location.getCoordinate() - 1]; 
+        return !pieceAt(location).hasMoved(); 
     }
 
     @Override

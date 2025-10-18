@@ -1,11 +1,9 @@
 package org.chess.view.board;
 
 import org.chess.ChessApplication;
-import org.chess.model.board.Alliance;
 import org.chess.model.piece.Piece;
 
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
@@ -17,14 +15,17 @@ public class TileView extends StackPane {
     private static final Color HIGHLIGHT_SQUARE = Color.rgb(135, 239, 172);
 
     private final Rectangle square;
-    private final Node piece;
+    private ImageView pieceView;
     private final Color baseColor;
 
     public TileView(SimpleObjectProperty<Piece> pieceProperty, Color color) {
         this.square = createSquare(color, TILE_SIZE);
-        this.piece = createPiece(pieceProperty);
+        this.pieceView = new ImageView();
+        updatePieceView(pieceProperty.get());
         this.baseColor = color;
-        this.getChildren().addAll(square, piece);
+        this.getChildren().addAll(square, pieceView);
+
+        pieceProperty.addListener((obs, oldPiece, newPiece) -> updatePieceView(newPiece));
     }
 
     public void highlight() {
@@ -43,18 +44,18 @@ public class TileView extends StackPane {
         return square;
     }
 
-    private Node createPiece(SimpleObjectProperty<Piece> pieceProperty) {
-        ImageView pieceView = new ImageView();
-        if (pieceProperty.get() != null) {
-            String type = pieceProperty.get().getClass().getSimpleName().toLowerCase();
-            String color = pieceProperty.get().getAlliance() == Alliance.WHITE ? "white" : "black";
-            String piecePath = String.format("/images/%s_%s.png", color, type);
-            Image pieceImage = new Image(String.valueOf(ChessApplication.class.getResource(piecePath)));
-            pieceView.setImage(pieceImage);
+    private void updatePieceView(Piece piece) {
+        if (piece == null) {
+            pieceView.setImage(null);
+            return;
         }
 
+        String type = piece.getClass().getSimpleName().toLowerCase();
+        String color = piece.getAlliance().isWhite() ? "white" : "black";
+        String piecePath = String.format("/images/%s_%s.png", color, type);
+        Image pieceImage = new Image(String.valueOf(ChessApplication.class.getResource(piecePath)));
+        pieceView.setImage(pieceImage);
         pieceView.setFitWidth(TILE_SIZE);
         pieceView.setFitHeight(TILE_SIZE);
-        return pieceView;
     }
 }

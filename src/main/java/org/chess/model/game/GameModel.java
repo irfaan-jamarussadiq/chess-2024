@@ -93,9 +93,8 @@ public class GameModel {
             }
 
             BoardModel copy = new BoardModel(board);
-            executeMove(move.start(), move.end(), board);
-            boolean movePutPlayerInCheck = isInCheck(currentPlayer);
-            board = copy;
+            executeMove(move.start(), move.end(), copy);
+            boolean movePutPlayerInCheck = isInCheck(currentPlayer, copy);
             if (!movePutPlayerInCheck) {
                 return true;
             }
@@ -120,10 +119,9 @@ public class GameModel {
         Collection<Move> pieceMoves =  piece.getLegalMoves(location, board);
 
         for (Move move : pieceMoves) {
-            BoardModel boardBeforeMakingMove = new BoardModel(board);
-            executeMove(move.start(), move.end(), board);
-            boolean movePutPlayerInCheck = isInCheck(currentPlayer);
-            board = boardBeforeMakingMove;
+            BoardModel copy = new BoardModel(board);
+            executeMove(move.start(), move.end(), copy);
+            boolean movePutPlayerInCheck = isInCheck(currentPlayer, copy);
             if (!movePutPlayerInCheck) {
                 legalMoves.add(move);
             }
@@ -133,7 +131,7 @@ public class GameModel {
         return legalMoves;
     }
 
-    public boolean isInCheck(Player player) {
+    private boolean isInCheck(Player player, BoardModel board) {
         Piece king = board.pieceAt(currentKingLocation);
         Collection<Move> enemyAttackMoves = new HashSet<>();
         enemyAttackMoves.addAll(new Queen(player.getAlliance()).getLegalMoves(currentKingLocation, board));
@@ -154,11 +152,11 @@ public class GameModel {
     }
 
     public boolean isInCheckmate(Player player) {
-        return isInCheck(player) && hasNoPossibleMoves(player);
+        return isInCheck(player, board) && hasNoPossibleMoves(player);
     }
 
     public boolean isInStalemate(Player player) {
-        return !isInCheck(player) && hasNoPossibleMoves(player);
+        return !isInCheck(player, board) && hasNoPossibleMoves(player);
     }
 
     private boolean hasNoPossibleMoves(Player player) {

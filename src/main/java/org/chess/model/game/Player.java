@@ -14,7 +14,7 @@ public class Player {
     }
 
     public boolean isPieceAlly(Piece piece) {
-        return piece.getAlliance() == alliance;
+        return piece != null && piece.getAlliance() == alliance;
     }
 
     public Alliance getAlliance() {

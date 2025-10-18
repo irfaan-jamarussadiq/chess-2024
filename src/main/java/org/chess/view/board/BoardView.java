@@ -19,14 +19,14 @@ public class BoardView extends GridPane {
                 Location location = new Location(rank, file);
                 Color color = ((rank + file) % 2 == 0) ? LIGHT_SQUARE : DARK_SQUARE;
                 TileView tileView = new TileView(boardModel.piecePropertyAt(location), color);
-                this.add(tileView, file, BoardModel.SIZE - rank);
+                this.add(tileView, file - 1, BoardModel.SIZE - rank);
             }
         }
     }
 
     public void highlightSquares(Collection<Location> locations) {
         for (Location location : locations) {
-            TileView tileView = (TileView) getNodeFromGridPane(this, BoardModel.SIZE - location.rank(), location.file());
+            TileView tileView = (TileView) getNodeFromGridPane(this, BoardModel.SIZE - location.rank(), location.file() - 1);
             tileView.highlight();
         }
     }
@@ -37,7 +37,7 @@ public class BoardView extends GridPane {
             for (int file = 1; file <= size; file++) {
                 Location location = new Location(rank, file);
                 TileView tileView = (TileView) getNodeFromGridPane(this, size - location.rank(),
-                        location.file());
+                        location.file() - 1);
                 tileView.reset();
             }
         }
@@ -45,11 +45,16 @@ public class BoardView extends GridPane {
 
     private Node getNodeFromGridPane(GridPane gridPane, int row, int col) {
         for (Node node : gridPane.getChildren()) {
-            if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
+            Integer columnIndex = GridPane.getColumnIndex(node);
+            Integer rowIndex = GridPane.getRowIndex(node);
+            int actualCol = (columnIndex == null) ? 0 : columnIndex;
+            int actualRow = (rowIndex == null) ? 0 : rowIndex;
+
+            if (actualCol == col && actualRow == row) {
                 return node;
             }
         }
-
         return null;
     }
+
 }
