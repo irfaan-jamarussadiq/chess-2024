@@ -133,16 +133,16 @@ public class GameModel {
 
     private boolean isInCheck(Player player, BoardModel board) {
         Piece king = board.pieceAt(currentKingLocation);
-        Collection<Move> enemyAttackMoves = new HashSet<>();
-        enemyAttackMoves.addAll(new Queen(player.getAlliance()).getLegalMoves(currentKingLocation, board));
-        enemyAttackMoves.addAll(new Knight(player.getAlliance()).getLegalMoves(currentKingLocation, board));
-
-        for (Move enemyAttackMove : enemyAttackMoves) {
-            Piece potentialEnemy = board.pieceAt(enemyAttackMove.end());
-            if (Piece.areEnemies(king, potentialEnemy)) {
-                for (Move enemyMove : potentialEnemy.getLegalMoves(enemyAttackMove.end(), board)) {
-                    if (enemyMove.end() == currentKingLocation) {
-                        return true;
+        for (int rank = 1; rank <= 8; rank++) {
+            for (int file = 1; file <= 8; file++) {
+                Location location = new Location(rank, file);
+                Piece potentialEnemy = board.pieceAt(location);
+                if (Piece.areEnemies(king, potentialEnemy)) {
+                    Collection<Move> enemyAttackMoves = potentialEnemy.getLegalMoves(location, board);
+                    for (Move enemyMove : enemyAttackMoves) {
+                        if (enemyMove.end() == currentKingLocation) {
+                            return true;
+                        }
                     }
                 }
             }
