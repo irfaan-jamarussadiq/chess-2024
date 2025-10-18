@@ -6,10 +6,8 @@ import org.chess.model.board.Alliance;
 import org.chess.model.board.BoardModel;
 import org.chess.model.board.Location;
 import org.chess.model.piece.King;
-import org.chess.model.piece.Knight;
 import org.chess.model.piece.Pawn;
 import org.chess.model.piece.Piece;
-import org.chess.model.piece.Queen;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
