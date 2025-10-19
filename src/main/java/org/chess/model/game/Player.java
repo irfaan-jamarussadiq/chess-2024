@@ -1,6 +1,7 @@
 package org.chess.model.game;
 
 import org.chess.model.board.Alliance;
+import org.chess.model.board.Location;
 import org.chess.model.piece.Piece;
 
 public class Player {
@@ -8,9 +9,11 @@ public class Player {
     private final static Player BLACK = new Player(Alliance.BLACK); 
 
     private final Alliance alliance;
+    private Location kingLocation;
 
     private Player(Alliance alliance) {
         this.alliance = alliance;
+        this.kingLocation = new Location(alliance.getStartingPieceRank(), 5);
     }
 
     public boolean isPieceAlly(Piece piece) {
@@ -31,5 +34,13 @@ public class Player {
 
     public boolean hasPiece(Piece piece) {
         return piece.getAlliance() == alliance;
+    }
+
+    public Location getKingLocation() {
+        return kingLocation;
+    }
+
+    public void setKingLocation(Location location) {
+        this.kingLocation = location;
     }
 }

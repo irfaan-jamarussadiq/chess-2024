@@ -13,14 +13,12 @@ import org.slf4j.LoggerFactory;
 
 public class GameModel {
     private Player currentPlayer;
-    private Location currentKingLocation;
     private BoardModel board;
 
     private static final Logger logger = LoggerFactory.getLogger(GameModel.class);
 
     public GameModel(BoardModel board) {
         this.currentPlayer = Player.getPlayer(Alliance.WHITE);
-        this.currentKingLocation = new Location(currentPlayer.getAlliance().getStartingPieceRank(), 5);
         this.board = board;
     }
 
@@ -33,11 +31,13 @@ public class GameModel {
         if (currentPlayer.isPieceAlly(piece) && isValidMove(move)) {
             executeMove(move.start(), move.end(), board);
             if (piece instanceof King) {
-                currentKingLocation = move.end();
+                currentPlayer.setKingLocation(move.end());
             }
 
             currentPlayer = currentPlayer.getOpponent();
         }
+
+        logger.debug("After executing move: \n" + board.toString());
     }
 
     private void executeMove(Location start, Location end, BoardModel board) {
@@ -47,7 +47,6 @@ public class GameModel {
 
         Piece piece = board.pieceAt(start);
         Piece enemy = board.pieceAt(end);
-
         if (King.isShortCastlingMove(start, end, board)) {
             Location rookStart = new Location(start.rank(), 8);
             Location rookEnd = new Location(start.rank(), 6);
@@ -70,8 +69,6 @@ public class GameModel {
         } else if (piece.canMoveFrom(start, end) && !Piece.areAllies(piece, enemy)) {
             board.movePiece(start, end);
         }
-
-        logger.debug("After executing move: \n" + board.toString());
     }
 
     public boolean isValidMove(Move move) {
@@ -79,26 +76,9 @@ public class GameModel {
             return false;
         }
 
-        Piece piece = board.pieceAt(move.start());
-        if (!piece.canMoveFrom(move.start(), move.end())) {
-            return false;
-        }
-
-        Collection<Location> possibleDestinations = piece.getPossibleDestinations(move.start());
-        for (Location destination : possibleDestinations) {
-            if (!destination.isWithinBounds()) {
-                continue;
-            }
-
-            BoardModel copy = new BoardModel(board);
-            executeMove(move.start(), move.end(), copy);
-            boolean movePutPlayerInCheck = isInCheck(currentPlayer, copy);
-            if (!movePutPlayerInCheck) {
-                return true;
-            }
-        }
-
-        return false;
+        BoardModel copy = new BoardModel(board);
+        executeMove(move.start(), move.end(), copy);
+        return !isInCheck(currentPlayer, copy);
     }
 
     public Collection<Move> getLegalMoves(Location location) {
@@ -115,12 +95,8 @@ public class GameModel {
         }
 
         Collection<Move> pieceMoves =  piece.getLegalMoves(location, board);
-
         for (Move move : pieceMoves) {
-            BoardModel copy = new BoardModel(board);
-            executeMove(move.start(), move.end(), copy);
-            boolean movePutPlayerInCheck = isInCheck(currentPlayer, copy);
-            if (!movePutPlayerInCheck) {
+            if (isValidMove(move)) {
                 legalMoves.add(move);
             }
         }
@@ -129,8 +105,12 @@ public class GameModel {
         return legalMoves;
     }
 
+    public boolean isInCheck(Player player) {
+        return isInCheck(player, board);
+    }
+
     private boolean isInCheck(Player player, BoardModel board) {
-        Piece king = board.pieceAt(currentKingLocation);
+        Piece king = board.pieceAt(player.getKingLocation());
         for (int rank = 1; rank <= 8; rank++) {
             for (int file = 1; file <= 8; file++) {
                 Location location = new Location(rank, file);
@@ -138,7 +118,7 @@ public class GameModel {
                 if (Piece.areEnemies(king, potentialEnemy)) {
                     Collection<Move> enemyAttackMoves = potentialEnemy.getLegalMoves(location, board);
                     for (Move enemyMove : enemyAttackMoves) {
-                        if (enemyMove.end() == currentKingLocation) {
+                        if (enemyMove.end().equals(currentPlayer.getKingLocation())) {
                             return true;
                         }
                     }

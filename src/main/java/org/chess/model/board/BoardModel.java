@@ -45,6 +45,9 @@ public class BoardModel {
         tiles = new TileModel[SIZE * SIZE];
         for (int i = 0; i < SIZE * SIZE; i++) {
             Piece piece = board.tiles[i].getPieceProperty().get();
+            if (piece != null) {
+                piece.setHasMoved(false);
+            }
             tiles[i] = new TileModel(piece);
         }
 
