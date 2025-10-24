@@ -85,12 +85,10 @@ public class Pawn extends Piece {
 
         boolean isLeftCapture = leftCaptureLocation.isWithinBounds()
             && leftCaptureLocation.equals(end)
-            && board.pieceAt(leftCaptureLocation) instanceof Pawn
             && Piece.areEnemies(pawn, board.pieceAt(leftCaptureLocation));
 
         boolean isRightCapture = rightCaptureLocation.isWithinBounds()
             && rightCaptureLocation.equals(end)
-            && board.pieceAt(rightCaptureLocation) instanceof Pawn
             && Piece.areEnemies(pawn, board.pieceAt(rightCaptureLocation));
 
         return isLeftCapture || isRightCapture;
