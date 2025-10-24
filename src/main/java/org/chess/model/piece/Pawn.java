@@ -123,4 +123,9 @@ public class Pawn extends Piece {
             && board.isEmpty(end)
             && end.rank() == pawn.getAlliance().getEnemy().getStartingPieceRank();
     }
+
+    @Override
+    public Piece getCopy() {
+        return new Pawn(alliance);
+    }
 }

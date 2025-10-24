@@ -56,4 +56,9 @@ public class Knight extends Piece {
 
         return legalMoves;
     }
+
+    @Override
+    public Piece getCopy() {
+        return new Knight(alliance);
+    }
 }

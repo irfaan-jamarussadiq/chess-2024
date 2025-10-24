@@ -128,4 +128,9 @@ public class King extends Piece {
 			&& board.hasPieceAtLocationNotMoved(start)
 			&& board.hasPieceAtLocationNotMoved(start.offset(0, -3));
     }
+
+    @Override
+    public Piece getCopy() {
+        return new King(alliance);
+    }
 }

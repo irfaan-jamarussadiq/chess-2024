@@ -72,4 +72,9 @@ public class Bishop extends Piece {
 
         return diagonalMoves;
     }
+
+    @Override
+    public Piece getCopy() {
+        return new Bishop(alliance);
+    }
 }

@@ -40,4 +40,9 @@ public class Queen extends Piece {
         legalMoves.addAll(new Rook(alliance).getLegalMoves(location, board));
         return legalMoves;
     }
+
+    @Override
+    public Piece getCopy() {
+        return new Queen(alliance);
+    }
 }

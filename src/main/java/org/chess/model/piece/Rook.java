@@ -72,4 +72,9 @@ public class Rook extends Piece {
 
         return diagonalMoves;
     }
+
+    @Override
+    public Piece getCopy() {
+        return new Rook(alliance);
+    }
 }

@@ -47,8 +47,10 @@ public class BoardModel {
             Piece piece = board.tiles[i].getPieceProperty().get();
             if (piece != null) {
                 piece.setHasMoved(false);
+                tiles[i] = new TileModel(piece.getCopy());
+            } else {
+                tiles[i] = new TileModel();
             }
-            tiles[i] = new TileModel(piece);
         }
 
         this.movedPieces = new boolean[SIZE * SIZE];

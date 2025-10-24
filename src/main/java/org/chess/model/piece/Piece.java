@@ -51,4 +51,6 @@ public abstract class Piece {
     public abstract boolean canMoveFrom(Location start, Location end);
 
     public abstract char getLetter();
+
+    public abstract Piece getCopy(); 
 }
